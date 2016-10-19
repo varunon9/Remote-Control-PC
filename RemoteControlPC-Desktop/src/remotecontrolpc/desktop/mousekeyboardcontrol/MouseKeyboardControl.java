@@ -186,4 +186,9 @@ public class MouseKeyboardControl {
             //throw new IllegalArgumentException("Cannot type character " + character);
         }
     }
+    public void typeCharacter(int keyCode) {
+        robot.keyPress(keyCode);
+        robot.delay(10);
+        robot.keyRelease(keyCode);
+    }
 }

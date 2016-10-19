@@ -80,25 +80,25 @@ public class KeyboardFragment extends Fragment implements OnTouchListener, OnCli
 		ctrlButton.setOnTouchListener(this);
 		altButton.setOnTouchListener(this);
 		shiftButton.setOnTouchListener(this);
-		enterButton.setOnTouchListener(this);
-		tabButton.setOnTouchListener(this);
-		escButton.setOnTouchListener(this);
-		printScrButton.setOnTouchListener(this);
 		winButton.setOnTouchListener(this);
-		deleteButton.setOnTouchListener(this);
+		enterButton.setOnClickListener(this);
+		tabButton.setOnClickListener(this);
+		escButton.setOnClickListener(this);
+		printScrButton.setOnClickListener(this);
+		deleteButton.setOnClickListener(this);
 		clearTextButton.setOnClickListener(this);
-		nButton.setOnTouchListener(this);
-		tButton.setOnTouchListener(this);
-		wButton.setOnTouchListener(this);
-		rButton.setOnTouchListener(this);
-		fButton.setOnTouchListener(this);
-		zButton.setOnTouchListener(this);
-		cButton.setOnTouchListener(this);
-		xButton.setOnTouchListener(this);
-		vButton.setOnTouchListener(this);
-		aButton.setOnTouchListener(this);
-		oButton.setOnTouchListener(this);
-		sButton.setOnTouchListener(this);
+		nButton.setOnClickListener(this);
+		tButton.setOnClickListener(this);
+		wButton.setOnClickListener(this);
+		rButton.setOnClickListener(this);
+		fButton.setOnClickListener(this);
+		zButton.setOnClickListener(this);
+		cButton.setOnClickListener(this);
+		xButton.setOnClickListener(this);
+		vButton.setOnClickListener(this);
+		aButton.setOnClickListener(this);
+		oButton.setOnClickListener(this);
+		sButton.setOnClickListener(this);
 		ctrlAltTButton.setOnClickListener(this);
 		ctrlShiftZButton.setOnClickListener(this);
 		altF4Button.setOnClickListener(this);
@@ -113,7 +113,7 @@ public class KeyboardFragment extends Fragment implements OnTouchListener, OnCli
 			action = "KEY_RELEASE";
 		}
 		int keyCode = 17;//dummy initialization
-		switch(v.getId()) {
+		switch (v.getId()) {
 		case R.id.ctrlButton:
 			keyCode = 17;
 			break;
@@ -123,59 +123,8 @@ public class KeyboardFragment extends Fragment implements OnTouchListener, OnCli
 		case R.id.shiftButton:
 			keyCode = 16;
 			break;
-		case R.id.enterButton:
-			keyCode = 10;
-			break;
-		case R.id.tabButton:
-			keyCode = 9;
-			break;
-		case R.id.escButton:
-			keyCode = 27;
-			break;
-		case R.id.printScrButton:
-			keyCode = 154;
-			break;
 		case R.id.winButton:
 			keyCode = 524;
-			break;
-		case R.id.deleteButton:		
-			keyCode = 127;
-			break;
-		case R.id.nButton:		
-			keyCode = 78;
-			break;
-		case R.id.tButton:		
-			keyCode = 84;
-			break;
-		case R.id.wButton:		
-			keyCode = 87;
-			break;
-		case R.id.rButton:		
-			keyCode = 82;
-			break;
-		case R.id.fButton:		
-			keyCode = 70;
-			break;
-		case R.id.zButton:		
-			keyCode = 90;
-			break;
-		case R.id.cButton:		
-			keyCode = 67;
-			break;
-		case R.id.xButton:		
-			keyCode = 88;
-			break;
-		case R.id.vButton:		
-			keyCode = 86;
-			break;
-		case R.id.aButton:		
-			keyCode = 65;
-			break;
-		case R.id.oButton:		
-			keyCode = 79;
-			break;
-		case R.id.sButton:		
-			keyCode = 83;
 			break;
 		}
 		sendKeyCodeToServer(action, keyCode);
@@ -183,11 +132,12 @@ public class KeyboardFragment extends Fragment implements OnTouchListener, OnCli
 	}
 	@Override
 	public void onClick(View v) {
-		if (v.getId() == R.id.clearTextButton) {
+		int id = v.getId();
+		if (id == R.id.clearTextButton) {
 			typeHereEditText.setText("");
-		} else {
+		} else if (id == R.id.ctrlAltTButton || id == R.id.ctrlShiftZButton || id == R.id.altF4Button) {
 			String message = "CTRL_SHIFT_Z";
-			switch(v.getId()) {
+			switch (id) {
 			case R.id.ctrlAltTButton:
 				message = "CTRL_ALT_T";
 		        break;
@@ -199,6 +149,63 @@ public class KeyboardFragment extends Fragment implements OnTouchListener, OnCli
 				break;
 			}
 			MainActivity.sendMessageToServer(message);
+		} else {
+			int keyCode = 17;//dummy initialization
+			String action = "TYPE_KEY";
+			switch (id) {
+			case R.id.enterButton:
+				keyCode = 10;
+				break;
+			case R.id.tabButton:
+				keyCode = 9;
+				break;
+			case R.id.escButton:
+				keyCode = 27;
+				break;
+			case R.id.printScrButton:
+				keyCode = 154;
+				break;
+			case R.id.deleteButton:		
+				keyCode = 127;
+				break;
+			case R.id.nButton:		
+				keyCode = 78;
+				break;
+			case R.id.tButton:		
+				keyCode = 84;
+				break;
+			case R.id.wButton:		
+				keyCode = 87;
+				break;
+			case R.id.rButton:		
+				keyCode = 82;
+				break;
+			case R.id.fButton:		
+				keyCode = 70;
+				break;
+			case R.id.zButton:		
+				keyCode = 90;
+				break;
+			case R.id.cButton:		
+				keyCode = 67;
+				break;
+			case R.id.xButton:		
+				keyCode = 88;
+				break;
+			case R.id.vButton:		
+				keyCode = 86;
+				break;
+			case R.id.aButton:		
+				keyCode = 65;
+				break;
+			case R.id.oButton:		
+				keyCode = 79;
+				break;
+			case R.id.sButton:		
+				keyCode = 83;
+				break;
+			}
+			sendKeyCodeToServer(action, keyCode);
 		}
 		
 	}

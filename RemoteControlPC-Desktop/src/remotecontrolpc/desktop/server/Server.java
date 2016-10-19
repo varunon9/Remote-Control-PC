@@ -75,6 +75,10 @@ public class Server {
                                 char ch = in.readLine().charAt(0);
                                 mouseControl.typeCharacter(ch);
                                 break;
+                            case "TYPE_KEY": 
+                                keyCode = Integer.parseInt(in.readLine());
+                                mouseControl.typeCharacter(keyCode);
+                                break;
                         }
                     } else {
                         //remote connection closed
@@ -114,4 +118,5 @@ public class Server {
 * 8. CTRL_SHIFT_Z
 * 9. ALT_F4
 * 10. TYPE_CHARACTER
+* 11. TYPE_KEY
 */
