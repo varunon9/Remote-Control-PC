@@ -9,28 +9,28 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
+import android.widget.Button;
 
 import com.example.remotecontrolpc.MainActivity;
 import com.example.remotecontrolpc.R;
 
 public class PowerOffFragment extends Fragment implements OnClickListener {
 	private static final String ARG_SECTION_NUMBER = "section_number";
-	private ImageButton shutdownImageButton, restartImageButton, sleepImageButton, lockImageButton;
+	private Button shutdownButton, restartButton, sleepButton, lockButton;
 	DialogInterface.OnClickListener dialogClickListener;
 	AlertDialog.Builder builder;
 	String action;
 	public View onCreateView (LayoutInflater inflater,
             ViewGroup container, Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.power_off_fragment, container, false);
-		shutdownImageButton = (ImageButton) rootView.findViewById(R.id.shutdownImageButton);
-		restartImageButton = (ImageButton) rootView.findViewById(R.id.restartImageButton);
-		sleepImageButton = (ImageButton) rootView.findViewById(R.id.sleepImageButton);
-		lockImageButton = (ImageButton) rootView.findViewById(R.id.lockImageButton);
-		shutdownImageButton.setOnClickListener(this);
-		restartImageButton.setOnClickListener(this);
-		sleepImageButton.setOnClickListener(this);
-		lockImageButton.setOnClickListener(this);
+		shutdownButton = (Button) rootView.findViewById(R.id.shutdownButton);
+		restartButton = (Button) rootView.findViewById(R.id.restartButton);
+		sleepButton = (Button) rootView.findViewById(R.id.sleepButton);
+		lockButton = (Button) rootView.findViewById(R.id.lockButton);
+		shutdownButton.setOnClickListener(this);
+		restartButton.setOnClickListener(this);
+		sleepButton.setOnClickListener(this);
+		lockButton.setOnClickListener(this);
         dialogClickListener = new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -60,16 +60,16 @@ public class PowerOffFragment extends Fragment implements OnClickListener {
 	public void onClick(View v) {
 		int id = v.getId();
 		switch(id) {
-		case R.id.shutdownImageButton: 
+		case R.id.shutdownButton: 
 			action = "Shutdown_PC";
 			break;
-		case R.id.restartImageButton:
+		case R.id.restartButton:
 			action = "Restart_PC";
 			break;
-		case R.id.sleepImageButton:
+		case R.id.sleepButton:
 			action = "Sleep_PC";
 			break;
-		case R.id.lockImageButton:
+		case R.id.lockButton:
 			action = "Lock_PC";
 			break;
 		}

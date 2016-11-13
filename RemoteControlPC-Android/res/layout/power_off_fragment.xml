@@ -10,21 +10,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         
-        <ImageButton
-            android:id="@+id/shutdownImageButton"
+        <Button
+            android:id="@+id/shutdownButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/transparent"
             android:layout_margin="10dp"
-            android:src="@drawable/shutdown" />
+            android:text="Shutdown"
+            android:drawableTop="@drawable/shutdown" />
 	
-	    <ImageButton
-	        android:id="@+id/restartImageButton"
+	    <Button
+	        android:id="@+id/restartButton"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:background="@color/transparent"
 	        android:layout_margin="10dp"
-	        android:src="@drawable/restart" />
+	        android:text="Restart"
+	        android:drawableTop="@drawable/restart" />
     </LinearLayout>
  
     <LinearLayout 
@@ -32,21 +34,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         
-        <ImageButton
-	        android:id="@+id/sleepImageButton"
+        <Button
+	        android:id="@+id/sleepButton"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:background="@color/transparent"
 	        android:layout_margin="10dp"
-	        android:src="@drawable/sleep" />
+	        android:text="Suspend"
+	        android:drawableTop="@drawable/sleep" />
 	
-	    <ImageButton
-	        android:id="@+id/lockImageButton"
+	    <Button
+	        android:id="@+id/lockButton"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:background="@color/transparent"
 	        android:layout_margin="10dp"
-	        android:src="@drawable/lock" />
+	        android:text="Lock"
+	        android:drawableTop="@drawable/lock" />
     </LinearLayout>
 
 </LinearLayout>

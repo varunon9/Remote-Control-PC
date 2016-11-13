@@ -448,7 +448,7 @@ int id leftArrowButton 0x7f090071
 int id leftClickButton 0x7f090076
 int id listMode 0x7f09000a
 int id list_item 0x7f090025
-int id lockImageButton 0x7f09006f
+int id lockButton 0x7f09006f
 int id mediaPlayerListView 0x7f090068
 int id middle 0x7f09001d
 int id musicImageAvatarProgressBar 0x7f090067
@@ -465,7 +465,7 @@ int id progress_circular 0x7f090007
 int id progress_horizontal 0x7f090008
 int id rButton 0x7f090059
 int id radio 0x7f09002b
-int id restartImageButton 0x7f09006d
+int id restartButton 0x7f09006d
 int id rightArrowButton 0x7f090073
 int id rightClickButton 0x7f090077
 int id sButton 0x7f090061
@@ -485,8 +485,8 @@ int id shortcut 0x7f09002a
 int id showCustom 0x7f090010
 int id showHome 0x7f090011
 int id showTitle 0x7f090012
-int id shutdownImageButton 0x7f09006c
-int id sleepImageButton 0x7f09006e
+int id shutdownButton 0x7f09006c
+int id sleepButton 0x7f09006e
 int id split_action_bar 0x7f090004
 int id submit_area 0x7f09003c
 int id tButton 0x7f090057

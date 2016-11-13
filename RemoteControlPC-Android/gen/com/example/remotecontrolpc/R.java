@@ -1758,7 +1758,7 @@ containing a value of this type.
         public static final int leftClickButton=0x7f090076;
         public static final int listMode=0x7f09000a;
         public static final int list_item=0x7f090025;
-        public static final int lockImageButton=0x7f09006f;
+        public static final int lockButton=0x7f09006f;
         public static final int mediaPlayerListView=0x7f090068;
         public static final int middle=0x7f09001d;
         public static final int musicImageAvatarProgressBar=0x7f090067;
@@ -1775,7 +1775,7 @@ containing a value of this type.
         public static final int progress_horizontal=0x7f090008;
         public static final int rButton=0x7f090059;
         public static final int radio=0x7f09002b;
-        public static final int restartImageButton=0x7f09006d;
+        public static final int restartButton=0x7f09006d;
         public static final int rightArrowButton=0x7f090073;
         public static final int rightClickButton=0x7f090077;
         public static final int sButton=0x7f090061;
@@ -1795,8 +1795,8 @@ containing a value of this type.
         public static final int showCustom=0x7f090010;
         public static final int showHome=0x7f090011;
         public static final int showTitle=0x7f090012;
-        public static final int shutdownImageButton=0x7f09006c;
-        public static final int sleepImageButton=0x7f09006e;
+        public static final int shutdownButton=0x7f09006c;
+        public static final int sleepButton=0x7f09006e;
         public static final int split_action_bar=0x7f090004;
         public static final int submit_area=0x7f09003c;
         public static final int tButton=0x7f090057;
