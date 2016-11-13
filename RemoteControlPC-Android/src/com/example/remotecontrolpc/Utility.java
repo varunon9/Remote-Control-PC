@@ -12,7 +12,7 @@ import android.net.Uri;
 import android.os.ParcelFileDescriptor;
 
 public class Utility {
-	public String getDate (String date, String dateFormat) {
+	public String getDate(String date, String dateFormat) {
 		long milliSeconds = Long.parseLong(date);
 		// Create a DateFormatter object for displaying date in specified format.
 	    SimpleDateFormat formatter = new SimpleDateFormat(dateFormat);
@@ -21,8 +21,16 @@ public class Utility {
 	     calendar.setTimeInMillis(milliSeconds);
 	     return formatter.format(calendar.getTime());
 	}
+	public String getDate(long milliSeconds, String dateFormat) {
+		// Create a DateFormatter object for displaying date in specified format.
+	    SimpleDateFormat formatter = new SimpleDateFormat(dateFormat);
+	    // Create a calendar object that will convert the date and time value in milliseconds to date. 
+	     Calendar calendar = Calendar.getInstance();
+	     calendar.setTimeInMillis(milliSeconds);
+	     return formatter.format(calendar.getTime());
+	}
 	/*http://stackoverflow.com/questions/22859350/android-listview-out-of-memory-exception*/
-	public Bitmap decodeImageFile (String path) {
+	public Bitmap decodeImageFile(String path) {
 		try {
             // Decode image size
             BitmapFactory.Options o = new BitmapFactory.Options();
@@ -44,7 +52,7 @@ public class Utility {
         }
         return null;
 	}
-	public String getDuration (int duration) {
+	public String getDuration(int duration) {
 		String time = "";
 		duration /= 1000;//in seconds
 		int minutes = duration / 60;
@@ -68,5 +76,13 @@ public class Utility {
 	    } catch (Exception e) {
 	    }
 	    return bm;
+	}
+	public String getSize(int size) {
+		size /= 1024; 
+		return size + "KB";
+	}
+	public String getSize(long size) {
+		size /= 1024; 
+		return size + "KB";
 	}
 }

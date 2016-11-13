@@ -7,6 +7,7 @@ import java.net.Socket;
 import com.example.remotecontrolpc.connect.ConnectFragment;
 import com.example.remotecontrolpc.filedownload.FileDownloadFragment;
 import com.example.remotecontrolpc.filetransfer.FileTransferFragment;
+import com.example.remotecontrolpc.help.HelpFragment;
 import com.example.remotecontrolpc.imageviewer.ImageViewerFragment;
 import com.example.remotecontrolpc.keyboard.KeyboardFragment;
 import com.example.remotecontrolpc.mediaplayer.MediaPlayerFragment;
@@ -97,6 +98,11 @@ public class MainActivity extends ActionBarActivity implements
 		case 9:
 			mTitle = getString(R.string.power_off);
 			break;
+		case 10:
+			mTitle = getString(R.string.help);
+			//not a navigation drawer item, so need to explicitly call it
+			restoreActionBar();
+			break;
 		}
 	}
 
@@ -128,6 +134,9 @@ public class MainActivity extends ActionBarActivity implements
 		int id = item.getItemId();
 		if (id == R.id.action_settings) {
 			return true;
+		} else if (id == R.id.action_help) {
+			onNavigationDrawerItemSelected(9);
+			return true;
 		}
 		return super.onOptionsItemSelected(item);
 	}
@@ -155,6 +164,8 @@ public class MainActivity extends ActionBarActivity implements
             break;
 		case 9: fragment = new PowerOffFragment();
             break;
+		case 10: fragment = new HelpFragment();
+		    break;
 		}
 		Bundle args = new Bundle();
 		args.putInt(ARG_SECTION_NUMBER, sectionNumber);

@@ -72,12 +72,28 @@ public class Server {
                                 mouseControl.altF4();
                                 break;
                             case "TYPE_CHARACTER": 
+                                //handle StringIndexOutOfBoundsException here when pressing soft enter key
                                 char ch = in.readLine().charAt(0);
                                 mouseControl.typeCharacter(ch);
                                 break;
                             case "TYPE_KEY": 
                                 keyCode = Integer.parseInt(in.readLine());
                                 mouseControl.typeCharacter(keyCode);
+                                break;
+                            case "LEFT_ARROW_KEY":
+                                mouseControl.pressLeftArrowKey();
+                                break;
+                            case "DOWN_ARROW_KEY":
+                                mouseControl.pressDownArrowKey();
+                                break;
+                            case "RIGHT_ARROW_KEY":
+                                mouseControl.pressRightArrowKey();
+                                break;
+                            case "UP_ARROW_KEY":
+                                mouseControl.pressUpArrowKey();
+                                break;
+                            case "F5_KEY":
+                                mouseControl.pressF5Key();
                                 break;
                         }
                     } else {

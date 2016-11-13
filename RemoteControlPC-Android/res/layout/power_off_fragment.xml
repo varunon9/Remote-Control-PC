@@ -2,7 +2,51 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
     android:orientation="vertical" >
-    
+
+    <LinearLayout 
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        
+        <ImageButton
+            android:id="@+id/shutdownImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:layout_margin="10dp"
+            android:src="@drawable/shutdown" />
+	
+	    <ImageButton
+	        android:id="@+id/restartImageButton"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:background="@color/transparent"
+	        android:layout_margin="10dp"
+	        android:src="@drawable/restart" />
+    </LinearLayout>
+ 
+    <LinearLayout 
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        
+        <ImageButton
+	        android:id="@+id/sleepImageButton"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:background="@color/transparent"
+	        android:layout_margin="10dp"
+	        android:src="@drawable/sleep" />
+	
+	    <ImageButton
+	        android:id="@+id/lockImageButton"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:background="@color/transparent"
+	        android:layout_margin="10dp"
+	        android:src="@drawable/lock" />
+    </LinearLayout>
 
 </LinearLayout>

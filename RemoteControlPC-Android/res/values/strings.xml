@@ -11,6 +11,8 @@
     <string name="image_viewer">Image Viewer</string>
     <string name="presentation">Presentation</string>
     <string name="power_off">Power Off</string>
+    <string name="help">Help</string>
+    <string name="help_url">https://github.com/varunon9/Remote-Control-PC</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_help">Help</string>

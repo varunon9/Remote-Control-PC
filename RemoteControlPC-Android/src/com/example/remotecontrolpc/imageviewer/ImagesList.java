@@ -26,6 +26,7 @@ public abstract class ImagesList extends AsyncTask<Void, Void, ArrayList<MusicIm
 		ContentResolver musicResolver = context.getContentResolver();
     	Uri imageUri = android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
         Cursor musicCursor = musicResolver.query(imageUri, null, null, null, null);
+        Utility utility = new Utility();
     	if (musicCursor != null && musicCursor.moveToFirst()) {
     		int titleColumn = musicCursor.getColumnIndex(android.provider.MediaStore.Images.Media.DISPLAY_NAME);
     		int dataColumn = musicCursor.getColumnIndex(android.provider.MediaStore.Images.Media.DATA);
@@ -37,7 +38,7 @@ public abstract class ImagesList extends AsyncTask<Void, Void, ArrayList<MusicIm
     			String thisDate = musicCursor.getString(dateColumn);
     			int thisSize = musicCursor.getInt(sizeColumn);//in bytes
     			int icon = R.drawable.image;
-    			String subHeading = getSize(thisSize) + ", " + new Utility().getDate(thisDate, "dd MMM yyyy hh:mm a");
+    			String subHeading = utility.getSize(thisSize) + ", " + utility.getDate(thisDate, "dd MMM yyyy hh:mm a");
     			imagesList.add(new MusicImageAvatar(icon, thisTitle, subHeading, thisData, "image"));
     		} while (musicCursor.moveToNext());
     	}
@@ -47,10 +48,6 @@ public abstract class ImagesList extends AsyncTask<Void, Void, ArrayList<MusicIm
 			}
 		});
 		return imagesList;
-	}
-	private String getSize(int size) {
-		size /= 1024; 
-		return size + "KB";
 	}
 	@Override
 	protected void onPostExecute(ArrayList<MusicImageAvatar> imagesList) {

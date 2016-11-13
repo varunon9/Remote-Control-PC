@@ -191,4 +191,19 @@ public class MouseKeyboardControl {
         robot.delay(10);
         robot.keyRelease(keyCode);
     }
+    public void pressLeftArrowKey() {
+        typeCharacter(VK_LEFT);
+    }
+    public void pressDownArrowKey() {
+        typeCharacter(VK_DOWN);
+    }
+    public void pressRightArrowKey() {
+        typeCharacter(VK_RIGHT);
+    }
+    public void pressUpArrowKey() {
+        typeCharacter(VK_UP);
+    }
+    public void pressF5Key() {
+        typeCharacter(VK_F5);
+    }
 }

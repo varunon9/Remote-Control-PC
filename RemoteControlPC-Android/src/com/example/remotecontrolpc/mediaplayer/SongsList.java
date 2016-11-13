@@ -24,6 +24,7 @@ public abstract class SongsList extends AsyncTask<Void, Void, ArrayList<MusicIma
 		ContentResolver musicResolver = context.getContentResolver();
     	Uri musicUri = android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
         Cursor musicCursor = musicResolver.query(musicUri, null, null, null, null);
+        Utility utility = new Utility();
     	if (musicCursor!=null && musicCursor.moveToFirst()) {
     		int titleColumn = musicCursor.getColumnIndex(android.provider.MediaStore.Audio.Media.TITLE);
     		int artistColumn = musicCursor.getColumnIndex(android.provider.MediaStore.Audio.Media.ARTIST);
@@ -36,7 +37,7 @@ public abstract class SongsList extends AsyncTask<Void, Void, ArrayList<MusicIma
     			String thisData = musicCursor.getString(dataColumn);
     			int thisDuration = musicCursor.getInt(durationColumn);
     			int thisAlbumId = musicCursor.getInt(albumIdColumn);
-    			String subHeading = thisArtist + ", " + new Utility().getDuration(thisDuration);
+    			String subHeading = thisArtist + ", " + utility.getDuration(thisDuration);
     			songsList.add(new MusicImageAvatar(thisAlbumId, thisTitle, subHeading, thisData, "music"));
     		} while (musicCursor.moveToNext());
     	}
