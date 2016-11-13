@@ -35,10 +35,11 @@ Enjoy :sparkles: :boom: :wink:
 5. Lock icon to launcher
 
 ## Screenshots
-
-![Desktop App] (./screenshots/desktop.png)  ![Connection Screen] (./screenshots/connect.png)
-![Touchpad Screen] (./screenshots/touchpad.png)  ![Navigation Screen] (./screenshots/navigation-drawer.png)
-![Typing Screen] (./screenshots/keyboard.png)  ![Media Player Screen] (./screenshots/media-player.png)
-![Image Viewer Screen] (./screenshots/image-viewer.png)  ![File Transfer Screen] (./screenshots/file-transfer.png)
-![Presentation Screen] (./screenshots/presentation.png)  ![Power Off Screen] (./screenshots/power-off.png)
+|  |  |
+| --- | --- |
+|![Desktop App] (./screenshots/desktop.png) | ![Connection Screen] (./screenshots/connect.png)|
+|![Touchpad Screen] (./screenshots/touchpad.png) | ![Navigation Screen] (./screenshots/navigation-drawer.png)|
+|![Typing Screen] (./screenshots/keyboard.png) | ![Media Player Screen] (./screenshots/media-player.png)|
+|![Image Viewer Screen] (./screenshots/image-viewer.png) | ![File Transfer Screen] (./screenshots/file-transfer.png)|
+|![Presentation Screen] (./screenshots/presentation.png) | ![Power Off Screen] (./screenshots/power-off.png)|
   
