@@ -1,6 +1,7 @@
 package com.example.remotecontrolpc;
 
 import java.io.BufferedReader;
+import java.io.ObjectInputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 
@@ -20,6 +21,8 @@ import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -40,9 +43,11 @@ public class MainActivity extends ActionBarActivity implements
 	 */
 	private CharSequence mTitle;
 	public static Socket clientSocket;
+	public static ObjectInputStream objectInputStream = null;
 	public static PrintWriter outToServer;
 	public static BufferedReader inFromServer;
 	private static ActionBarActivity thisActivity;
+	private boolean doubleBackToExitPressedOnce = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -210,5 +215,23 @@ public class MainActivity extends ActionBarActivity implements
 				}
 			}	
 		}
+	}
+	
+	@Override
+	public void onBackPressed() {
+	    if (doubleBackToExitPressedOnce) {
+	        super.onBackPressed();
+	        return;
+	    }
+	    doubleBackToExitPressedOnce = true;
+	    Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+
+	    new Handler().postDelayed(new Runnable() {
+
+	        @Override
+	        public void run() {
+	            doubleBackToExitPressedOnce = false;                       
+	        }
+	    }, 2000);
 	}
 }

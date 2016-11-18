@@ -8,11 +8,16 @@ package remotecontrolpc.desktop.server;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.io.BufferedReader;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import remotecontrolpc.desktop.filesharing.FileAPI;
+import remotecontrolpc.desktop.filesharing.SendFilesList;
 import remotecontrolpc.desktop.mousekeyboardcontrol.MouseKeyboardControl;
 
 /**
@@ -21,14 +26,19 @@ import remotecontrolpc.desktop.mousekeyboardcontrol.MouseKeyboardControl;
  */
 public class Server {
     public void connect(ServerSocket serverSocket, Socket clientSocket,
-            JButton resetButton, JLabel connectionStatusLabel) {
+            JButton resetButton, JLabel connectionStatusLabel, InputStream inputStream,
+            OutputStream outputStream, ObjectOutputStream objectOutputStream) {
         MouseKeyboardControl mouseControl = new MouseKeyboardControl();
         try {
             connectionStatusLabel.setText("Waiting for Phone to connect...");
             clientSocket = serverSocket.accept();
             resetButton.setEnabled(false);
             connectionStatusLabel.setText("Connected to: " + clientSocket.getRemoteSocketAddress());
-            BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            inputStream = clientSocket.getInputStream();
+            outputStream = clientSocket.getOutputStream();
+            objectOutputStream = new ObjectOutputStream(outputStream);
+            BufferedReader in = new BufferedReader(new InputStreamReader(inputStream));
+            FileAPI fileAPI = new FileAPI();
             String message;
             while (true) {
                 try {
@@ -95,12 +105,22 @@ public class Server {
                             case "F5_KEY":
                                 mouseControl.pressF5Key();
                                 break;
+                            case "FILE_DOWNLOAD_LIST_FILES":
+                                String path = in.readLine();
+                                if (path.equals("/")) {
+                                    path = fileAPI.getHomeDirectoryPath();
+                                }
+                                new SendFilesList().sendFilesList(fileAPI, path, objectOutputStream);
+                                break;
                         }
                     } else {
                         //remote connection closed
                         in.close();
                         clientSocket.close();
                         serverSocket.close();
+                        inputStream.close();
+                        outputStream.close();
+                        objectOutputStream.close();
                         resetButton.setEnabled(true);
                         connectionStatusLabel.setText("Disconnected");
                         break;

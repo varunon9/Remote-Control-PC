@@ -2,8 +2,7 @@ package com.example.remotecontrolpc;
 
 import java.util.ArrayList;
 
-import com.example.remotecontrolpc.MusicImageAvatarAdapter.MusicImageAvatarHolder;
-
+import file.AvatarFile;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.view.LayoutInflater;
@@ -42,13 +41,23 @@ public class AvatarFileAdapter extends ArrayAdapter<AvatarFile> {
 		AvatarFile item = objects.get(position);
 		Bitmap bitmap;
 		Utility utility = new Utility();
-		//change to lowercase and match
-		if (item.getHeading().endsWith("jpg") || item.getHeading().endsWith("JPG") || item.getHeading().endsWith("Jpg")
-				|| item.getHeading().endsWith("Jpeg") || item.getHeading().endsWith("JPEG") || item.getHeading().endsWith("jpeg")) {
-			bitmap = utility.decodeImageFile(item.getPath());
-			holder.icon.setImageBitmap(bitmap);
-		} else {
-			holder.icon.setImageResource(item.getIcon());
+		String type = item.getType();
+		if (type.equals("image")) {
+			//files from server has icon -1
+			if (item.getIcon() != -1) {
+				bitmap = utility.decodeImageFile(item.getPath());
+				holder.icon.setImageBitmap(bitmap);
+			} else {
+				holder.icon.setImageResource(R.drawable.image);
+			}
+		} else if (type.equals("mp3")) {
+			holder.icon.setImageResource(R.drawable.music_png);
+		} else if (type.equals("pdf")) {
+			holder.icon.setImageResource(R.drawable.pdf);
+		} else if (type.equals("file")) {
+			holder.icon.setImageResource(R.drawable.file);
+		} else if (type.equals("folder")) {
+			holder.icon.setImageResource(R.drawable.folder);
 		}
 		holder.avatarHeading.setText(item.getHeading());
 		holder.avatarSubheading.setText(item.getSubheading());

@@ -3,11 +3,11 @@ package com.example.remotecontrolpc.filetransfer;
 import java.io.File;
 import java.util.ArrayList;
 
-import com.example.remotecontrolpc.AvatarFile;
 import com.example.remotecontrolpc.CallbackReceiver;
 import com.example.remotecontrolpc.R;
 import com.example.remotecontrolpc.Utility;
 
+import file.AvatarFile;
 import android.os.AsyncTask;
 /*
  * The three types used by an asynchronous task are the following:
@@ -25,17 +25,15 @@ public abstract class FilesList extends AsyncTask<String, Void, ArrayList<Avatar
 		File file = new File(path);
 		//file.mkdirs();
 		File[] files = file.listFiles();
-	    if (files.length == 0)
-	        return null;
-	    else {
-	        for (int i = 0; i < files.length; i++) {
+	    if (files.length > 0) {
+	    	for (int i = 0; i < files.length; i++) {
 	        	String avatarHeading = files[i].getName();
 	        	long lastModified = files[i].lastModified();
 	        	String lastModifiedDate = utility.getDate(lastModified, "dd MMM yyyy hh:mm a");
-	        	int icon;
-	        	String itemsOrSize, filePath;
+	        	int icon = R.drawable.folder;
+	        	String itemsOrSize, filePath, type;
 	        	if (files[i].isDirectory()) {
-	        		icon = R.drawable.folder;
+	        		type = "folder";
 	        		File tempArray[] = files[i].listFiles();
 	        		if (tempArray != null) {
 	        			itemsOrSize = files[i].listFiles().length + " items";
@@ -44,23 +42,25 @@ public abstract class FilesList extends AsyncTask<String, Void, ArrayList<Avatar
 	        		}
 	        	} else {
 	        		itemsOrSize = utility.getSize(files[i].length());
-	        		if (avatarHeading.endsWith("mp3")) {
-	        			icon = R.drawable.music_png;
-	        		} else if (avatarHeading.endsWith("jpg")) {
-	        			icon = R.drawable.image;
-	        		} else if (avatarHeading.endsWith("pdf")) {
-	        			icon = R.drawable.pdf;
-	        		} else {
-	        			icon = R.drawable.file;
+	        		type = "file";
+	        		if (avatarHeading.length() > 3) {
+	        			String extension = avatarHeading.substring(avatarHeading.length() - 3).toLowerCase();
+	        			if (extension.equals("jpg") || extension.equals("jpeg") || extension.equals("png")
+	        					|| extension.equals("svg")) {
+	        				type = "image";
+	        			} else if (extension.equals("mp3")) {
+	        				type = "mp3";
+	        			} else if (extension.equals("pdf")) {
+	        				type = "pdf";
+	        			}
 	        		}
 	        	}
 	        	filePath = files[i].getAbsolutePath();
 	        	String subHeading = itemsOrSize + " " + lastModifiedDate;
 	        	AvatarFile avatarFile = new AvatarFile(
-	        			icon, avatarHeading, subHeading, filePath);
+	        			icon, avatarHeading, subHeading, filePath, type);
 	        	myFiles.add(avatarFile);
 	        }
-	        	
 	    }
 	    return myFiles;
 	}

@@ -21,7 +21,7 @@ import android.widget.Toast;
 import com.example.remotecontrolpc.AvatarFileAdapter;
 import com.example.remotecontrolpc.FileAPI;
 import com.example.remotecontrolpc.MainActivity;
-import com.example.remotecontrolpc.AvatarFile;
+import file.AvatarFile;
 import com.example.remotecontrolpc.R;
 
 public class FileTransferFragment extends Fragment implements OnClickListener {

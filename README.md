@@ -42,4 +42,28 @@ Enjoy :sparkles: :boom: :wink:
 |![Typing Screen] (./screenshots/keyboard.png) | ![Media Player Screen] (./screenshots/media-player.png)|
 |![Image Viewer Screen] (./screenshots/image-viewer.png) | ![File Transfer Screen] (./screenshots/file-transfer.png)|
 |![Presentation Screen] (./screenshots/presentation.png) | ![Power Off Screen] (./screenshots/power-off.png)|
+
+## How to contribute?
+Desktop part of this project has been developed in Netbeans while that of Android part in eclipse.
+
+#### Steps to deploy app on your machine-
+1. There are three folders-
+    1. RemoteControlPC-Android- Android part, Import in Eclipse
+    2. RemoteControlPC-Desktop- Desktop part, Import in Netbeans
+    3. RemoteControlPC-Libraries- Libraries (Jar file) that is being used in android as well as desktop, Import in Netbeans
+2. Library has a dist folder that contains jar file.
+3. Add this jar file in build path of Desktop (Netbeans) as well as Android (Eclipse) part. See steps below.
+4. To change/modify the java files inside library folder, import it in Netbeans and 'clean and build project' after changing.
+5. Make sure to clean android as well as desktop part after modifying library files.
+
+#### Steps to add jar file to android as well as dekstop part-
+1. For Netbeans-
+    1. Right click on project 
+    2. Click Properties
+    3. Click Libraries
+    4. Add JAR/Folder -> Select jar from /path/to/repository/RemoteControlPC-Libraries/dist/RemoteControlPC-Libraries.jar
+2. For Eclipse-
+    1. Create libs folder in root directory if not already available
+    2. Copy JAR file to the libs folder
+    3. Right click on the Jar file and then select Build Path > Add to Build Path
   

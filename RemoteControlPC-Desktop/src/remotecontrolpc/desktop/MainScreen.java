@@ -5,6 +5,9 @@
  */
 package remotecontrolpc.desktop;
 
+import java.io.InputStream;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import javax.swing.JOptionPane;
@@ -21,6 +24,9 @@ public class MainScreen extends javax.swing.JFrame {
     int port;
     ServerSocket serverSocket = null;
     Socket clientSocket = null;
+    InputStream inputStream = null;
+    OutputStream outputStream = null;
+    ObjectOutputStream objectOutputStream = null;
     /**
      * Creates new form MainScreen
      */
@@ -124,21 +130,24 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void resetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetButtonActionPerformed
         // TODO add your handling code here:
-        if (serverSocket != null) {
-            try {
+        try {
+            if (serverSocket != null) {
                 serverSocket.close();
-            } catch(Exception e) {
-                e.printStackTrace();
-                showDialogMessage("Error: Could not close server");
             }
-        }
-        if (clientSocket != null) {
-            try {
+            if (clientSocket != null) {
                 clientSocket.close();
-            } catch(Exception e) {
-                e.printStackTrace();
-                showDialogMessage("Error: Could not close Connected Client");
             }
+            if (inputStream != null) {
+                inputStream.close();
+            }
+            if (outputStream != null) {
+                outputStream.close();
+            }
+            if (objectOutputStream != null) {
+                objectOutputStream.close();
+            }
+        } catch(Exception e) {
+            e.printStackTrace();
         }
         setConnectionDetails();
     }//GEN-LAST:event_resetButtonActionPerformed
@@ -205,7 +214,8 @@ public class MainScreen extends javax.swing.JFrame {
     private void startServer() {
         new Thread() {
             public void run() {
-                new Server().connect(serverSocket, clientSocket, resetButton, connectionStatusLabel);  
+                new Server().connect(serverSocket, clientSocket, resetButton, connectionStatusLabel,
+                    inputStream, outputStream, objectOutputStream);  
             }
         }.start();
     }

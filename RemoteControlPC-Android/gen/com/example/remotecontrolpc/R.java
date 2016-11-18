@@ -1871,19 +1871,18 @@ containing a value of this type.
         public static final int abc_simple_dropdown_hint=0x7f030015;
         public static final int activity_main=0x7f030016;
         public static final int connect_fragment=0x7f030017;
-        public static final int file_download_fragment=0x7f030018;
-        public static final int file_transfer_fragment=0x7f030019;
-        public static final int fragment_main=0x7f03001a;
-        public static final int fragment_navigation_drawer=0x7f03001b;
-        public static final int help_fragment=0x7f03001c;
-        public static final int keyboard_fragment=0x7f03001d;
-        public static final int listview_item_navigation_drawer=0x7f03001e;
-        public static final int media_player_fragment=0x7f03001f;
-        public static final int music_image_avatar=0x7f030020;
-        public static final int power_off_fragment=0x7f030021;
-        public static final int presentation_fragment=0x7f030022;
-        public static final int support_simple_spinner_dropdown_item=0x7f030023;
-        public static final int touchpad_fragment=0x7f030024;
+        public static final int file_transfer_fragment=0x7f030018;
+        public static final int fragment_main=0x7f030019;
+        public static final int fragment_navigation_drawer=0x7f03001a;
+        public static final int help_fragment=0x7f03001b;
+        public static final int keyboard_fragment=0x7f03001c;
+        public static final int listview_item_navigation_drawer=0x7f03001d;
+        public static final int media_player_fragment=0x7f03001e;
+        public static final int music_image_avatar=0x7f03001f;
+        public static final int power_off_fragment=0x7f030020;
+        public static final int presentation_fragment=0x7f030021;
+        public static final int support_simple_spinner_dropdown_item=0x7f030022;
+        public static final int touchpad_fragment=0x7f030023;
     }
     public static final class menu {
         public static final int global=0x7f0c0000;
