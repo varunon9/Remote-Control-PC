@@ -48,7 +48,7 @@ public class TouchpadFragment extends Fragment {
                             //save X and Y positions when user touches the TextView
                             initX = (int) event.getX();
                             initY = (int) event.getY();
-                            mouseMoved=false;
+                            mouseMoved = false;
                             break;
                         case MotionEvent.ACTION_MOVE:
                             if(moultiTouch == false) {
@@ -61,8 +61,8 @@ public class TouchpadFragment extends Fragment {
                                 if (disX != 0 || disY != 0) {
                                 	MainActivity.sendMessageToServer("MOUSE_MOVE");
                                     //send mouse movement to server
-                            	    MainActivity.sendMessageToServer(Integer.toString(disX));
-                            	    MainActivity.sendMessageToServer(Integer.toString(disY));
+                            	    MainActivity.sendMessageToServer(disX);
+                            	    MainActivity.sendMessageToServer(disY);
                                 }
                             }
                             else {
@@ -71,7 +71,7 @@ public class TouchpadFragment extends Fragment {
                         	    initY = (int) event.getY();
                         	    if(disY != 0) {
                         	    	MainActivity.sendMessageToServer("MOUSE_WHEEL");
-                        	    	MainActivity.sendMessageToServer(Integer.toString(disY));;
+                        	    	MainActivity.sendMessageToServer(disY);;
                         	    }
                             }
                             mouseMoved=true;

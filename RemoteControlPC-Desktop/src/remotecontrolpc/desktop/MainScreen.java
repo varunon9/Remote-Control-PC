@@ -5,9 +5,14 @@
  */
 package remotecontrolpc.desktop;
 
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.InputStream;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import javax.swing.JOptionPane;
@@ -22,11 +27,12 @@ import remotecontrolpc.desktop.server.Server;
 public class MainScreen extends javax.swing.JFrame {
     //variable declaration
     int port;
-    ServerSocket serverSocket = null;
-    Socket clientSocket = null;
-    InputStream inputStream = null;
-    OutputStream outputStream = null;
-    ObjectOutputStream objectOutputStream = null;
+    public static ServerSocket serverSocket = null;
+    public static Socket clientSocket = null;
+    public static InputStream inputStream = null;
+    public static OutputStream outputStream = null;
+    public static ObjectOutputStream objectOutputStream = null;
+    public static ObjectInputStream objectInputStream = null;
     /**
      * Creates new form MainScreen
      */
@@ -146,6 +152,9 @@ public class MainScreen extends javax.swing.JFrame {
             if (objectOutputStream != null) {
                 objectOutputStream.close();
             }
+            if (objectInputStream != null) {
+                objectInputStream.close();
+            }
         } catch(Exception e) {
             e.printStackTrace();
         }
@@ -214,8 +223,7 @@ public class MainScreen extends javax.swing.JFrame {
     private void startServer() {
         new Thread() {
             public void run() {
-                new Server().connect(serverSocket, clientSocket, resetButton, connectionStatusLabel,
-                    inputStream, outputStream, objectOutputStream);  
+                new Server().connect(resetButton, connectionStatusLabel);  
             }
         }.start();
     }

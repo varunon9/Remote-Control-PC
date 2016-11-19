@@ -19,10 +19,10 @@ public class SendFilesList {
         new Thread() {
             public void run() {
                 ArrayList<AvatarFile> myFiles = fileAPI.getFiles(path);
+                System.out.println(path);
                 try {
                     out.writeObject(myFiles);
                     out.flush();
-                    //out.reset();
                 } catch(Exception e) {
                     e.printStackTrace();
                 }

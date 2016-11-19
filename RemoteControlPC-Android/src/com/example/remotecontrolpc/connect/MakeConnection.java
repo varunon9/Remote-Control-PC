@@ -2,6 +2,8 @@ package com.example.remotecontrolpc.connect;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.net.InetSocketAddress;
 import java.net.Socket;
@@ -30,9 +32,8 @@ public abstract class MakeConnection extends AsyncTask<Void, Void, Socket> imple
 			clientSocket = new Socket();
 			//3s timeout
 			clientSocket.connect(socketAddress, 3000);
-			MainActivity.outToServer = new PrintWriter(clientSocket.getOutputStream(), true);
-			MainActivity.inFromServer = new BufferedReader(
-					new InputStreamReader(clientSocket.getInputStream()));
+			MainActivity.objectInputStream = new ObjectInputStream(clientSocket.getInputStream());
+			MainActivity.objectOutputStream = new ObjectOutputStream(clientSocket.getOutputStream());
 		} catch(Exception e) {
 			e.printStackTrace();
 			clientSocket = null;

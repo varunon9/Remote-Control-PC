@@ -56,7 +56,8 @@ public class FileDownloadFragment extends Fragment implements OnClickListener {
 					backButton.setEnabled(true);
 					getFiles();
 				} else {
-					Toast.makeText(getActivity(), "Downloading " + file.getHeading(), Toast.LENGTH_LONG).show();
+					//Toast.makeText(getActivity(), "Downloading " + file.getHeading(), Toast.LENGTH_LONG).show();
+					downloadFile(file.getHeading(), file.getPath());
 				}
 			}
 			
@@ -91,6 +92,15 @@ public class FileDownloadFragment extends Fragment implements OnClickListener {
 		message = pathStack.peek();
 		MainActivity.sendMessageToServer(message);
 		new GetFilesList(fileDownloadListView, getActivity()).execute(pathStack.peek());
+	}
+	private void downloadFile(String name, String path) {
+		if (MainActivity.clientSocket != null) {
+			MainActivity.sendMessageToServer("FILE_DOWNLOAD_REQUEST");
+			MainActivity.sendMessageToServer(path);
+			new DownloadFileFromServer(getActivity()).execute(name);
+		} else {
+			Toast.makeText(getActivity(), "Not Connected", Toast.LENGTH_LONG).show();
+		}
 	}
 }
 

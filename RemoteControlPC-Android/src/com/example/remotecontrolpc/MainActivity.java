@@ -1,7 +1,10 @@
 package com.example.remotecontrolpc;
 
 import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 
@@ -42,10 +45,9 @@ public class MainActivity extends ActionBarActivity implements
 	 * {@link #restoreActionBar()}.
 	 */
 	private CharSequence mTitle;
-	public static Socket clientSocket;
+	public static Socket clientSocket = null;
 	public static ObjectInputStream objectInputStream = null;
-	public static PrintWriter outToServer;
-	public static BufferedReader inFromServer;
+	public static ObjectOutputStream objectOutputStream = null;
 	private static ActionBarActivity thisActivity;
 	private boolean doubleBackToExitPressedOnce = false;
 
@@ -180,35 +182,75 @@ public class MainActivity extends ActionBarActivity implements
     
 	protected void onDestroy() {
 		super.onDestroy();
-		if (MainActivity.clientSocket != null) {
-			try {
+		//Toast.makeText(thisActivity, "Destroyed", Toast.LENGTH_LONG).show();
+		try {
+			if (MainActivity.clientSocket != null) {
 				MainActivity.clientSocket.close();
-			} catch(Exception e) {
-				e.printStackTrace();
 			}
+			if (MainActivity.objectOutputStream != null) {
+				MainActivity.objectOutputStream.close();
+			}
+			if (MainActivity.objectInputStream != null) {
+				MainActivity.objectInputStream.close();
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
 		}
 	}
+	
 	//this method is called from fragments to send message to server (Desktop)
 	public static void sendMessageToServer(String message) {
 		if (MainActivity.clientSocket != null) {
 			try {
-				MainActivity.outToServer.println(message);
-				if (MainActivity.outToServer.checkError()) {
-					Toast.makeText(thisActivity, "Connection Closed By server", Toast.LENGTH_LONG).show();
-					try {
-						MainActivity.clientSocket.close();
-					} catch(Exception e2) {
-						e2.printStackTrace();
-					} finally {
-						MainActivity.clientSocket = null;
-					}
-				}
+				MainActivity.objectOutputStream.writeObject(message);
 			} catch (Exception e) {
-				Toast.makeText(thisActivity, "Unable to send message", Toast.LENGTH_LONG).show();
+				Toast.makeText(thisActivity, "Connection Closed", Toast.LENGTH_LONG).show();
 				e.printStackTrace();
 				if (MainActivity.clientSocket != null) {
 					try {
 						MainActivity.clientSocket.close();
+						MainActivity.objectOutputStream.close();
+						MainActivity.clientSocket = null;
+					} catch(Exception e2) {
+						e2.printStackTrace();
+					}
+				}
+			}	
+		}
+	}
+	
+	public static void sendMessageToServer(int message) {
+		if (MainActivity.clientSocket != null) {
+			try {
+				MainActivity.objectOutputStream.writeObject(message);
+			} catch (Exception e) {
+				Toast.makeText(thisActivity, "Connection Closed", Toast.LENGTH_LONG).show();
+				e.printStackTrace();
+				if (MainActivity.clientSocket != null) {
+					try {
+						MainActivity.clientSocket.close();
+						MainActivity.objectOutputStream.close();
+						MainActivity.clientSocket = null;
+					} catch(Exception e2) {
+						e2.printStackTrace();
+					}
+				}
+			}	
+		}
+	}
+	
+	public static void sendMessageToServer(float message) {
+		if (MainActivity.clientSocket != null) {
+			try {
+				MainActivity.objectOutputStream.writeObject(message);
+			} catch (Exception e) {
+				Toast.makeText(thisActivity, "Connection Closed", Toast.LENGTH_LONG).show();
+				e.printStackTrace();
+				if (MainActivity.clientSocket != null) {
+					try {
+						MainActivity.clientSocket.close();
+						MainActivity.objectOutputStream.close();
+						MainActivity.clientSocket = null;
 					} catch(Exception e2) {
 						e2.printStackTrace();
 					}

@@ -7,16 +7,14 @@ package remotecontrolpc.desktop.server;
 
 import java.awt.MouseInfo;
 import java.awt.Point;
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.OutputStream;
-import java.net.ServerSocket;
 import java.net.Socket;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import remotecontrolpc.desktop.MainScreen;
 import remotecontrolpc.desktop.filesharing.FileAPI;
+import remotecontrolpc.desktop.filesharing.SendFile;
 import remotecontrolpc.desktop.filesharing.SendFilesList;
 import remotecontrolpc.desktop.mousekeyboardcontrol.MouseKeyboardControl;
 
@@ -25,24 +23,23 @@ import remotecontrolpc.desktop.mousekeyboardcontrol.MouseKeyboardControl;
  * @author varun
  */
 public class Server {
-    public void connect(ServerSocket serverSocket, Socket clientSocket,
-            JButton resetButton, JLabel connectionStatusLabel, InputStream inputStream,
-            OutputStream outputStream, ObjectOutputStream objectOutputStream) {
+    public void connect(JButton resetButton, JLabel connectionStatusLabel) {
         MouseKeyboardControl mouseControl = new MouseKeyboardControl();
         try {
             connectionStatusLabel.setText("Waiting for Phone to connect...");
-            clientSocket = serverSocket.accept();
+            MainScreen.clientSocket = MainScreen.serverSocket.accept();
             resetButton.setEnabled(false);
-            connectionStatusLabel.setText("Connected to: " + clientSocket.getRemoteSocketAddress());
-            inputStream = clientSocket.getInputStream();
-            outputStream = clientSocket.getOutputStream();
-            objectOutputStream = new ObjectOutputStream(outputStream);
-            BufferedReader in = new BufferedReader(new InputStreamReader(inputStream));
+            connectionStatusLabel.setText("Connected to: " +
+                    MainScreen.clientSocket.getRemoteSocketAddress());
+            MainScreen.inputStream = MainScreen.clientSocket.getInputStream();
+            MainScreen.outputStream = MainScreen.clientSocket.getOutputStream();
+            MainScreen.objectOutputStream = new ObjectOutputStream(MainScreen.outputStream);
+            MainScreen.objectInputStream = new ObjectInputStream(MainScreen.inputStream);
             FileAPI fileAPI = new FileAPI();
-            String message;
+            String message, path;
             while (true) {
                 try {
-                    message = in.readLine();
+                    message = (String) MainScreen.objectInputStream.readObject();
                     int keyCode;
                     if (message != null) {
                         switch (message) {
@@ -53,23 +50,23 @@ public class Server {
                                 mouseControl.rightClick();
                                 break;
                             case "MOUSE_WHEEL":
-                                int scrollAmount = Integer.parseInt(in.readLine());
+                                int scrollAmount = (int) MainScreen.objectInputStream.readObject();
                                 mouseControl.mouseWheel(scrollAmount);
                                 break;
                             case "MOUSE_MOVE":
-                                float x = Float.parseFloat(in.readLine());
-                                float y = Float.parseFloat(in.readLine());
+                                int x = (int) MainScreen.objectInputStream.readObject();
+                                int y = (int) MainScreen.objectInputStream.readObject();
                                 Point point = MouseInfo.getPointerInfo().getLocation(); //Get current mouse position
                                 float nowx = point.x;
                                 float nowy = point.y;
                                 mouseControl.mouseMove((int) (nowx + x), (int) (nowy + y));
                                 break;
                             case "KEY_PRESS":
-                                keyCode = Integer.parseInt(in.readLine());
+                                keyCode = (int) MainScreen.objectInputStream.readObject();
                                 mouseControl.keyPress(keyCode);
                                 break;
                             case "KEY_RELEASE":
-                                keyCode = Integer.parseInt(in.readLine());
+                                keyCode = (int) MainScreen.objectInputStream.readObject();
                                 mouseControl.keyRelease(keyCode);
                                 break;
                             case "CTRL_ALT_T":
@@ -83,11 +80,11 @@ public class Server {
                                 break;
                             case "TYPE_CHARACTER": 
                                 //handle StringIndexOutOfBoundsException here when pressing soft enter key
-                                char ch = in.readLine().charAt(0);
+                                char ch = ((String) MainScreen.objectInputStream.readObject()).charAt(0);
                                 mouseControl.typeCharacter(ch);
                                 break;
                             case "TYPE_KEY": 
-                                keyCode = Integer.parseInt(in.readLine());
+                                keyCode = (int) MainScreen.objectInputStream.readObject();
                                 mouseControl.typeCharacter(keyCode);
                                 break;
                             case "LEFT_ARROW_KEY":
@@ -106,27 +103,31 @@ public class Server {
                                 mouseControl.pressF5Key();
                                 break;
                             case "FILE_DOWNLOAD_LIST_FILES":
-                                String path = in.readLine();
+                                path = (String) MainScreen.objectInputStream.readObject();
                                 if (path.equals("/")) {
                                     path = fileAPI.getHomeDirectoryPath();
                                 }
-                                new SendFilesList().sendFilesList(fileAPI, path, objectOutputStream);
+                                new SendFilesList().sendFilesList(fileAPI, path, MainScreen.objectOutputStream);
+                                break;
+                            case "FILE_DOWNLOAD_REQUEST":
+                                //path is complete path including file name
+                                path = (String) MainScreen.objectInputStream.readObject();
+                                new SendFile().sendFile(path, MainScreen.objectOutputStream);
                                 break;
                         }
                     } else {
                         //remote connection closed
-                        in.close();
-                        clientSocket.close();
-                        serverSocket.close();
-                        inputStream.close();
-                        outputStream.close();
-                        objectOutputStream.close();
+                        connectionClosed();
                         resetButton.setEnabled(true);
                         connectionStatusLabel.setText("Disconnected");
                         break;
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
+                    connectionClosed();
+                    resetButton.setEnabled(true);
+                    connectionStatusLabel.setText("Disconnected");
+                    break;
                 }
             };
         }
@@ -134,9 +135,15 @@ public class Server {
             e.printStackTrace();
         }
     }
-    private void sendMessageToClient(Socket clientSocket) {
+    
+    private void connectionClosed() {
         try {
-            //ObjectOutputStream out = new ObjectOutputStream(clientSocket.getOutputStream());
+            MainScreen.objectInputStream.close();
+            MainScreen.clientSocket.close();
+            MainScreen.serverSocket.close();
+            MainScreen.inputStream.close();
+            MainScreen.outputStream.close();
+            MainScreen.objectOutputStream.close();
         } catch(Exception e) {
             e.printStackTrace();
         }

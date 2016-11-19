@@ -211,7 +211,7 @@ public class KeyboardFragment extends Fragment implements OnTouchListener, OnCli
 	}
 	private void sendKeyCodeToServer(String action, int keyCode) {
 		MainActivity.sendMessageToServer(action);
-		MainActivity.sendMessageToServer(Integer.toString(keyCode));
+		MainActivity.sendMessageToServer(keyCode);
 	}
 	@Override
 	public void beforeTextChanged(CharSequence s, int start, int count,
