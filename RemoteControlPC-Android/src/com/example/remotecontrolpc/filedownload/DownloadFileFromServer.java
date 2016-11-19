@@ -26,6 +26,7 @@ public class DownloadFileFromServer extends AsyncTask<String, String, Void > {
     	progressDialog = new ProgressDialog(context);
     	progressDialog.setTitle("Downloading File");
     	progressDialog.setMessage("Please Wait...");
+    	progressDialog.setCancelable(false);
     	progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         progressDialog.setProgress(0);
     	progressDialog.show();
@@ -52,13 +53,10 @@ public class DownloadFileFromServer extends AsyncTask<String, String, Void > {
 				fos = new FileOutputStream(file);
 				byte buffer[] = new byte[4096];
 				int fileSize = (int) MainActivity.objectInputStream.readObject();
-				System.out.println(fileSize + " file size in Integer");
-				System.out.println(path);
 				int read = 0;
 				int totalRead = 0;
 				int remaining = fileSize;
 				while ((read = MainActivity.objectInputStream.read(buffer, 0, Math.min(buffer.length, remaining))) > 0) {
-					System.out.println(read + " " + totalRead + " " + remaining);
 					totalRead += read;
 					remaining -= read;
 					publishProgress("" + (int) ((totalRead * 100) / fileSize));
@@ -82,7 +80,6 @@ public class DownloadFileFromServer extends AsyncTask<String, String, Void > {
 	@Override
 	protected void onProgressUpdate(String... progress) {
 		progressDialog.setProgress(Integer.parseInt(progress[0]));
-		System.out.println("Progress: " + progress[0]);
 	}
 	
 	@Override

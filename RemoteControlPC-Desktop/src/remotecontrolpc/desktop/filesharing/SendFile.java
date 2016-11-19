@@ -5,12 +5,9 @@
  */
 package remotecontrolpc.desktop.filesharing;
 
-import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
-import remotecontrolpc.desktop.MainScreen;
 
 /**
  *
@@ -19,6 +16,7 @@ import remotecontrolpc.desktop.MainScreen;
 public class SendFile {
     public void sendFile(final String path, final ObjectOutputStream out) {
         new Thread() {
+            @Override
             public void run() {
                 FileInputStream fis = null;
                 try {
@@ -36,7 +34,7 @@ public class SendFile {
                     while ((read = fis.read(buffer, 0, Math.min(buffer.length, remaining))) > 0) {
                         totalRead += read;
                         remaining -= read;
-                        System.out.println(read + " " + totalRead + " " + remaining);
+                        System.out.println("Transfer Progress: " + ((totalRead * 100) / fileSize));
                         out.write(buffer, 0, read);
                     }
                     out.flush();

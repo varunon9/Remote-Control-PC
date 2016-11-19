@@ -21,8 +21,11 @@ import android.widget.Toast;
 import com.example.remotecontrolpc.AvatarFileAdapter;
 import com.example.remotecontrolpc.FileAPI;
 import com.example.remotecontrolpc.MainActivity;
+
 import file.AvatarFile;
+
 import com.example.remotecontrolpc.R;
+import com.example.remotecontrolpc.filedownload.DownloadFileFromServer;
 
 public class FileTransferFragment extends Fragment implements OnClickListener {
 	private Button backButton;
@@ -62,7 +65,8 @@ public class FileTransferFragment extends Fragment implements OnClickListener {
 						new GetFilesList(fileTransferListView, getActivity()).execute(currentPath);
 	        		}
 				} else {
-					Toast.makeText(getActivity(), "Sending " + file.getHeading(), Toast.LENGTH_LONG).show();
+					//Toast.makeText(getActivity(), "Sending " + file.getHeading(), Toast.LENGTH_LONG).show();
+					transferFile(file.getHeading(), file.getPath());
 				}
 			}
 			
@@ -91,6 +95,16 @@ public class FileTransferFragment extends Fragment implements OnClickListener {
 			} else {
 				backButton.setEnabled(false);
 			}
+		}
+	}
+	
+	private void transferFile(String name, String path) {
+		if (MainActivity.clientSocket != null) {
+			MainActivity.sendMessageToServer("FILE_TRANSFER_REQUEST");
+			MainActivity.sendMessageToServer(name);
+			new TransferFileToServer(getActivity()).execute(new String[]{name, path});
+		} else {
+			Toast.makeText(getActivity(), "Not Connected", Toast.LENGTH_LONG).show();
 		}
 	}
 }

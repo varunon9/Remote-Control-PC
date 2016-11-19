@@ -14,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import remotecontrolpc.desktop.MainScreen;
 import remotecontrolpc.desktop.filesharing.FileAPI;
+import remotecontrolpc.desktop.filesharing.ReceiveFile;
 import remotecontrolpc.desktop.filesharing.SendFile;
 import remotecontrolpc.desktop.filesharing.SendFilesList;
 import remotecontrolpc.desktop.mousekeyboardcontrol.MouseKeyboardControl;
@@ -36,7 +37,7 @@ public class Server {
             MainScreen.objectOutputStream = new ObjectOutputStream(MainScreen.outputStream);
             MainScreen.objectInputStream = new ObjectInputStream(MainScreen.inputStream);
             FileAPI fileAPI = new FileAPI();
-            String message, path;
+            String message, filePath, fileName;
             while (true) {
                 try {
                     message = (String) MainScreen.objectInputStream.readObject();
@@ -103,16 +104,21 @@ public class Server {
                                 mouseControl.pressF5Key();
                                 break;
                             case "FILE_DOWNLOAD_LIST_FILES":
-                                path = (String) MainScreen.objectInputStream.readObject();
-                                if (path.equals("/")) {
-                                    path = fileAPI.getHomeDirectoryPath();
+                                filePath = (String) MainScreen.objectInputStream.readObject();
+                                if (filePath.equals("/")) {
+                                    filePath = fileAPI.getHomeDirectoryPath();
                                 }
-                                new SendFilesList().sendFilesList(fileAPI, path, MainScreen.objectOutputStream);
+                                new SendFilesList().sendFilesList(fileAPI, filePath, MainScreen.objectOutputStream);
                                 break;
                             case "FILE_DOWNLOAD_REQUEST":
-                                //path is complete path including file name
-                                path = (String) MainScreen.objectInputStream.readObject();
-                                new SendFile().sendFile(path, MainScreen.objectOutputStream);
+                                //filePath is complete path including file name
+                                filePath = (String) MainScreen.objectInputStream.readObject();
+                                new SendFile().sendFile(filePath, MainScreen.objectOutputStream);
+                                break;
+                            case "FILE_TRANSFER_REQUEST":
+                                fileName = (String) MainScreen.objectInputStream.readObject();
+                                //not in thread, blocking action
+                                new ReceiveFile().receiveFile(fileName);
                                 break;
                         }
                     } else {
