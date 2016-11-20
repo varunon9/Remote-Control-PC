@@ -9,7 +9,6 @@ import java.awt.MouseInfo;
 import java.awt.Point;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.net.Socket;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import remotecontrolpc.desktop.MainScreen;
@@ -20,8 +19,7 @@ import remotecontrolpc.desktop.filesharing.SendFilesList;
 import remotecontrolpc.desktop.mousekeyboardcontrol.MouseKeyboardControl;
 import remotecontrolpc.desktop.poweroff.PowerOff;
 public class Server {
-    public void connect(JButton resetButton, JLabel connectionStatusLabel)
-    {
+    public void connect(JButton resetButton, JLabel connectionStatusLabel) {
         MouseKeyboardControl mouseControl = new MouseKeyboardControl();
         try {
             connectionStatusLabel.setText("Waiting for Phone to connect...");
@@ -36,10 +34,8 @@ public class Server {
             FileAPI fileAPI = new FileAPI();
             String message, filePath, fileName;
             PowerOff  powerOff =new PowerOff();
-            while (true) 
-            {
-                try 
-                {
+            while (true) {
+                try {
                     message = (String) MainScreen.objectInputStream.readObject();
                     int keyCode;
                     if (message != null) {
@@ -153,10 +149,8 @@ public class Server {
             e.printStackTrace();
         }
     } 
-    private void connectionClosed()
-    {
-        try 
-        {
+    private void connectionClosed() {
+        try {
             MainScreen.objectInputStream.close();
             MainScreen.clientSocket.close();
             MainScreen.serverSocket.close();
@@ -164,8 +158,7 @@ public class Server {
             MainScreen.outputStream.close();
             MainScreen.objectOutputStream.close();
         } 
-        catch(Exception e)
-        {
+        catch(Exception e) {
             e.printStackTrace();
         }
     }
