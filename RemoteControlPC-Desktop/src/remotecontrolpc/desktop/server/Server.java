@@ -18,13 +18,10 @@ import remotecontrolpc.desktop.filesharing.ReceiveFile;
 import remotecontrolpc.desktop.filesharing.SendFile;
 import remotecontrolpc.desktop.filesharing.SendFilesList;
 import remotecontrolpc.desktop.mousekeyboardcontrol.MouseKeyboardControl;
-
-/**
- *
- * @author varun
- */
+import remotecontrolpc.desktop.poweroff.PowerOff;
 public class Server {
-    public void connect(JButton resetButton, JLabel connectionStatusLabel) {
+    public void connect(JButton resetButton, JLabel connectionStatusLabel)
+    {
         MouseKeyboardControl mouseControl = new MouseKeyboardControl();
         try {
             connectionStatusLabel.setText("Waiting for Phone to connect...");
@@ -38,8 +35,11 @@ public class Server {
             MainScreen.objectInputStream = new ObjectInputStream(MainScreen.inputStream);
             FileAPI fileAPI = new FileAPI();
             String message, filePath, fileName;
-            while (true) {
-                try {
+            PowerOff  powerOff =new PowerOff();
+            while (true) 
+            {
+                try 
+                {
                     message = (String) MainScreen.objectInputStream.readObject();
                     int keyCode;
                     if (message != null) {
@@ -120,6 +120,18 @@ public class Server {
                                 //not in thread, blocking action
                                 new ReceiveFile().receiveFile(fileName);
                                 break;
+                            case "SHUTDOWN_PC":
+                                powerOff.shutdown();
+                                break;
+                            case "RESTART_PC":
+                                powerOff.restart();
+                                break;
+                            case "SLEEP_PC":
+                                powerOff.suspend();
+                                break;
+                            case "LOCK_PC":
+                                powerOff.lock();
+                                break;
                         }
                     } else {
                         //remote connection closed
@@ -140,17 +152,20 @@ public class Server {
         catch(Exception e) {
             e.printStackTrace();
         }
-    }
-    
-    private void connectionClosed() {
-        try {
+    } 
+    private void connectionClosed()
+    {
+        try 
+        {
             MainScreen.objectInputStream.close();
             MainScreen.clientSocket.close();
             MainScreen.serverSocket.close();
             MainScreen.inputStream.close();
             MainScreen.outputStream.close();
             MainScreen.objectOutputStream.close();
-        } catch(Exception e) {
+        } 
+        catch(Exception e)
+        {
             e.printStackTrace();
         }
     }

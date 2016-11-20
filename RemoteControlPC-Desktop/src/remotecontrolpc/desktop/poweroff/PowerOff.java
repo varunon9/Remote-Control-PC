@@ -12,11 +12,11 @@ package remotecontrolpc.desktop.poweroff;
 public class PowerOff {
     String os;
     Runtime runtime;
-    PowerOff() {
+    public PowerOff() {
         os = System.getProperty("os.name");
         runtime = Runtime.getRuntime();
     }
-    void shutdown() {     
+    public void shutdown() {     
         try {
             if ("Linux".equals(os) || "Mac OS X".equals(os)) {
                 runtime.exec("shutdown -h now"); //or
@@ -32,7 +32,7 @@ public class PowerOff {
         }
         
     }
-    void restart() {     
+    public void restart() {     
         try {
             if ("Linux".equals(os) || "Mac OS X".equals(os)) {
                 runtime.exec("systemctl reboot");
@@ -47,7 +47,7 @@ public class PowerOff {
         }
         
     }
-    void logOff() {     
+   /* public void logOff() {     
         try {
             if ("Linux".equals(os) || "Mac OS X".equals(os)) {
                 runtime.exec("systemctl hibernate");
@@ -61,8 +61,8 @@ public class PowerOff {
             e.printStackTrace();
         }
         
-    }
-    void suspend() {     
+    }*/
+    public void suspend() {     
         try {
             if ("Linux".equals(os) || "Mac OS X".equals(os)) {
                 runtime.exec("systemctl suspend");
@@ -77,7 +77,7 @@ public class PowerOff {
         }
         
     }
-    void lock() {     
+    public void lock() {     
         try {
             if ("Linux".equals(os) || "Mac OS X".equals(os)) {
                 runtime.exec("systemctl lock");
@@ -95,6 +95,6 @@ public class PowerOff {
     
     public static void main(String args[]) {
         PowerOff powerOff = new PowerOff();
-        powerOff.shutdown();
+        powerOff.lock();
     }
 }
