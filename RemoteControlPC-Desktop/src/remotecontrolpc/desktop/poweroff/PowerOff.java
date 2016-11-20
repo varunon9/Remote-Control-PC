@@ -16,6 +16,7 @@ public class PowerOff {
         os = System.getProperty("os.name");
         runtime = Runtime.getRuntime();
     }
+    
     public void shutdown() {     
         try {
             if ("Linux".equals(os) || "Mac OS X".equals(os)) {
@@ -32,6 +33,7 @@ public class PowerOff {
         }
         
     }
+    
     public void restart() {     
         try {
             if ("Linux".equals(os) || "Mac OS X".equals(os)) {
@@ -47,21 +49,7 @@ public class PowerOff {
         }
         
     }
-   /* public void logOff() {     
-        try {
-            if ("Linux".equals(os) || "Mac OS X".equals(os)) {
-                runtime.exec("systemctl hibernate");
-            } else if ("Windows 8.1".equals(os) || "Windows 8.0".equals(os)) {
-                runtime.exec("shutdown -l");
-            } else {
-                System.out.println("Unsupported operating system");
-            }
-        } catch(Exception e) {
-            System.out.println("Log off error");
-            e.printStackTrace();
-        }
-        
-    }*/
+    
     public void suspend() {     
         try {
             if ("Linux".equals(os) || "Mac OS X".equals(os)) {
@@ -74,9 +62,9 @@ public class PowerOff {
         } catch(Exception e) {
             System.out.println("suspend error");
             e.printStackTrace();
-        }
-        
+        }   
     }
+    
     public void lock() {     
         try {
             if ("Linux".equals(os) || "Mac OS X".equals(os)) {

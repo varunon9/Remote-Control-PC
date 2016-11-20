@@ -205,7 +205,11 @@ public class MainScreen extends javax.swing.JFrame {
         String ipAddresses[] = new GetMyIpAddress().ipAddress();
         String connectionStatus = "Not Connected";
         port = new GetFreePort().getFreePort();
-        ipAddressLabel.setText(ipAddresses[0]);
+        String ipAddress = ipAddresses[0];
+        if (ipAddress.length() > 1) {
+            ipAddress = ipAddress + " | " + ipAddresses[1];
+        }
+        ipAddressLabel.setText(ipAddress);
         portNumberLabel.setText(Integer.toString(port));
         connectionStatusLabel.setText(connectionStatus);
         if (ipAddresses[0].equals("127.0.0.1")) {
