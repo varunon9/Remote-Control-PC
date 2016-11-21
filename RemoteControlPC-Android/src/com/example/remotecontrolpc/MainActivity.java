@@ -1,14 +1,11 @@
 package com.example.remotecontrolpc;
 
-import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
 import java.net.Socket;
 
 import com.example.remotecontrolpc.connect.ConnectFragment;
+import com.example.remotecontrolpc.filedownload.DownloadFileFromServer;
 import com.example.remotecontrolpc.filedownload.FileDownloadFragment;
 import com.example.remotecontrolpc.filetransfer.FileTransferFragment;
 import com.example.remotecontrolpc.help.HelpFragment;
@@ -23,9 +20,9 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -276,4 +273,23 @@ public class MainActivity extends ActionBarActivity implements
 	        }
 	    }, 2000);
 	}
+	
+	@Override
+	public void onRequestPermissionsResult(int requestCode,
+	        String permissions[], int[] grantResults) {
+	    switch (requestCode) {
+	        case 2: {
+	            // If request is cancelled, the result arrays are empty.
+	            if (grantResults.length > 0
+	                && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+	            	Toast.makeText(this, "Click again to download", Toast.LENGTH_SHORT).show();
+
+	            } else {
+	            	Toast.makeText(this, "Failed to download", Toast.LENGTH_SHORT).show();
+	            }
+	            return;
+	        }
+	    }
+	}
+	
 }

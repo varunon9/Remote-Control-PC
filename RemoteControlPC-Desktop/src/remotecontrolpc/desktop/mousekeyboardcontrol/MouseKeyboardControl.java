@@ -56,6 +56,15 @@ public class MouseKeyboardControl {
         robot.keyRelease(KeyEvent.VK_ALT);
         robot.keyRelease(KeyEvent.VK_CONTROL);
     }
+    public void ctrlAltL() {
+        robot.keyPress(KeyEvent.VK_CONTROL);
+        robot.keyPress(KeyEvent.VK_ALT);
+        robot.keyPress(KeyEvent.VK_L);
+        robot.delay(10);
+        robot.keyRelease(KeyEvent.VK_L);
+        robot.keyRelease(KeyEvent.VK_ALT);
+        robot.keyRelease(KeyEvent.VK_CONTROL);
+    }
     public void ctrlShiftZ() {
         robot.keyPress(KeyEvent.VK_CONTROL);
         robot.keyPress(KeyEvent.VK_SHIFT);

@@ -1,6 +1,5 @@
 package com.example.remotecontrolpc.filedownload;
 
-import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
@@ -17,7 +16,7 @@ public class DownloadFileFromServer extends AsyncTask<String, String, Void > {
     Context context;
     ProgressDialog progressDialog;
     
-    DownloadFileFromServer(Context context) {
+    public DownloadFileFromServer(Context context) {
     	this.context = context;
     }
     
@@ -38,7 +37,7 @@ public class DownloadFileFromServer extends AsyncTask<String, String, Void > {
 		progressDialog.setMessage(name);
 		FileOutputStream fos = null;
 		String path = new FileAPI().getExternalStoragePath();
-		path = path + "/RemoteControlPC/" + name;
+		path = path + "/RemoteControlPC/" + name;System.out.println(path);
 		File file = new File(path);
 		File dirs = new File(file.getParent());
 		if (!dirs.exists()) {

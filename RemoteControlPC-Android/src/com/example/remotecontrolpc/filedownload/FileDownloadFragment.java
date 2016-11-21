@@ -3,10 +3,16 @@ package com.example.remotecontrolpc.filedownload;
 import java.util.ArrayList;
 import java.util.Stack;
 
+import android.Manifest;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,7 +63,11 @@ public class FileDownloadFragment extends Fragment implements OnClickListener {
 					getFiles();
 				} else {
 					//Toast.makeText(getActivity(), "Downloading " + file.getHeading(), Toast.LENGTH_LONG).show();
-					downloadFile(file.getHeading(), file.getPath());
+					if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+						downloadFile(file.getHeading(), file.getPath());
+					} else {
+						checkForPermissionAndDownload(file.getHeading(), file.getPath());
+					}
 				}
 			}
 			
@@ -86,6 +96,7 @@ public class FileDownloadFragment extends Fragment implements OnClickListener {
 		}
 		
 	}
+	
 	private void getFiles() {
 		String message = "FILE_DOWNLOAD_LIST_FILES";
 		MainActivity.sendMessageToServer(message);
@@ -93,7 +104,25 @@ public class FileDownloadFragment extends Fragment implements OnClickListener {
 		MainActivity.sendMessageToServer(message);
 		new GetFilesList(fileDownloadListView, getActivity()).execute(pathStack.peek());
 	}
-	private void downloadFile(String name, String path) {
+	
+	
+	@TargetApi(Build.VERSION_CODES.M)
+	private void checkForPermissionAndDownload(String name, String path) {
+		if (getActivity().checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+				!= PackageManager.PERMISSION_GRANTED) {
+		    // Should we show an explanation?
+		    if (getActivity().shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+		    	Toast.makeText(getActivity(), "Read Permission is necessary to transfer ", Toast.LENGTH_LONG).show();
+		    } else {
+		        getActivity().requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 2);
+		        //1 is integer constant for WRITE_EXTERNAL_STORAGE permission, uses in onRequestPermissionResult
+		    }
+        } else {
+        	downloadFile(name, path);
+        }
+	}
+	
+	protected void downloadFile(String name, String path) {
 		if (MainActivity.clientSocket != null) {
 			MainActivity.sendMessageToServer("FILE_DOWNLOAD_REQUEST");
 			MainActivity.sendMessageToServer(path);

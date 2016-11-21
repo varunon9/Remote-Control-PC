@@ -5,6 +5,8 @@
  */
 package remotecontrolpc.desktop.poweroff;
 
+import remotecontrolpc.desktop.mousekeyboardcontrol.MouseKeyboardControl;
+
 /**
  *
  * @author varun
@@ -19,10 +21,7 @@ public class PowerOff {
     
     public void shutdown() {     
         try {
-            if ("Linux".equals(os) || "Mac OS X".equals(os)) {
-                runtime.exec("shutdown -h now"); //or
-                //runtime.exec("systemctl poweroff");
-            } else if ("Windows 8.1".equals(os) || "Windows 8.0".equals(os)) {
+            if ("Windows 8.1".equals(os) || "Windows 8.0".equals(os)) {
                 runtime.exec("shutdown -s");
             } else {
                 System.out.println("Unsupported operating system");
@@ -36,9 +35,7 @@ public class PowerOff {
     
     public void restart() {     
         try {
-            if ("Linux".equals(os) || "Mac OS X".equals(os)) {
-                runtime.exec("systemctl reboot");
-            } else if ("Windows 8.1".equals(os) || "Windows 8.0".equals(os)) {
+            if ("Windows 8.1".equals(os) || "Windows 8.0".equals(os)) {
                 runtime.exec("shutdown -r");
             } else {
                 System.out.println("Unsupported operating system");
@@ -52,9 +49,7 @@ public class PowerOff {
     
     public void suspend() {     
         try {
-            if ("Linux".equals(os) || "Mac OS X".equals(os)) {
-                runtime.exec("systemctl suspend");
-            } else if ("Windows 8.1".equals(os) || "Windows 8.0".equals(os)) {
+            if ("Windows 8.1".equals(os) || "Windows 8.0".equals(os)) {
                 runtime.exec("Rundll32.exe powrprof.dll,SetSuspendState Sleep");
             } else {
                 System.out.println("Unsupported operating system");
@@ -68,7 +63,7 @@ public class PowerOff {
     public void lock() {     
         try {
             if ("Linux".equals(os) || "Mac OS X".equals(os)) {
-                runtime.exec("systemctl lock");
+                new MouseKeyboardControl().ctrlAltL();
             } else if ("Windows 8.1".equals(os) || "Windows 8.0".equals(os)) {
                 runtime.exec("Rundll32.exe user32.dll,LockWorkStation");
             } else {

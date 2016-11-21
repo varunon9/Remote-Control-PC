@@ -107,7 +107,9 @@ public class FileTransferFragment extends Fragment implements OnClickListener {
 			Toast.makeText(getActivity(), "Not Connected", Toast.LENGTH_LONG).show();
 		}
 	}
+	
 }
+
 class GetFilesList extends FilesList {
     ListView fileTransferListView;
     Context context;

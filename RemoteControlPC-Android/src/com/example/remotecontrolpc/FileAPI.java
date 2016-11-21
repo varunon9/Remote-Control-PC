@@ -32,14 +32,15 @@ public class FileAPI {
 				for (File file: files) {
 					if (file.isDirectory() && file.canRead() && (file.listFiles().length > 2)) {
 						path = file.getAbsolutePath();
-						/*System.out.println(path + " " + file.listFiles().length);
-						File internalFiles[] = file.listFiles();
+						System.out.println(path + " " + file.listFiles().length);
+						/*File internalFiles[] = file.listFiles();
 						for (File internalFile: internalFiles) {
 							System.out.println(internalFile.getAbsolutePath());
 						}*/
 						return path;
 					}
 				}
+				//return path;
 			}
 		}
 		return path;
