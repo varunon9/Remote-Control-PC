@@ -42,7 +42,7 @@ Enjoy :sparkles: :boom: :wink:
 |![Typing Screen] (./screenshots/keyboard.png) | ![Media Player Screen] (./screenshots/media-player.png)|
 |![Image Viewer Screen] (./screenshots/image-viewer.png) | ![File Transfer Screen] (./screenshots/file-transfer.png)|
 |![Presentation Screen] (./screenshots/presentation.png) | ![Power Off Screen] (./screenshots/power-off.png)|
-|![Downloading File Screen] (./screenshots/downloading-file.png) | |
+|![Downloading File Screen] (./screenshots/downloading-file.png) | ![Music Control Screen] (./screenshots/music-control.png)|
 
 ## How to contribute?
 Desktop part of this project has been developed in Netbeans while that of Android part in eclipse.

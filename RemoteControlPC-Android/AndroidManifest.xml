@@ -30,6 +30,10 @@
             android:name=".HelpActivity"
             android:label="@string/title_activity_help" >
         </activity>
+        <activity
+            android:name=".MusicControlActivity"
+            android:label="@string/title_activity_music_control" >
+        </activity>
     </application>
 
 </manifest>

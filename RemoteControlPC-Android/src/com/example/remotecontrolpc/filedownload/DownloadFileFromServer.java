@@ -51,10 +51,10 @@ public class DownloadFileFromServer extends AsyncTask<String, String, Void > {
 				}
 				fos = new FileOutputStream(file);
 				byte buffer[] = new byte[4096];
-				int fileSize = (int) MainActivity.objectInputStream.readObject();
+				long fileSize = (long) MainActivity.objectInputStream.readObject();
 				int read = 0;
-				int totalRead = 0;
-				int remaining = fileSize;
+				long totalRead = 0;
+				int remaining = (int) fileSize;
 				while ((read = MainActivity.objectInputStream.read(buffer, 0, Math.min(buffer.length, remaining))) > 0) {
 					totalRead += read;
 					remaining -= read;

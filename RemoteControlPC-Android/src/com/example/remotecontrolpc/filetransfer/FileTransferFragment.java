@@ -102,7 +102,11 @@ public class FileTransferFragment extends Fragment implements OnClickListener {
 		if (MainActivity.clientSocket != null) {
 			MainActivity.sendMessageToServer("FILE_TRANSFER_REQUEST");
 			MainActivity.sendMessageToServer(name);
-			new TransferFileToServer(getActivity()).execute(new String[]{name, path});
+			new TransferFileToServer(getActivity()){
+				@Override
+				public void receiveData(Object result) {	
+				}
+			}.execute(new String[]{name, path});
 		} else {
 			Toast.makeText(getActivity(), "Not Connected", Toast.LENGTH_LONG).show();
 		}

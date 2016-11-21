@@ -21,7 +21,7 @@ import android.widget.EditText;
 public class KeyboardFragment extends Fragment implements OnTouchListener, OnClickListener, TextWatcher {
 	private static final String ARG_SECTION_NUMBER = "section_number";
 	private EditText typeHereEditText;
-	private Button ctrlButton, altButton, shiftButton, enterButton, tabButton, escButton, printScrButton, winButton;
+	private Button ctrlButton, altButton, shiftButton, enterButton, tabButton, escButton, printScrButton, backspaceButton;
 	private Button deleteButton, clearTextButton;
 	private Button nButton, tButton, wButton, rButton, fButton, zButton;
 	private Button cButton, xButton, vButton, aButton, oButton, sButton;
@@ -59,7 +59,7 @@ public class KeyboardFragment extends Fragment implements OnTouchListener, OnCli
 		tabButton = (Button) rootView.findViewById(R.id.tabButton);
 		escButton = (Button) rootView.findViewById(R.id.escButton);
 		printScrButton = (Button) rootView.findViewById(R.id.printScrButton);
-		winButton = (Button) rootView.findViewById(R.id.winButton);
+		backspaceButton = (Button) rootView.findViewById(R.id.backspaceButton);
 		deleteButton = (Button) rootView.findViewById(R.id.deleteButton);
 		clearTextButton = (Button) rootView.findViewById(R.id.clearTextButton);
 		nButton = (Button) rootView.findViewById(R.id.nButton);
@@ -80,7 +80,7 @@ public class KeyboardFragment extends Fragment implements OnTouchListener, OnCli
 		ctrlButton.setOnTouchListener(this);
 		altButton.setOnTouchListener(this);
 		shiftButton.setOnTouchListener(this);
-		winButton.setOnTouchListener(this);
+		backspaceButton.setOnClickListener(this);
 		enterButton.setOnClickListener(this);
 		tabButton.setOnClickListener(this);
 		escButton.setOnClickListener(this);
@@ -122,9 +122,6 @@ public class KeyboardFragment extends Fragment implements OnTouchListener, OnCli
 			break;
 		case R.id.shiftButton:
 			keyCode = 16;
-			break;
-		case R.id.winButton:
-			keyCode = 524;
 			break;
 		}
 		sendKeyCodeToServer(action, keyCode);
@@ -204,6 +201,9 @@ public class KeyboardFragment extends Fragment implements OnTouchListener, OnCli
 			case R.id.sButton:		
 				keyCode = 83;
 				break;
+			case R.id.backspaceButton:
+				keyCode = 8;
+				break;
 			}
 			sendKeyCodeToServer(action, keyCode);
 		}
@@ -249,8 +249,9 @@ public class KeyboardFragment extends Fragment implements OnTouchListener, OnCli
  * tab: 9
  * esc: 27
  * prntScr: 154
- * win: 524
+ * backspace: 524
  * delete: 127
+ * backspace: 8
  */
 /**
  * N: 78

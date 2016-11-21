@@ -112,10 +112,10 @@ public class FileDownloadFragment extends Fragment implements OnClickListener {
 				!= PackageManager.PERMISSION_GRANTED) {
 		    // Should we show an explanation?
 		    if (getActivity().shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-		    	Toast.makeText(getActivity(), "Read Permission is necessary to transfer ", Toast.LENGTH_LONG).show();
+		    	Toast.makeText(getActivity(), "Write Permission is necessary to download", Toast.LENGTH_LONG).show();
 		    } else {
 		        getActivity().requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 2);
-		        //1 is integer constant for WRITE_EXTERNAL_STORAGE permission, uses in onRequestPermissionResult
+		        //2 is integer constant for WRITE_EXTERNAL_STORAGE permission, uses in onRequestPermissionResult
 		    }
         } else {
         	downloadFile(name, path);

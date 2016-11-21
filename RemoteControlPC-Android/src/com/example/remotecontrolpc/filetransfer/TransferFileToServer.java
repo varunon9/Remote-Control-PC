@@ -4,18 +4,19 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.ObjectOutputStream;
 
+import com.example.remotecontrolpc.CallbackReceiver;
 import com.example.remotecontrolpc.MainActivity;
 
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 
-public class TransferFileToServer extends AsyncTask<String, String, Void> {
+public abstract class TransferFileToServer extends AsyncTask<String, String, Void> implements CallbackReceiver {
 
 	Context context;
     ProgressDialog progressDialog;
     
-    TransferFileToServer(Context context) {
+    public TransferFileToServer(Context context) {
     	this.context = context;
     }
 	@Override
@@ -42,18 +43,19 @@ public class TransferFileToServer extends AsyncTask<String, String, Void> {
 							MainActivity.clientSocket.getOutputStream());
 				}
 				File file = new File(path);
-	            int fileSize = (int) file.length();
+	            long fileSize = file.length();
 	            MainActivity.sendMessageToServer(fileSize);
 	            fis = new FileInputStream(file);
 	            byte[] buffer = new byte[4096];
 	            int read = 0;
-	            int totalRead = 0;
-	            int remaining = fileSize;
-	            while ((read = fis.read(buffer, 0, Math.min(buffer.length, remaining))) > 0) {
+	            long totalRead = 0;
+	            int remaining = (int) fileSize;
+	            while (totalRead < fileSize && (read = fis.read(buffer, 0, Math.min(buffer.length, remaining))) > 0) {
 	                totalRead += read;
 	                remaining -= read;
 	                publishProgress("" + (int) ((totalRead * 100) / fileSize));
 	                MainActivity.objectOutputStream.write(buffer, 0, read);
+	                MainActivity.objectOutputStream.flush();
 	            }
 	            MainActivity.objectOutputStream.flush();
 			}
@@ -81,5 +83,8 @@ public class TransferFileToServer extends AsyncTask<String, String, Void> {
 		if (progressDialog.isShowing()) {
 			progressDialog.dismiss();
 		}
+		receiveData(result);
 	}
+	@Override
+	public abstract void receiveData(Object result);
 }

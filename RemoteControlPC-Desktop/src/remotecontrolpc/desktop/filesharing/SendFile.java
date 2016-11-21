@@ -21,7 +21,7 @@ public class SendFile {
                 FileInputStream fis = null;
                 try {
                     File file = new File(path);
-                    int fileSize = (int) file.length();
+                    long fileSize = file.length();
                     //sending fileSize first
                     out.writeObject(fileSize);
                     out.flush();
@@ -29,13 +29,14 @@ public class SendFile {
                     fis = new FileInputStream(file);
                     byte[] buffer = new byte[4096];
                     int read = 0;
-                    int totalRead = 0;
-                    int remaining = fileSize;
+                    long totalRead = 0;
+                    int remaining = (int) fileSize;
                     while ((read = fis.read(buffer, 0, Math.min(buffer.length, remaining))) > 0) {
                         totalRead += read;
                         remaining -= read;
                         System.out.println("Transfer Progress: " + ((totalRead * 100) / fileSize));
                         out.write(buffer, 0, read);
+                        out.flush();
                     }
                     out.flush();
                 } catch(Exception e) {

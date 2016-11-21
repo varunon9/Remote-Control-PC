@@ -7,7 +7,6 @@ package remotecontrolpc.desktop.filesharing;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
 import remotecontrolpc.desktop.MainScreen;
 
 /**
@@ -27,14 +26,14 @@ public class ReceiveFile {
         try {
             fos = new FileOutputStream(file);
             byte buffer[] = new byte[4096];
-            int fileSize = (int) MainScreen.objectInputStream.readObject();
+            long fileSize = (long) MainScreen.objectInputStream.readObject();
             int read = 0;
-            int totalRead = 0;
-            int remaining = fileSize;
+            long totalRead = 0;
+            int remaining = (int) fileSize;
             while ((read = MainScreen.objectInputStream.read(buffer, 0, Math.min(buffer.length, remaining))) > 0) {
                 totalRead += read;
                 remaining -= read;
-                System.out.println("Receive Progress: " + ((totalRead * 100) / fileSize));
+                //System.out.println("Receive Progress: " + ((totalRead * 100) / fileSize));
                 fos.write(buffer, 0, read);
             }
         } catch (Exception e) {

@@ -18,6 +18,7 @@ import remotecontrolpc.desktop.filesharing.SendFile;
 import remotecontrolpc.desktop.filesharing.SendFilesList;
 import remotecontrolpc.desktop.mousekeyboardcontrol.MouseKeyboardControl;
 import remotecontrolpc.desktop.poweroff.PowerOff;
+import music.MusicPlayer;
 public class Server {
     public void connect(JButton resetButton, JLabel connectionStatusLabel) {
         MouseKeyboardControl mouseControl = new MouseKeyboardControl();
@@ -33,7 +34,10 @@ public class Server {
             MainScreen.objectInputStream = new ObjectInputStream(MainScreen.inputStream);
             FileAPI fileAPI = new FileAPI();
             String message, filePath, fileName;
-            PowerOff  powerOff =new PowerOff();
+            int slideDuration;
+            float volume;
+            PowerOff  powerOff = new PowerOff();
+            MusicPlayer musicPlayer = new MusicPlayer();
             while (true) {
                 try {
                     message = (String) MainScreen.objectInputStream.readObject();
@@ -127,6 +131,26 @@ public class Server {
                                 break;
                             case "LOCK_PC":
                                 powerOff.lock();
+                                break;
+                            case "PLAY_MUSIC":
+                                fileName = (String) MainScreen.objectInputStream.readObject();
+                                filePath = new FileAPI().getHomeDirectoryPath();
+                                filePath = filePath + "/RemoteControlPC/" + fileName;
+                                musicPlayer.playNewMedia(filePath);
+                                break;
+                            case "SLIDE_MUSIC":
+                                slideDuration = (int) MainScreen.objectInputStream.readObject();
+                                musicPlayer.slide(slideDuration);
+                                break;
+                            case "PAUSE_OR_RESUME_MUSIC":
+                                musicPlayer.resumeOrPauseMedia();
+                                break;
+                            case "STOP_MUSIC":
+                                musicPlayer.stopMusic();
+                                break;
+                            case "SET_VOLUME_MUSIC":
+                                volume = (float) MainScreen.objectInputStream.readObject();
+                                musicPlayer.setVolume(volume);
                                 break;
                         }
                     } else {

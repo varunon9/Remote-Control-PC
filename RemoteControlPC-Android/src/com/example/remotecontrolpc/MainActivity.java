@@ -201,17 +201,8 @@ public class MainActivity extends ActionBarActivity implements
 			try {
 				MainActivity.objectOutputStream.writeObject(message);
 			} catch (Exception e) {
-				Toast.makeText(thisActivity, "Connection Closed", Toast.LENGTH_LONG).show();
 				e.printStackTrace();
-				if (MainActivity.clientSocket != null) {
-					try {
-						MainActivity.clientSocket.close();
-						MainActivity.objectOutputStream.close();
-						MainActivity.clientSocket = null;
-					} catch(Exception e2) {
-						e2.printStackTrace();
-					}
-				}
+				socketException();
 			}	
 		}
 	}
@@ -221,18 +212,22 @@ public class MainActivity extends ActionBarActivity implements
 			try {
 				MainActivity.objectOutputStream.writeObject(message);
 			} catch (Exception e) {
-				Toast.makeText(thisActivity, "Connection Closed", Toast.LENGTH_LONG).show();
 				e.printStackTrace();
-				if (MainActivity.clientSocket != null) {
-					try {
-						MainActivity.clientSocket.close();
-						MainActivity.objectOutputStream.close();
-						MainActivity.clientSocket = null;
-					} catch(Exception e2) {
-						e2.printStackTrace();
-					}
-				}
+				socketException();
 			}	
+		}
+	}
+	
+	private static void socketException() {
+		Toast.makeText(thisActivity, "Connection Closed", Toast.LENGTH_LONG).show();
+		if (MainActivity.clientSocket != null) {
+			try {
+				MainActivity.clientSocket.close();
+				MainActivity.objectOutputStream.close();
+				MainActivity.clientSocket = null;
+			} catch(Exception e2) {
+				e2.printStackTrace();
+			}
 		}
 	}
 	
@@ -241,17 +236,19 @@ public class MainActivity extends ActionBarActivity implements
 			try {
 				MainActivity.objectOutputStream.writeObject(message);
 			} catch (Exception e) {
-				Toast.makeText(thisActivity, "Connection Closed", Toast.LENGTH_LONG).show();
 				e.printStackTrace();
-				if (MainActivity.clientSocket != null) {
-					try {
-						MainActivity.clientSocket.close();
-						MainActivity.objectOutputStream.close();
-						MainActivity.clientSocket = null;
-					} catch(Exception e2) {
-						e2.printStackTrace();
-					}
-				}
+				socketException();
+			}	
+		}
+	}
+	
+	public static void sendMessageToServer(long message) {
+		if (MainActivity.clientSocket != null) {
+			try {
+				MainActivity.objectOutputStream.writeObject(message);
+			} catch (Exception e) {
+				e.printStackTrace();
+				socketException();
 			}	
 		}
 	}

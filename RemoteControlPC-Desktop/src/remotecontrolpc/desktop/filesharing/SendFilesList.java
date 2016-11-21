@@ -8,7 +8,6 @@ package remotecontrolpc.desktop.filesharing;
 import file.AvatarFile;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import remotecontrolpc.desktop.Callback;
 
 /**
  *

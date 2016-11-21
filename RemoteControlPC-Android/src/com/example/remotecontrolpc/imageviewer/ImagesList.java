@@ -39,7 +39,8 @@ public abstract class ImagesList extends AsyncTask<Void, Void, ArrayList<MusicIm
     			int thisSize = musicCursor.getInt(sizeColumn);//in bytes
     			int icon = R.drawable.image;
     			String subHeading = utility.getSize(thisSize) + ", " + utility.getDate(thisDate, "dd MMM yyyy hh:mm a");
-    			imagesList.add(new MusicImageAvatar(icon, thisTitle, subHeading, thisData, "image"));
+    			//duration set to 0 because it is for music
+    			imagesList.add(new MusicImageAvatar(icon, 0, thisTitle, subHeading, thisData, "image"));
     		} while (musicCursor.moveToNext());
     	}
     	Collections.sort(imagesList, new Comparator<MusicImageAvatar>() {

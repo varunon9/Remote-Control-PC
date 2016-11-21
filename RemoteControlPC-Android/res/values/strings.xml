@@ -20,5 +20,6 @@
     <string name="title_activity_touch_pad">TouchPad</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_help">HelpActivity</string>
+    <string name="title_activity_music_control">MusicControl</string>
 
 </resources>

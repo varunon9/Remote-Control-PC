@@ -5,17 +5,16 @@
  */
 package remotecontrolpc.desktop;
 
-import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
-import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.concurrent.CountDownLatch;
+import javafx.embed.swing.JFXPanel;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import remotecontrolpc.desktop.ipaddress.GetFreePort;
 import remotecontrolpc.desktop.ipaddress.GetMyIpAddress;
 import remotecontrolpc.desktop.server.Server;
@@ -196,6 +195,21 @@ public class MainScreen extends javax.swing.JFrame {
                 mainScreen.setConnectionDetails();
             }
         });
+        //http://stackoverflow.com/questions/11273773/javafx-2-1-toolkit-not-initialized
+        final CountDownLatch latch = new CountDownLatch(1);
+        SwingUtilities.invokeLater(new Runnable() {
+
+            @Override
+            public void run() {
+                new JFXPanel();
+                latch.countDown();
+            }  
+        });
+        try {
+            latch.await();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
         
     }
     private void showDialogMessage(String message) {

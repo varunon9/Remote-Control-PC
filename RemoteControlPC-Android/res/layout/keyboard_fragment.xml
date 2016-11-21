@@ -87,12 +87,12 @@
             android:textAllCaps="false" />
 
         <Button
-            android:id="@+id/winButton"
+            android:id="@+id/backspaceButton"
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Win+"
+            android:text="Back"
             android:textAllCaps="false" />
         
         <Button

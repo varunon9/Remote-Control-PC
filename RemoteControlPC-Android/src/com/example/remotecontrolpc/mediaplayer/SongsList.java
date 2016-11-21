@@ -38,7 +38,7 @@ public abstract class SongsList extends AsyncTask<Void, Void, ArrayList<MusicIma
     			int thisDuration = musicCursor.getInt(durationColumn);
     			int thisAlbumId = musicCursor.getInt(albumIdColumn);
     			String subHeading = thisArtist + ", " + utility.getDuration(thisDuration);
-    			songsList.add(new MusicImageAvatar(thisAlbumId, thisTitle, subHeading, thisData, "music"));
+    			songsList.add(new MusicImageAvatar(thisAlbumId, thisDuration, thisTitle, subHeading, thisData, "music"));
     		} while (musicCursor.moveToNext());
     	}
     	Collections.sort(songsList,new Comparator<MusicImageAvatar>() {
