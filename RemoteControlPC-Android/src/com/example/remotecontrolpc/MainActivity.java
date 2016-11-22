@@ -200,6 +200,7 @@ public class MainActivity extends ActionBarActivity implements
 		if (MainActivity.clientSocket != null) {
 			try {
 				MainActivity.objectOutputStream.writeObject(message);
+				MainActivity.objectOutputStream.flush();
 			} catch (Exception e) {
 				e.printStackTrace();
 				socketException();
@@ -211,6 +212,7 @@ public class MainActivity extends ActionBarActivity implements
 		if (MainActivity.clientSocket != null) {
 			try {
 				MainActivity.objectOutputStream.writeObject(message);
+				MainActivity.objectOutputStream.flush();
 			} catch (Exception e) {
 				e.printStackTrace();
 				socketException();
@@ -235,6 +237,7 @@ public class MainActivity extends ActionBarActivity implements
 		if (MainActivity.clientSocket != null) {
 			try {
 				MainActivity.objectOutputStream.writeObject(message);
+				MainActivity.objectOutputStream.flush();
 			} catch (Exception e) {
 				e.printStackTrace();
 				socketException();
@@ -246,6 +249,7 @@ public class MainActivity extends ActionBarActivity implements
 		if (MainActivity.clientSocket != null) {
 			try {
 				MainActivity.objectOutputStream.writeObject(message);
+				MainActivity.objectOutputStream.flush();
 			} catch (Exception e) {
 				e.printStackTrace();
 				socketException();

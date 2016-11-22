@@ -5,6 +5,7 @@
  */
 package remotecontrolpc.desktop.server;
 
+import image.ImageViewer;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.io.ObjectInputStream;
@@ -38,6 +39,7 @@ public class Server {
             float volume;
             PowerOff  powerOff = new PowerOff();
             MusicPlayer musicPlayer = new MusicPlayer();
+            ImageViewer imageViewer = new ImageViewer();
             while (true) {
                 try {
                     message = (String) MainScreen.objectInputStream.readObject();
@@ -151,6 +153,16 @@ public class Server {
                             case "SET_VOLUME_MUSIC":
                                 volume = (float) MainScreen.objectInputStream.readObject();
                                 musicPlayer.setVolume(volume);
+                                break;
+                            case "SHOW_IMAGE":
+                                fileName = (String) MainScreen.objectInputStream.readObject();
+                                filePath = new FileAPI().getHomeDirectoryPath();
+                                filePath = filePath + "/RemoteControlPC/" + fileName;
+                                imageViewer.showImage(fileName, filePath);
+                                break; 
+                            case "CLOSE_IMAGE_VIEWER":
+                                //closing this close music player also
+                                //imageViewer.closeImageViewer();
                                 break;
                         }
                     } else {

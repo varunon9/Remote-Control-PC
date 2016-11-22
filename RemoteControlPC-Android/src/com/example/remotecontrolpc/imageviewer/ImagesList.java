@@ -23,25 +23,25 @@ public abstract class ImagesList extends AsyncTask<Void, Void, ArrayList<MusicIm
 	@Override
 	protected ArrayList<MusicImageAvatar> doInBackground(Void... params) {
 		ArrayList <MusicImageAvatar> imagesList = new ArrayList<MusicImageAvatar>();
-		ContentResolver musicResolver = context.getContentResolver();
+		ContentResolver imageResolver = context.getContentResolver();
     	Uri imageUri = android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
-        Cursor musicCursor = musicResolver.query(imageUri, null, null, null, null);
+        Cursor imageCursor = imageResolver.query(imageUri, null, null, null, null);
         Utility utility = new Utility();
-    	if (musicCursor != null && musicCursor.moveToFirst()) {
-    		int titleColumn = musicCursor.getColumnIndex(android.provider.MediaStore.Images.Media.DISPLAY_NAME);
-    		int dataColumn = musicCursor.getColumnIndex(android.provider.MediaStore.Images.Media.DATA);
-    		int sizeColumn = musicCursor.getColumnIndex(android.provider.MediaStore.Images.Media.SIZE);
-    		int dateColumn = musicCursor.getColumnIndex(android.provider.MediaStore.Images.Media.DATE_TAKEN);
+    	if (imageCursor != null && imageCursor.moveToFirst()) {
+    		int titleColumn = imageCursor.getColumnIndex(android.provider.MediaStore.Images.Media.DISPLAY_NAME);
+    		int dataColumn = imageCursor.getColumnIndex(android.provider.MediaStore.Images.Media.DATA);
+    		int sizeColumn = imageCursor.getColumnIndex(android.provider.MediaStore.Images.Media.SIZE);
+    		int dateColumn = imageCursor.getColumnIndex(android.provider.MediaStore.Images.Media.DATE_TAKEN);
     		do {
-    			String thisTitle = musicCursor.getString(titleColumn);
-    			String thisData = musicCursor.getString(dataColumn);
-    			String thisDate = musicCursor.getString(dateColumn);
-    			int thisSize = musicCursor.getInt(sizeColumn);//in bytes
+    			String thisTitle = imageCursor.getString(titleColumn);
+    			String thisData = imageCursor.getString(dataColumn);
+    			String thisDate = imageCursor.getString(dateColumn);
+    			int thisSize = imageCursor.getInt(sizeColumn);//in bytes
     			int icon = R.drawable.image;
     			String subHeading = utility.getSize(thisSize) + ", " + utility.getDate(thisDate, "dd MMM yyyy hh:mm a");
-    			//duration set to 0 because it is for music
+    			//duration set to 0 because it is for image
     			imagesList.add(new MusicImageAvatar(icon, 0, thisTitle, subHeading, thisData, "image"));
-    		} while (musicCursor.moveToNext());
+    		} while (imageCursor.moveToNext());
     	}
     	Collections.sort(imagesList, new Comparator<MusicImageAvatar>() {
 			public int compare(MusicImageAvatar a,MusicImageAvatar b) {
