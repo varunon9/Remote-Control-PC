@@ -1,19 +1,12 @@
 package image;
 
 
-import java.awt.Button;
-import java.awt.Label;
 import java.io.File;
-import javafx.application.Application;
-import static javafx.application.Application.launch;
 import javafx.application.Platform;
 import javafx.scene.*;
 import javafx.scene.image.*;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates

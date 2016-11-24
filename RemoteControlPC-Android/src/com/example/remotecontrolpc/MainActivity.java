@@ -16,11 +16,14 @@ import com.example.remotecontrolpc.poweroff.PowerOffFragment;
 import com.example.remotecontrolpc.presentation.PresentationFragment;
 import com.example.remotecontrolpc.touchpad.TouchpadFragment;
 
+import android.Manifest;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.annotation.TargetApi;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Menu;
@@ -60,6 +63,23 @@ public class MainActivity extends ActionBarActivity implements
 		// Set up the drawer.
 		mNavigationDrawerFragment.setUp(R.id.navigation_drawer,
 				(DrawerLayout) findViewById(R.id.drawer_layout));
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+			checkForPermission();
+		}
+	}
+	
+	@TargetApi(Build.VERSION_CODES.M)
+	private void checkForPermission() {
+		if (thisActivity.checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+				!= PackageManager.PERMISSION_GRANTED) {
+		    // Should we show an explanation?
+		    if (thisActivity.shouldShowRequestPermissionRationale(Manifest.permission.READ_EXTERNAL_STORAGE)) {
+		    	Toast.makeText(thisActivity, "Read Permission is necessary to transfer", Toast.LENGTH_LONG).show();
+		    } else {
+		    	thisActivity.requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+		        //2 is integer constant for WRITE_EXTERNAL_STORAGE permission, uses in onRequestPermissionResult
+		    }
+        }
 	}
 
 	@Override
@@ -287,6 +307,17 @@ public class MainActivity extends ActionBarActivity implements
 
 	            } else {
 	            	Toast.makeText(this, "Failed to download", Toast.LENGTH_SHORT).show();
+	            }
+	            return;
+	        }
+	        case 1: {
+	        	// If request is cancelled, the result arrays are empty.
+	            if (grantResults.length > 0
+	                && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+	            	//Toast.makeText(this, "Click again to download", Toast.LENGTH_SHORT).show();
+
+	            } else {
+	            	Toast.makeText(this, "File Transfer will not work", Toast.LENGTH_SHORT).show();
 	            }
 	            return;
 	        }
