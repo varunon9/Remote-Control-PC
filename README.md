@@ -67,4 +67,9 @@ Desktop part of this project has been developed in Netbeans while that of Androi
     1. Create libs folder in root directory if not already available
     2. Copy JAR file to the libs folder
     3. Right click on the Jar file and then select Build Path > Add to Build Path
+
+###### Feedbacks
+1. If you are getting error in eclipse, you can import in Android-studio (for android part). 
+2. You might need to change compile path for this project to Java 1.7. 
+3. Keyboard has some issues particular to some android versions. 
   
