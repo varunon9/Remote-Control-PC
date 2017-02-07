@@ -69,7 +69,8 @@ Desktop part of this project has been developed in Netbeans while that of Androi
     3. Right click on the Jar file and then select Build Path > Add to Build Path
 
 ###### Feedbacks
-1. If you are getting error in eclipse, you can import in Android-studio (for android part). 
-2. You might need to change compile path for this project to Java 1.7. 
-3. Keyboard has some issues particular to some android versions. 
+1. You need Java 8 for desktop part (Netbeans)
+2. If you are getting error in eclipse, you can import in Android-studio (for android part). 
+3. You might need to change compile path for android part to Java 1.7. 
+4. Keyboard has some issues particular to some android versions. 
   
