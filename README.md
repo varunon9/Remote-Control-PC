@@ -37,12 +37,12 @@ Enjoy :sparkles: :boom: :wink:
 ## Screenshots
 |  |  |
 | --- | --- |
-|![Desktop App] (./screenshots/desktop.png) | ![Connection Screen] (./screenshots/connect.png)|
-|![Touchpad Screen] (./screenshots/touchpad.png) | ![Navigation Screen] (./screenshots/navigation-drawer.png)|
-|![Typing Screen] (./screenshots/keyboard.png) | ![Media Player Screen] (./screenshots/media-player.png)|
-|![Image Viewer Screen] (./screenshots/image-viewer.png) | ![File Transfer Screen] (./screenshots/file-transfer.png)|
-|![Presentation Screen] (./screenshots/presentation.png) | ![Power Off Screen] (./screenshots/power-off.png)|
-|![Downloading File Screen] (./screenshots/downloading-file.png) | ![Music Control Screen] (./screenshots/music-control.png)|
+|![Desktop App](./screenshots/desktop.png) | ![Connection Screen](./screenshots/connect.png)|
+|![Touchpad Screen](./screenshots/touchpad.png) | ![Navigation Screen](./screenshots/navigation-drawer.png)|
+|![Typing Screen](./screenshots/keyboard.png) | ![Media Player Screen](./screenshots/media-player.png)|
+|![Image Viewer Screen](./screenshots/image-viewer.png) | ![File Transfer Screen](./screenshots/file-transfer.png)|
+|![Presentation Screen](./screenshots/presentation.png) | ![Power Off Screen](./screenshots/power-off.png)|
+|![Downloading File Screen](./screenshots/downloading-file.png) | ![Music Control Screen](./screenshots/music-control.png)|
 
 ## How to contribute?
 Desktop part of this project has been developed in Netbeans while that of Android part in eclipse.
@@ -67,6 +67,9 @@ Desktop part of this project has been developed in Netbeans while that of Androi
     1. Create libs folder in root directory if not already available
     2. Copy JAR file to the libs folder
     3. Right click on the Jar file and then select Build Path > Add to Build Path
+
+#### To import RemoteControlPC-Android in Android Studio see this video: 
+* https://www.youtube.com/watch?v=mMPT4M0p4T8
 
 ###### Feedbacks
 1. You need Java 8 for desktop part (Netbeans)
