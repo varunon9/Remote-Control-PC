@@ -5,12 +5,12 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 import com.example.remotecontrolpc.connect.ConnectFragment;
-import com.example.remotecontrolpc.filedownload.DownloadFileFromServer;
 import com.example.remotecontrolpc.filedownload.FileDownloadFragment;
 import com.example.remotecontrolpc.filetransfer.FileTransferFragment;
 import com.example.remotecontrolpc.help.HelpFragment;
 import com.example.remotecontrolpc.imageviewer.ImageViewerFragment;
 import com.example.remotecontrolpc.keyboard.KeyboardFragment;
+import com.example.remotecontrolpc.livescreen.LiveScreenFragment;
 import com.example.remotecontrolpc.mediaplayer.MediaPlayerFragment;
 import com.example.remotecontrolpc.poweroff.PowerOffFragment;
 import com.example.remotecontrolpc.presentation.PresentationFragment;
@@ -123,8 +123,13 @@ public class MainActivity extends ActionBarActivity implements
 			mTitle = getString(R.string.power_off);
 			break;
 		case 10:
+			mTitle = "Live Screen";
+            // not a navigation drawer item, so need to explicitly call it
+            restoreActionBar();
+			break;
+		case 11:
 			mTitle = getString(R.string.help);
-			//not a navigation drawer item, so need to explicitly call it
+			// not a navigation drawer item, so need to explicitly call it
 			restoreActionBar();
 			break;
 		}
@@ -159,9 +164,12 @@ public class MainActivity extends ActionBarActivity implements
 		if (id == R.id.action_settings) {
 			return true;
 		} else if (id == R.id.action_help) {
-			onNavigationDrawerItemSelected(9);
+			onNavigationDrawerItemSelected(10);
 			return true;
-		}
+		} else if (id == R.id.action_live_screen) {
+            onNavigationDrawerItemSelected(9);
+            return true;
+        }
 		return super.onOptionsItemSelected(item);
 	}
 	
@@ -188,7 +196,9 @@ public class MainActivity extends ActionBarActivity implements
             break;
 		case 9: fragment = new PowerOffFragment();
             break;
-		case 10: fragment = new HelpFragment();
+		case 10: fragment = new LiveScreenFragment();
+			break;
+		case 11: fragment = new HelpFragment();
 		    break;
 		}
 		Bundle args = new Bundle();

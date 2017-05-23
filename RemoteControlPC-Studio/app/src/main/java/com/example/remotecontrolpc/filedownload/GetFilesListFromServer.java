@@ -31,6 +31,7 @@ public abstract class GetFilesListFromServer extends AsyncTask<String, Void, Arr
 		}
 		return myFiles;
 	}
+
 	protected void onPostExecute(ArrayList<AvatarFile> myFiles) {
 		receiveData(myFiles);
 	}

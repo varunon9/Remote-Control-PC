@@ -37,7 +37,7 @@ public class DownloadFileFromServer extends AsyncTask<String, String, Void > {
 		progressDialog.setMessage(name);
 		FileOutputStream fos = null;
 		String path = new FileAPI().getExternalStoragePath();
-		path = path + "/RemoteControlPC/" + name;System.out.println(path);
+		path = path + "/RemoteControlPC/" + name;
 		File file = new File(path);
 		File dirs = new File(file.getParent());
 		if (!dirs.exists()) {
