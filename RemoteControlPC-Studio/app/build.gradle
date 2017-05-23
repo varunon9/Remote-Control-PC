@@ -1,0 +1,30 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "25.0.0"
+
+    defaultConfig {
+        applicationId "com.example.remotecontrolpc"
+        minSdkVersion 11
+        targetSdkVersion 23
+        multiDexEnabled = true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+
+    configurations {
+        all*.exclude group: 'com.android.support', module: 'support-v4'
+    }
+}
+
+dependencies {
+    compile 'com.android.support:appcompat-v7:23.4.0'
+    compile files('libs/RemoteControlPC-Libraries.jar')
+    compile files('libs/android-support-v4.jar')
+}

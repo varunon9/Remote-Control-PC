@@ -1,0 +1,86 @@
+[
+    {
+        "merged": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/res/merged/debug/drawable-hdpi/connect.png",
+        "source": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/src/main/res/drawable-hdpi/connect.png"
+    },
+    {
+        "merged": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/res/merged/debug/drawable-hdpi/ic_drawer.png",
+        "source": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/src/main/res/drawable-hdpi/ic_drawer.png"
+    },
+    {
+        "merged": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/res/merged/debug/drawable-hdpi/sleep.png",
+        "source": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/src/main/res/drawable-hdpi/sleep.png"
+    },
+    {
+        "merged": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/res/merged/debug/drawable-hdpi/file_download.png",
+        "source": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/src/main/res/drawable-hdpi/file_download.png"
+    },
+    {
+        "merged": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/res/merged/debug/drawable-hdpi/file.png",
+        "source": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/src/main/res/drawable-hdpi/file.png"
+    },
+    {
+        "merged": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/res/merged/debug/drawable-hdpi/touchpad.png",
+        "source": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/src/main/res/drawable-hdpi/touchpad.png"
+    },
+    {
+        "merged": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/res/merged/debug/drawable-hdpi/keyboard.png",
+        "source": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/src/main/res/drawable-hdpi/keyboard.png"
+    },
+    {
+        "merged": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/res/merged/debug/drawable-hdpi/lock.png",
+        "source": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/src/main/res/drawable-hdpi/lock.png"
+    },
+    {
+        "merged": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/res/merged/debug/drawable-hdpi/shutdown.png",
+        "source": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/src/main/res/drawable-hdpi/shutdown.png"
+    },
+    {
+        "merged": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/res/merged/debug/drawable-hdpi/ic_launcher.png",
+        "source": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/src/main/res/drawable-hdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/res/merged/debug/drawable-hdpi/restart.png",
+        "source": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/src/main/res/drawable-hdpi/restart.png"
+    },
+    {
+        "merged": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/res/merged/debug/drawable-hdpi/drawer_shadow.9.png",
+        "source": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/src/main/res/drawable-hdpi/drawer_shadow.9.png"
+    },
+    {
+        "merged": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/res/merged/debug/drawable-hdpi/pdf.png",
+        "source": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/src/main/res/drawable-hdpi/pdf.png"
+    },
+    {
+        "merged": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/res/merged/debug/drawable-hdpi/media_player.png",
+        "source": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/src/main/res/drawable-hdpi/media_player.png"
+    },
+    {
+        "merged": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/res/merged/debug/drawable-hdpi/power_off.png",
+        "source": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/src/main/res/drawable-hdpi/power_off.png"
+    },
+    {
+        "merged": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/res/merged/debug/drawable-hdpi/presentation.png",
+        "source": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/src/main/res/drawable-hdpi/presentation.png"
+    },
+    {
+        "merged": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/res/merged/debug/drawable-hdpi/folder.png",
+        "source": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/src/main/res/drawable-hdpi/folder.png"
+    },
+    {
+        "merged": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/res/merged/debug/drawable-hdpi/image.png",
+        "source": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/src/main/res/drawable-hdpi/image.png"
+    },
+    {
+        "merged": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/res/merged/debug/drawable-hdpi/music_png.png",
+        "source": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/src/main/res/drawable-hdpi/music_png.png"
+    },
+    {
+        "merged": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/res/merged/debug/drawable-hdpi/image_viewer.png",
+        "source": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/src/main/res/drawable-hdpi/image_viewer.png"
+    },
+    {
+        "merged": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/res/merged/debug/drawable-hdpi/file_transfer.png",
+        "source": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/src/main/res/drawable-hdpi/file_transfer.png"
+    }
+]

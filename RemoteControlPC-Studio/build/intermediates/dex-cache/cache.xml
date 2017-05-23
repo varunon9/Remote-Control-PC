@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/jars/libs/internal_impl-23.4.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="ea3c07504d2c8f4b13aa17c45c1b68ed9c1c3674">
+        <dex dex="/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/pre-dexed/debug/internal_impl-23.4.0_b66a8afb17e571c0f7b73c0398664c56d019156c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/opt/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/23.4.0/support-annotations-23.4.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="ffbe55fdb2bb456b1485831706a9eac3300bb6b8">
+        <dex dex="/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/pre-dexed/debug/support-annotations-23.4.0_b4981f280e4ecf6b9d85bb1f59f263f03db44ccb.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/libs/android-support-v4.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="33b27a8d2a5b87e6eb6c60e87a5374ffbfeacc3a">
+        <dex dex="/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/pre-dexed/debug/android-support-v4_263a311007b0c9413cad7bec5de642ad3a344b72.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/23.4.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="de4db3785756bfb0915a9f59a9b3f2fea7407be4">
+        <dex dex="/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/pre-dexed/debug/com.android.support-animated-vector-drawable-23.4.0_95f638250c7d1702927e7f7be59dd1ac78becae5.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="548f06de403a9409f00554b3ee12a9fdea0e236c">
+        <dex dex="/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-23.4.0_21b7a256f3d27d5fbb32504c9d74a2c8d938f780.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="67bd36ee9340ec7c254108936ad16b24bed160cc">
+        <dex dex="/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-23.4.0_891aaf8e97a83997e1cfe1bc4b531e25384bfb12.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/libs/RemoteControlPC-Libraries.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="f16b4910de668d7747f89fdb5ee5f80676a2f543">
+        <dex dex="/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/pre-dexed/debug/RemoteControlPC-Libraries_5b3e85cea1091fa046416e06e16c35ffe65ee5c2.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.4.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="c2c594cace5d83a3227b2b6e658ecbfd586d3ed9">
+        <dex dex="/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/pre-dexed/debug/com.android.support-support-vector-drawable-23.4.0_ac74bc5f437bdb24fb20f225c4fc7c198ebb2517.jar" />
+    </item>
+
+</items>

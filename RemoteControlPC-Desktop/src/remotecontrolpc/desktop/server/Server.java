@@ -20,6 +20,7 @@ import remotecontrolpc.desktop.filesharing.SendFilesList;
 import remotecontrolpc.desktop.mousekeyboardcontrol.MouseKeyboardControl;
 import remotecontrolpc.desktop.poweroff.PowerOff;
 import music.MusicPlayer;
+import remotecontrolpc.desktop.filesharing.Screenshot;
 public class Server {
     public void connect(JButton resetButton, JLabel connectionStatusLabel) {
         MouseKeyboardControl mouseControl = new MouseKeyboardControl();
@@ -163,6 +164,11 @@ public class Server {
                             case "CLOSE_IMAGE_VIEWER":
                                 //closing this close music player also
                                 //imageViewer.closeImageViewer();
+                                break;
+                            case "SCREENSHOT_REQUEST":
+                                new Screenshot().sendScreenshot(
+                                        MainScreen.objectOutputStream
+                                );
                                 break;
                         }
                     } else {

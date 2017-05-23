@@ -1,0 +1,375 @@
+[
+    {
+        "outputFile": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v11/values-v11.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endLine": 4,
+                    "endColumn": 12,
+                    "endOffset": 184
+                },
+                "from": {
+                    "file": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/src/main/res/values-v11/styles.xml",
+                    "position": {
+                        "startLine": 6,
+                        "startColumn": 4,
+                        "startOffset": 177,
+                        "endLine": 8,
+                        "endColumn": 12,
+                        "endOffset": 306
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 5,
+                    "startColumn": 4,
+                    "startOffset": 189,
+                    "endLine": 10,
+                    "endColumn": 12,
+                    "endOffset": 603
+                },
+                "from": {
+                    "file": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v11/values-v11.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 55,
+                        "endLine": 7,
+                        "endColumn": 12,
+                        "endOffset": 469
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 11,
+                    "startColumn": 4,
+                    "startOffset": 608,
+                    "endLine": 16,
+                    "endColumn": 12,
+                    "endOffset": 1028
+                },
+                "from": {
+                    "file": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v11/values-v11.xml",
+                    "position": {
+                        "startLine": 8,
+                        "startColumn": 4,
+                        "startOffset": 474,
+                        "endLine": 13,
+                        "endColumn": 12,
+                        "endOffset": 894
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 17,
+                    "startColumn": 4,
+                    "startOffset": 1033,
+                    "endLine": 22,
+                    "endColumn": 12,
+                    "endOffset": 1456
+                },
+                "from": {
+                    "file": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v11/values-v11.xml",
+                    "position": {
+                        "startLine": 14,
+                        "startColumn": 4,
+                        "startOffset": 899,
+                        "endLine": 19,
+                        "endColumn": 12,
+                        "endOffset": 1322
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 23,
+                    "startColumn": 4,
+                    "startOffset": 1461,
+                    "endLine": 28,
+                    "endColumn": 12,
+                    "endOffset": 1882
+                },
+                "from": {
+                    "file": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v11/values-v11.xml",
+                    "position": {
+                        "startLine": 20,
+                        "startColumn": 4,
+                        "startOffset": 1327,
+                        "endLine": 25,
+                        "endColumn": 12,
+                        "endOffset": 1748
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 29,
+                    "startColumn": 4,
+                    "startOffset": 1887,
+                    "endLine": 34,
+                    "endColumn": 12,
+                    "endOffset": 2309
+                },
+                "from": {
+                    "file": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v11/values-v11.xml",
+                    "position": {
+                        "startLine": 26,
+                        "startColumn": 4,
+                        "startOffset": 1753,
+                        "endLine": 31,
+                        "endColumn": 12,
+                        "endOffset": 2175
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 35,
+                    "startColumn": 4,
+                    "startOffset": 2314,
+                    "endLine": 40,
+                    "endColumn": 12,
+                    "endOffset": 2734
+                },
+                "from": {
+                    "file": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v11/values-v11.xml",
+                    "position": {
+                        "startLine": 32,
+                        "startColumn": 4,
+                        "startOffset": 2180,
+                        "endLine": 37,
+                        "endColumn": 12,
+                        "endOffset": 2600
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 41,
+                    "startColumn": 4,
+                    "startOffset": 2739,
+                    "endColumn": 88,
+                    "endOffset": 2823
+                },
+                "from": {
+                    "file": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v11/values-v11.xml",
+                    "position": {
+                        "startLine": 38,
+                        "startColumn": 4,
+                        "startOffset": 2605,
+                        "endColumn": 88,
+                        "endOffset": 2689
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 42,
+                    "startColumn": 4,
+                    "startOffset": 2828,
+                    "endColumn": 100,
+                    "endOffset": 2924
+                },
+                "from": {
+                    "file": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v11/values-v11.xml",
+                    "position": {
+                        "startLine": 39,
+                        "startColumn": 4,
+                        "startOffset": 2694,
+                        "endColumn": 100,
+                        "endOffset": 2790
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 43,
+                    "startColumn": 4,
+                    "startOffset": 2929,
+                    "endLine": 47,
+                    "endColumn": 12,
+                    "endOffset": 3332
+                },
+                "from": {
+                    "file": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v11/values-v11.xml",
+                    "position": {
+                        "startLine": 40,
+                        "startColumn": 4,
+                        "startOffset": 2795,
+                        "endLine": 44,
+                        "endColumn": 12,
+                        "endOffset": 3198
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 48,
+                    "startColumn": 4,
+                    "startOffset": 3337,
+                    "endLine": 52,
+                    "endColumn": 12,
+                    "endOffset": 3752
+                },
+                "from": {
+                    "file": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v11/values-v11.xml",
+                    "position": {
+                        "startLine": 45,
+                        "startColumn": 4,
+                        "startOffset": 3203,
+                        "endLine": 49,
+                        "endColumn": 12,
+                        "endOffset": 3618
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 53,
+                    "startColumn": 4,
+                    "startOffset": 3757,
+                    "endLine": 54,
+                    "endColumn": 12,
+                    "endOffset": 3859
+                },
+                "from": {
+                    "file": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v11/values-v11.xml",
+                    "position": {
+                        "startLine": 50,
+                        "startColumn": 4,
+                        "startOffset": 3623,
+                        "endLine": 51,
+                        "endColumn": 12,
+                        "endOffset": 3725
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 55,
+                    "startColumn": 4,
+                    "startOffset": 3864,
+                    "endLine": 56,
+                    "endColumn": 12,
+                    "endOffset": 3988
+                },
+                "from": {
+                    "file": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v11/values-v11.xml",
+                    "position": {
+                        "startLine": 52,
+                        "startColumn": 4,
+                        "startOffset": 3730,
+                        "endLine": 53,
+                        "endColumn": 12,
+                        "endOffset": 3854
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 57,
+                    "startColumn": 4,
+                    "startOffset": 3993,
+                    "endColumn": 70,
+                    "endOffset": 4059
+                },
+                "from": {
+                    "file": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v11/values-v11.xml",
+                    "position": {
+                        "startLine": 54,
+                        "startColumn": 4,
+                        "startOffset": 3859,
+                        "endColumn": 70,
+                        "endOffset": 3925
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 58,
+                    "startColumn": 4,
+                    "startOffset": 4064,
+                    "endColumn": 82,
+                    "endOffset": 4142
+                },
+                "from": {
+                    "file": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v11/values-v11.xml",
+                    "position": {
+                        "startLine": 55,
+                        "startColumn": 4,
+                        "startOffset": 3930,
+                        "endColumn": 82,
+                        "endOffset": 4008
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 59,
+                    "startColumn": 4,
+                    "startOffset": 4147,
+                    "endLine": 109,
+                    "endColumn": 12,
+                    "endOffset": 7850
+                },
+                "from": {
+                    "file": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v11/values-v11.xml",
+                    "position": {
+                        "startLine": 56,
+                        "startColumn": 4,
+                        "startOffset": 4013,
+                        "endLine": 106,
+                        "endColumn": 12,
+                        "endOffset": 7716
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 110,
+                    "startColumn": 4,
+                    "startOffset": 7855,
+                    "endLine": 161,
+                    "endColumn": 12,
+                    "endOffset": 11698
+                },
+                "from": {
+                    "file": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v11/values-v11.xml",
+                    "position": {
+                        "startLine": 107,
+                        "startColumn": 4,
+                        "startOffset": 7721,
+                        "endLine": 158,
+                        "endColumn": 12,
+                        "endOffset": 11564
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 162,
+                    "startColumn": 4,
+                    "startOffset": 11703,
+                    "endColumn": 90,
+                    "endOffset": 11789
+                },
+                "from": {
+                    "file": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/values-v11/values-v11.xml",
+                    "position": {
+                        "startLine": 159,
+                        "startColumn": 4,
+                        "startOffset": 11569,
+                        "endColumn": 90,
+                        "endOffset": 11655
+                    }
+                }
+            }
+        ]
+    }
+]

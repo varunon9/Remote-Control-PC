@@ -1,0 +1,38 @@
+[
+    {
+        "merged": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/res/merged/debug/drawable-mdpi/file.png",
+        "source": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/src/main/res/drawable-mdpi/file.png"
+    },
+    {
+        "merged": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/res/merged/debug/drawable-mdpi/drawer_shadow.9.png",
+        "source": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/src/main/res/drawable-mdpi/drawer_shadow.9.png"
+    },
+    {
+        "merged": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/res/merged/debug/drawable-mdpi/sleep.png",
+        "source": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/src/main/res/drawable-mdpi/sleep.png"
+    },
+    {
+        "merged": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/res/merged/debug/drawable-mdpi/folder.png",
+        "source": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/src/main/res/drawable-mdpi/folder.png"
+    },
+    {
+        "merged": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/res/merged/debug/drawable-mdpi/ic_launcher.png",
+        "source": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/src/main/res/drawable-mdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/res/merged/debug/drawable-mdpi/restart.png",
+        "source": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/src/main/res/drawable-mdpi/restart.png"
+    },
+    {
+        "merged": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/res/merged/debug/drawable-mdpi/ic_drawer.png",
+        "source": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/src/main/res/drawable-mdpi/ic_drawer.png"
+    },
+    {
+        "merged": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/res/merged/debug/drawable-mdpi/shutdown.png",
+        "source": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/src/main/res/drawable-mdpi/shutdown.png"
+    },
+    {
+        "merged": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/res/merged/debug/drawable-mdpi/lock.png",
+        "source": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/src/main/res/drawable-mdpi/lock.png"
+    }
+]

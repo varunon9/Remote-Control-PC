@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/res/merged/debug/menu/main.xml",
+        "source": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/src/main/res/menu/main.xml"
+    },
+    {
+        "merged": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/res/merged/debug/menu/music_control.xml",
+        "source": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/src/main/res/menu/music_control.xml"
+    },
+    {
+        "merged": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/res/merged/debug/menu/help.xml",
+        "source": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/src/main/res/menu/help.xml"
+    },
+    {
+        "merged": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/res/merged/debug/menu/global.xml",
+        "source": "/home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/src/main/res/menu/global.xml"
+    }
+]
