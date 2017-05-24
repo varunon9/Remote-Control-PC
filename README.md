@@ -37,7 +37,8 @@ Enjoy :sparkles: :boom: :wink:
 ## Screenshots
 |  |  |
 | --- | --- |
-|![Desktop App](./screenshots/desktop.png) | ![Connection Screen](./screenshots/connect.png)|
+|![Desktop App](./screenshots/desktop.png) | |
+|![Live Screen](./screenshots/live-screen.png) | ![Connection Screen](./screenshots/connect.png)|
 |![Touchpad Screen](./screenshots/touchpad.png) | ![Navigation Screen](./screenshots/navigation-drawer.png)|
 |![Typing Screen](./screenshots/keyboard.png) | ![Media Player Screen](./screenshots/media-player.png)|
 |![Image Viewer Screen](./screenshots/image-viewer.png) | ![File Transfer Screen](./screenshots/file-transfer.png)|
@@ -49,9 +50,10 @@ Desktop part of this project has been developed in Netbeans while that of Androi
 
 #### Steps to deploy app on your machine-
 1. There are three folders-
-    1. RemoteControlPC-Android- Android part, Import in Eclipse
-    2. RemoteControlPC-Desktop- Desktop part, Import in Netbeans
-    3. RemoteControlPC-Libraries- Libraries (Jar file) that is being used in android as well as desktop, Import in Netbeans
+    1. RemoteControlPC-Android- Android part, Import in Eclipse (Outdated)
+    2. RemoteControlPC-Studio- Android part, Import in Android Studio (Latest)
+    3. RemoteControlPC-Desktop- Desktop part, Import in Netbeans
+    4. RemoteControlPC-Libraries- Libraries (Jar file) that is being used in android as well as desktop, Import in Netbeans
 2. Library has a dist folder that contains jar file.
 3. Add this jar file in build path of Desktop (Netbeans) as well as Android (Eclipse) part. See steps below.
 4. To change/modify the java files inside library folder, import it in Netbeans and 'clean and build project' after changing.

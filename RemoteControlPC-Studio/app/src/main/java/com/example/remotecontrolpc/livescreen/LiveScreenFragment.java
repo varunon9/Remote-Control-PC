@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 
 import com.example.remotecontrolpc.MainActivity;
@@ -20,10 +21,11 @@ import java.util.TimerTask;
 
 public class LiveScreenFragment extends Fragment {
     private static final String ARG_SECTION_NUMBER = "section_number";
-    private int initX, initY, disX, disY;
+    private int xCord, yCord, disY;
     boolean mouseMoved = false, moultiTouch = false;
     private ImageView screenshotImageView;
     private Timer timer;
+    private int screenshotImageViewX, screenshotImageViewY;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -31,40 +33,38 @@ public class LiveScreenFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView =  inflater.inflate(R.layout.fragment_live_screen, container, false);
         screenshotImageView = (ImageView) rootView.findViewById(R.id.screenshotImageView);
+        ViewTreeObserver vto = screenshotImageView.getViewTreeObserver();
+        vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                screenshotImageViewX = screenshotImageView.getHeight();
+                screenshotImageViewY = screenshotImageView.getWidth();
+                ViewTreeObserver obs = screenshotImageView.getViewTreeObserver();
+                obs.removeGlobalOnLayoutListener(this);
+            }
+        });
         screenshotImageView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent event) {
                 if (MainActivity.clientSocket != null) {
                     switch(event.getAction() & MotionEvent.ACTION_MASK){
                         case MotionEvent.ACTION_DOWN:
-                            //save X and Y positions when user touches the TextView
-                            initX = (int) event.getX();
-                            initY = (int) event.getY();
+                            xCord = screenshotImageViewX - (int) event.getY();
+                            yCord = (int) event.getX();
+                            MainActivity.sendMessageToServer("MOUSE_MOVE_LIVE");
+                            //send mouse movement to server by adjusting coordinates
+                            MainActivity.sendMessageToServer((float) xCord / screenshotImageViewX);
+                            MainActivity.sendMessageToServer((float) yCord / screenshotImageViewY);
                             mouseMoved = false;
                             break;
                         case MotionEvent.ACTION_MOVE:
                             if(moultiTouch == false) {
-                                disX = (int) event.getX()- initX; //Mouse movement in x direction
-                                disY = (int) event.getY()- initY; //Mouse movement in y direction
-                                /*set init to new position so that continuous mouse movement
-                                is captured*/
-                                initX = (int) event.getX();
-                                initY = (int) event.getY();
-                                if (disX != 0 || disY != 0) {
-                                    MainActivity.sendMessageToServer("MOUSE_MOVE");
-                                    //send mouse movement to server
-                                    MainActivity.sendMessageToServer(disX);
-                                    MainActivity.sendMessageToServer(disY);
-                                }
-                            }
-                            else {
-                                disY = (int) event.getY()- initY; //Mouse movement in y direction
-                                disY = (int) disY / 2;//to scroll by less amount
-                                initY = (int) event.getY();
-                                if(disY != 0) {
-                                    MainActivity.sendMessageToServer("MOUSE_WHEEL");
-                                    MainActivity.sendMessageToServer(disY);;
-                                }
+                                xCord = screenshotImageViewX - (int) event.getY();
+                                yCord = (int) event.getX();
+                                MainActivity.sendMessageToServer("MOUSE_MOVE_LIVE");
+                                //send mouse movement to server by adjusting coordinates
+                                MainActivity.sendMessageToServer((float) xCord / screenshotImageViewX);
+                                MainActivity.sendMessageToServer((float) yCord / screenshotImageViewY);
                             }
                             mouseMoved=true;
                             break;
@@ -72,18 +72,8 @@ public class LiveScreenFragment extends Fragment {
                             //consider a tap only if user did not move mouse after ACTION_DOWN
                             if(!mouseMoved){
                                 MainActivity.sendMessageToServer("LEFT_CLICK");
+                                delayedUpdateScreenshot();
                             }
-                            break;
-                        case MotionEvent.ACTION_POINTER_DOWN:
-                            initY = (int) event.getY();
-                            mouseMoved = false;
-                            moultiTouch = true;
-                            break;
-                        case MotionEvent.ACTION_POINTER_UP:
-                            if(!mouseMoved) {
-                                MainActivity.sendMessageToServer("LEFT_CLICK");
-                            }
-                            moultiTouch = false;
                             break;
                     }
                 }
@@ -91,12 +81,7 @@ public class LiveScreenFragment extends Fragment {
             }
         });
         timer = new Timer();
-        timer.scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-                updateScreenshot();
-            }
-        }, 0, 1000);
+        updateScreenshot();
         return rootView;
     }
 
@@ -122,6 +107,15 @@ public class LiveScreenFragment extends Fragment {
                 }
             }.execute();
         }
+    }
+
+    private void delayedUpdateScreenshot() {
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                updateScreenshot();
+            }
+        }, 500);
     }
 
     @Override

@@ -6,8 +6,10 @@
 package remotecontrolpc.desktop.server;
 
 import image.ImageViewer;
+import java.awt.Dimension;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.awt.Toolkit;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import javax.swing.JButton;
@@ -24,6 +26,9 @@ import remotecontrolpc.desktop.filesharing.Screenshot;
 public class Server {
     public void connect(JButton resetButton, JLabel connectionStatusLabel) {
         MouseKeyboardControl mouseControl = new MouseKeyboardControl();
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int screenWidth = (int) screenSize.getWidth();
+        int screenHeight = (int) screenSize.getHeight();
         try {
             connectionStatusLabel.setText("Waiting for Phone to connect...");
             MainScreen.clientSocket = MainScreen.serverSocket.accept();
@@ -60,10 +65,19 @@ public class Server {
                             case "MOUSE_MOVE":
                                 int x = (int) MainScreen.objectInputStream.readObject();
                                 int y = (int) MainScreen.objectInputStream.readObject();
-                                Point point = MouseInfo.getPointerInfo().getLocation(); //Get current mouse position
+                                Point point = MouseInfo.getPointerInfo().getLocation(); 
+                                // Get current mouse position
                                 float nowx = point.x;
                                 float nowy = point.y;
                                 mouseControl.mouseMove((int) (nowx + x), (int) (nowy + y));
+                                break;
+                            case "MOUSE_MOVE_LIVE":
+                                // need to adjust coordinates 
+                                float xCord = (float) MainScreen.objectInputStream.readObject();
+                                float yCord = (float) MainScreen.objectInputStream.readObject();
+                                xCord = xCord * screenWidth;
+                                yCord = yCord * screenHeight;
+                                mouseControl.mouseMove((int) xCord, (int) yCord);
                                 break;
                             case "KEY_PRESS":
                                 keyCode = (int) MainScreen.objectInputStream.readObject();
