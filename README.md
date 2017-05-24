@@ -12,6 +12,7 @@ Use your Android phone to control your Laptop.
 6. See images of phone on laptop
 7. Control presentation on laptop via phone
 8. Suspend, Restart or Shutdown your laptop using phone
+9. Fetch your laptop screen to Android
 
 ## How does it work?
 
@@ -46,7 +47,7 @@ Enjoy :sparkles: :boom: :wink:
 |![Downloading File Screen](./screenshots/downloading-file.png) | ![Music Control Screen](./screenshots/music-control.png)|
 
 ## How to contribute?
-Desktop part of this project has been developed in Netbeans while that of Android part in eclipse.
+Desktop part of this project has been developed in Netbeans while that of Android part in Android-Studio (shifted from eclipse after 1st release).
 
 #### Steps to deploy app on your machine-
 1. There are three folders-
