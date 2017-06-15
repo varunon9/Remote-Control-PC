@@ -2,4 +2,15 @@
 /RemoteControlPC-Desktop/build/
 /RemoteControlPC-Studio/app/build/generated/
 /RemoteControlPC-Studio/app/build/intermediates/
+/RemoteControlPC-Studio/app/build/tmp/
+
 *~
+
+# Android Studio / IntelliJ IDEA 
+*.iws
+/RemoteControlPC-Studio/.idea/libraries
+/RemoteControlPC-Studio/.idea/tasks.xml
+/RemoteControlPC-Studio/.idea/vcs.xml
+/RemoteControlPC-Studio/.idea/workspace.xml
+
+/RemoteControlPC-Studio/.gradle/
