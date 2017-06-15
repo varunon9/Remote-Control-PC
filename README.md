@@ -12,7 +12,7 @@ Use your Android phone to control your Laptop.
 6. See images of phone on laptop
 7. Control presentation on laptop via phone
 8. Suspend, Restart or Shutdown your laptop using phone
-9. Fetch your laptop screen to Android
+9. Fetch your laptop screen to Android (only single click supported)
 
 ## How does it work?
 
@@ -35,6 +35,12 @@ Enjoy :sparkles: :boom: :wink:
 4. Type `java -jar RemoteControlPC-Desktop.jar`
 5. Lock icon to launcher
 
+### How to start android app?
+1. Install apk from /Remote-Control-PC/RemoteControlPC-Studio/app/build/outputs/apk/app-debug.apk
+2. Connect your laptop with your phone via hotspot (or any local network)
+3. Start Desktop app
+4. Enter connection details shown on Desktop
+
 ## Screenshots
 |  |  |
 | --- | --- |
@@ -47,16 +53,15 @@ Enjoy :sparkles: :boom: :wink:
 |![Downloading File Screen](./screenshots/downloading-file.png) | ![Music Control Screen](./screenshots/music-control.png)|
 
 ## How to contribute?
-Desktop part of this project has been developed in Netbeans while that of Android part in Android-Studio (shifted from eclipse after 1st release).
+Desktop part of this project has been developed in Netbeans while that of Android part in Android-Studio.
 
 #### Steps to deploy app on your machine-
 1. There are three folders-
-    1. RemoteControlPC-Android- Android part, Import in Eclipse (Outdated)
-    2. RemoteControlPC-Studio- Android part, Import in Android Studio (Latest)
-    3. RemoteControlPC-Desktop- Desktop part, Import in Netbeans
-    4. RemoteControlPC-Libraries- Libraries (Jar file) that is being used in android as well as desktop, Import in Netbeans
+    1. RemoteControlPC-Studio- Android part, Import in Android Studio 
+    2. RemoteControlPC-Desktop- Desktop part, Import in Netbeans
+    3. RemoteControlPC-Libraries- Libraries (Jar file) that is being used in android as well as desktop, Import in Netbeans
 2. Library has a dist folder that contains jar file.
-3. Add this jar file in build path of Desktop (Netbeans) as well as Android (Eclipse) part. See steps below.
+3. Add this jar file in build path of Desktop (Netbeans) as well as Android part. See steps below.
 4. To change/modify the java files inside library folder, import it in Netbeans and 'clean and build project' after changing.
 5. Make sure to clean android as well as desktop part after modifying library files.
 
@@ -66,20 +71,8 @@ Desktop part of this project has been developed in Netbeans while that of Androi
     2. Click Properties
     3. Click Libraries
     4. Add JAR/Folder -> Select jar from /path/to/repository/RemoteControlPC-Libraries/dist/RemoteControlPC-Libraries.jar
-2. For Eclipse-
-    1. Create libs folder in root directory if not already available
-    2. Copy JAR file to the libs folder
-    3. Right click on the Jar file and then select Build Path > Add to Build Path
-
-#### To import RemoteControlPC-Android in Android Studio see this video: 
-* https://www.youtube.com/watch?v=mMPT4M0p4T8
 
 #### To see working demo on youtube watch this video:
 * https://youtu.be/WY06MoDLFfc
 
-###### Feedbacks
-1. You need Java 8 for desktop part (Netbeans)
-2. If you are getting error in eclipse, you can import in Android-studio (for android part). 
-3. You might need to change compile path for android part to Java 1.7. 
-4. Keyboard has some issues particular to some android versions. 
   
