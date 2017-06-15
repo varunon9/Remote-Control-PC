@@ -17,12 +17,12 @@ ADDED from /home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/a
 		ADDED from /home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/src/main/AndroidManifest.xml:2:11-69
 uses-sdk
 ADDED from /home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/src/main/AndroidManifest.xml:7:5-9:41
-MERGED from [com.android.support:multidex:1.0.1] /home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/exploded-aar/com.android.support/multidex/1.0.1/AndroidManifest.xml:18:5-42
-MERGED from [com.android.support:appcompat-v7:23.4.0] /home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/AndroidManifest.xml:21:5-23:78
-MERGED from [com.android.support:animated-vector-drawable:23.4.0] /home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/23.4.0/AndroidManifest.xml:5:5-44
-MERGED from [com.android.support:support-vector-drawable:23.4.0] /home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.4.0/AndroidManifest.xml:5:5-43
+MERGED from [com.android.support:multidex:1.0.1] /home/varun/.android/build-cache/660780c622b1201198353b82d98620675014bf6e/output/AndroidManifest.xml:18:5-42
+MERGED from [com.android.support:appcompat-v7:23.4.0] /home/varun/.android/build-cache/64755ab34adc489da76630e7c3aa626d2a74f023/output/AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:animated-vector-drawable:23.4.0] /home/varun/.android/build-cache/361246cbbbb984a0924f4ca094c65681a304bafc/output/AndroidManifest.xml:5:5-44
+MERGED from [com.android.support:support-vector-drawable:23.4.0] /home/varun/.android/build-cache/9c3e6563cfce1c407ec4bd65682944e1c63f0ad7/output/AndroidManifest.xml:5:5-43
 	tools:overrideLibrary
-		ADDED from [com.android.support:appcompat-v7:23.4.0] /home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/AndroidManifest.xml:23:9-75
+		ADDED from [com.android.support:appcompat-v7:23.4.0] /home/varun/.android/build-cache/64755ab34adc489da76630e7c3aa626d2a74f023/output/AndroidManifest.xml:23:9-75
 	android:targetSdkVersion
 		ADDED from /home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/src/main/AndroidManifest.xml:9:9-38
 		INJECTED from /home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/src/main/AndroidManifest.xml
@@ -45,9 +45,9 @@ ADDED from /home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/a
 		ADDED from /home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/src/main/AndroidManifest.xml:13:22-64
 application
 ADDED from /home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/src/main/AndroidManifest.xml:15:5-37:19
-MERGED from [com.android.support:appcompat-v7:23.4.0] /home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:animated-vector-drawable:23.4.0] /home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/23.4.0/AndroidManifest.xml:7:5-20
-MERGED from [com.android.support:support-vector-drawable:23.4.0] /home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.4.0/AndroidManifest.xml:7:5-20
+MERGED from [com.android.support:appcompat-v7:23.4.0] /home/varun/.android/build-cache/64755ab34adc489da76630e7c3aa626d2a74f023/output/AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:animated-vector-drawable:23.4.0] /home/varun/.android/build-cache/361246cbbbb984a0924f4ca094c65681a304bafc/output/AndroidManifest.xml:7:5-20
+MERGED from [com.android.support:support-vector-drawable:23.4.0] /home/varun/.android/build-cache/9c3e6563cfce1c407ec4bd65682944e1c63f0ad7/output/AndroidManifest.xml:7:5-20
 	android:label
 		ADDED from /home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/src/main/AndroidManifest.xml:18:9-41
 	android:allowBackup

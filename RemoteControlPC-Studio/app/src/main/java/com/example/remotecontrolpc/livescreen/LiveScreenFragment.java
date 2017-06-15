@@ -26,6 +26,7 @@ public class LiveScreenFragment extends Fragment {
     private ImageView screenshotImageView;
     private Timer timer;
     private int screenshotImageViewX, screenshotImageViewY;
+    long currentPressTime, lastPressTime;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -56,6 +57,8 @@ public class LiveScreenFragment extends Fragment {
                             MainActivity.sendMessageToServer((float) xCord / screenshotImageViewX);
                             MainActivity.sendMessageToServer((float) yCord / screenshotImageViewY);
                             mouseMoved = false;
+                            /*startTime = System.currentTimeMillis();
+                            clickCount++;*/
                             break;
                         case MotionEvent.ACTION_MOVE:
                             if(moultiTouch == false) {
@@ -69,11 +72,14 @@ public class LiveScreenFragment extends Fragment {
                             mouseMoved=true;
                             break;
                         case MotionEvent.ACTION_UP:
-                            //consider a tap only if user did not move mouse after ACTION_DOWN
-                            if(!mouseMoved){
+                            // supporting only single click
+                            currentPressTime = System.currentTimeMillis();
+                            long interval = currentPressTime - lastPressTime;
+                            if (interval >= 500 && !mouseMoved) {
                                 MainActivity.sendMessageToServer("LEFT_CLICK");
                                 delayedUpdateScreenshot();
                             }
+                            lastPressTime = currentPressTime;
                             break;
                     }
                 }

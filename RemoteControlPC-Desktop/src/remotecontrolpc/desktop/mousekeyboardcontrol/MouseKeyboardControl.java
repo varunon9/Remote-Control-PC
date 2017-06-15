@@ -31,6 +31,11 @@ public class MouseKeyboardControl {
         robot.mousePress(InputEvent.BUTTON1_MASK);
         robot.mouseRelease(InputEvent.BUTTON1_MASK);  
     } 
+    public void doubleClick() {
+        leftClick();
+        robot.delay(500);
+        leftClick();
+    }
     public void rightClick() {
         robot.mousePress(InputEvent.BUTTON3_MASK);
         robot.mouseRelease(InputEvent.BUTTON3_MASK);

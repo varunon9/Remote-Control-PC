@@ -58,6 +58,9 @@ public class Server {
                             case "RIGHT_CLICK":
                                 mouseControl.rightClick();
                                 break;
+                            case "DOUBLE_CLICK":
+                                mouseControl.doubleClick();
+                                break;
                             case "MOUSE_WHEEL":
                                 int scrollAmount = (int) MainScreen.objectInputStream.readObject();
                                 mouseControl.mouseWheel(scrollAmount);
