@@ -21,6 +21,7 @@ public abstract class UpdateScreenshot extends AsyncTask<Void, Void, String> imp
         FileOutputStream fos = null;
         String path = new FileAPI().getExternalStoragePath();
         path = path + "/RemoteControlPC/screenshot.png";
+        System.out.println("Screenshot url: " + path);
         File file = new File(path);
         File dirs = new File(file.getParent());
         if (!dirs.exists()) {
