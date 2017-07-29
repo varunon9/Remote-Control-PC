@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="RemoteControlPC.jnlp">
+  <information>
+    <title>RemoteControlPC</title>
+    <vendor>varun</vendor>
+    <description>null</description>
+    <offline-allowed/>
+  </information>
+  <resources>
+    <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+    <jar href="RemoteControlPC.jar" size="34186" download="eager" />
+    <jar href="lib/RemoteControlPC-Libraries.jar" size="1658" download="eager" />
+  </resources>
+  <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="RemoteControlPC" >
+    <param name="requiredFXVersion" value="8.0+"/>
+  </applet-desc>
+  <jfx:javafx-desc  width="800" height="600" main-class="remotecontrolpc.RemoteControlPC"  name="RemoteControlPC" />
+  <update check="always"/>
+</jnlp>
