@@ -28,18 +28,23 @@ Open Android app and enter connection details provided by desktop app to connect
 ###### Step 4:
 Enjoy :sparkles: :boom: :wink:
 
+### Dependencies
+You need Java 8
+
 ### How to start desktop app?
 1. Clone this Repository / Download zip 
 2. Open terminal (Ctrl + Alt + T)
-3. Type `cd /path/to/repository/RemoteControlPC-Desktop/dist`
+3. Type `cd /path/to/repository/RemoteControlPC-JavaFXML/dist/RemoteControlPC.jar`
 4. Type `java -jar RemoteControlPC-Desktop.jar`
 5. Lock icon to launcher
+6. Make sure you have Java 8 installed (hit `java -version`) 
 
 ### How to start android app?
 1. Install apk from /Remote-Control-PC/RemoteControlPC-Studio/app/build/outputs/apk/app-debug.apk
 2. Connect your laptop with your phone via hotspot (or any local network)
 3. Start Desktop app
 4. Enter connection details shown on Desktop
+5. Tested on Android 4.2.2 (Samsung Duos)
 
 ## Screenshots
 |  |  |
@@ -53,12 +58,12 @@ Enjoy :sparkles: :boom: :wink:
 |![Downloading File Screen](./screenshots/downloading-file.png) | ![Music Control Screen](./screenshots/music-control.png)|
 
 ## How to contribute?
-Desktop part of this project has been developed in Netbeans while that of Android part in Android-Studio.
+Desktop part of this project has been developed in Netbeans(Java-FXML) while that of Android part in Android-Studio.
 
 #### Steps to deploy app on your machine-
 1. There are three folders-
     1. RemoteControlPC-Studio- Android part, Import in Android Studio 
-    2. RemoteControlPC-Desktop- Desktop part, Import in Netbeans
+    2. RemoteControlPC-JavaFXML- Desktop part, Import in Netbeans (Use SceneBuilder)
     3. RemoteControlPC-Libraries- Libraries (Jar file) that is being used in android as well as desktop, Import in Netbeans
 2. Library has a dist folder that contains jar file.
 3. Add this jar file in build path of Desktop (Netbeans) as well as Android part. See steps below.
@@ -75,4 +80,4 @@ Desktop part of this project has been developed in Netbeans while that of Androi
 #### To see working demo on youtube watch this video:
 * https://youtu.be/WY06MoDLFfc
 
-  
+#### For query/issues open Github issue or contact: varunon9@gmail.com
