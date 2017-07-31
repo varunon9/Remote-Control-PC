@@ -5,6 +5,7 @@
  */
 package remotecontrolpc;
 
+import file.AvatarFile;
 import ipaddress.GetFreePort;
 import ipaddress.GetMyIpAddress;
 import java.io.File;
@@ -15,6 +16,7 @@ import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.concurrent.Service;
@@ -22,15 +24,12 @@ import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
-import javafx.stage.Stage;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -118,7 +117,7 @@ public class MainScreenController implements Initializable {
         } else {
             try {
                 serverSocket = new ServerSocket(port);
-                startServer();
+                startServer(port);
             } catch(Exception e) {
                 showMessage("Error in initializing server");
                 e.printStackTrace();
@@ -127,7 +126,7 @@ public class MainScreenController implements Initializable {
     }
     
     
-    private void startServer() throws Exception {
+    private void startServer(int port) throws Exception {
         new Service<Void>() {
 
             @Override
@@ -136,8 +135,8 @@ public class MainScreenController implements Initializable {
 
                     @Override
                     protected Void call() throws Exception {
-                        new Server().connect(resetButton, 
-                                connectionStatusLabel, messageLabel);
+                        new Server().connect(resetButton, connectionStatusLabel,
+                                messageLabel, port);
                         return null;
                     }
                     
@@ -172,4 +171,18 @@ public class MainScreenController implements Initializable {
         });
     }
     
+    public void showFiles(ArrayList<AvatarFile> filesInFolder) {
+        Platform.runLater(() -> {
+            flowPane.getChildren().clear();
+            for (AvatarFile file : filesInFolder) {
+                Image image = new Image(
+                        getClass().getResourceAsStream("/resources/folder.png")
+                );
+                ImageView imageView = new ImageView(image);
+                imageView.setPreserveRatio(true);
+                flowPane.getChildren().add(imageView);
+                //System.out.println(file.getHeading() + ":" + file.getSubheading());
+            }
+        });
+    }
 }

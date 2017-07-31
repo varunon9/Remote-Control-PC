@@ -65,7 +65,6 @@ public class FileTransferFragment extends Fragment implements OnClickListener {
 						new GetFilesList(fileTransferListView, getActivity()).execute(currentPath);
 	        		}
 				} else {
-					//Toast.makeText(getActivity(), "Sending " + file.getHeading(), Toast.LENGTH_LONG).show();
 					transferFile(file.getHeading(), file.getPath());
 				}
 			}

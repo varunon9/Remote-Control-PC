@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package file;
 
 import java.io.Serializable;
@@ -12,8 +7,8 @@ import java.io.Serializable;
  * @author varun
  */
 public class AvatarFile implements Serializable {
-    private int icon;
-    private String avatarHeading, avatarSubheading, path, type;
+    private final int icon;
+    private final String avatarHeading, avatarSubheading, path, type;
 
     public AvatarFile(int icon, String avatarHeading, String avatarSubheading, String path, String type) {
         this.icon = icon;

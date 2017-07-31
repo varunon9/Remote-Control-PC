@@ -14,6 +14,9 @@ import filesharing.FileAPI;
 import filesharing.ReceiveFile;
 import filesharing.SendFile;
 import filesharing.SendFilesList;
+import java.io.EOFException;
+import java.net.InetAddress;
+import java.net.SocketAddress;
 import javafx.application.Platform;
 import mousekeyboardcontrol.MouseKeyboardControl;
 import poweroff.PowerOff;
@@ -28,8 +31,8 @@ public class Server {
     
     private Label messageLabel;
     
-    public void connect(Button resetButton, 
-            Label connectionStatusLabel, Label messageLabel) {
+    public void connect(Button resetButton, Label connectionStatusLabel, 
+            Label messageLabel, int port) {
         this.messageLabel = messageLabel;
         MouseKeyboardControl mouseControl = new MouseKeyboardControl();
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -39,12 +42,16 @@ public class Server {
             MainScreenController.clientSocket = 
                     MainScreenController.serverSocket.accept();
             resetButton.setDisable(true);
-            String connectedMessage = "Connected to: " + 
-                    MainScreenController.clientSocket.getRemoteSocketAddress();
+            InetAddress remoteInetAddress = 
+                    MainScreenController.clientSocket.getInetAddress();
+            String connectedMessage = "Connected to: " + remoteInetAddress;     
             Platform.runLater(() -> {
                 connectionStatusLabel.setText(connectedMessage);
             });
             showMessage(connectedMessage);
+            
+            // connecting another socket to app (Peer to Peer)
+            new ClientToAndroid().connect(remoteInetAddress, port);
             MainScreenController.inputStream = 
                     MainScreenController.clientSocket.getInputStream();
             MainScreenController.outputStream = 
@@ -220,6 +227,7 @@ public class Server {
                 } catch (Exception e) {
                     e.printStackTrace();
                     connectionClosed();
+                    ClientToAndroid.closeConnectionToAndroid();
                     Platform.runLater(() -> {
                         resetButton.setDisable(false);
                         connectionStatusLabel.setText("Disconnected");
@@ -227,8 +235,7 @@ public class Server {
                     break;
                 }
             };
-        }
-        catch(Exception e) {
+        } catch(Exception e) {
             e.printStackTrace();
         }
     } 

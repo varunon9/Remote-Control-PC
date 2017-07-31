@@ -7,6 +7,7 @@ import java.net.Socket;
 
 import com.example.remotecontrolpc.MainActivity;
 import com.example.remotecontrolpc.R;
+import com.example.remotecontrolpc.server.Server;
 
 import android.app.Activity;
 import android.content.Context;
@@ -62,7 +63,6 @@ public class ConnectFragment extends Fragment {
 			new MakeConnection(ipAddress, port, getActivity()) {
 				@Override
 				public void receiveData(Object result) {
-					// TODO Auto-generated method stub
 					MainActivity.clientSocket = (Socket) result;
 					if (MainActivity.clientSocket == null) {
 						Toast.makeText(getActivity(), "Server is not listening", Toast.LENGTH_SHORT).show();
@@ -70,6 +70,11 @@ public class ConnectFragment extends Fragment {
 						connectButton.setEnabled(true);
 					} else {
 						connectButton.setText("connected");
+						new Thread(new Runnable() {
+							public void run() {
+								new Server(getActivity()).startServer(Integer.parseInt(port));
+							}
+						}).start();
 					}
 				}
 			}.execute();

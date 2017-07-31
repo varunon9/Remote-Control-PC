@@ -80,4 +80,10 @@ Desktop part of this project has been developed in Netbeans(Java-FXML) while tha
 #### To see working demo on youtube watch this video:
 * https://youtu.be/WY06MoDLFfc
 
+### Releases:
+1. v1.0, Android app developed in eclipse and Desktop app using Java Swing
+    * https://github.com/varunon9/Remote-Control-PC/releases/tag/v1.0
+2. v2.0, Android app from Android Studio and Desktop app using Java Swing: 
+    * https://github.com/varunon9/Remote-Control-PC/releases/tag/v2.0
+
 #### For query/issues open Github issue or contact: varunon9@gmail.com

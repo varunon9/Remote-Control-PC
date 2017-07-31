@@ -28,7 +28,7 @@
                   <Insets right="5.0" />
                </HBox.margin>
             </Button>
-            <Label prefHeight="26.0" prefWidth="559.0" style="-fx-border-width: 0 0 2 0; -fx-border-color: silver;" text="/" />
+            <Label prefHeight="26.0" prefWidth="559.0" style="-fx-border-width: 0 0 0 0; -fx-border-color: silver;" text="/" />
          </children>
          <padding>
             <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
@@ -70,9 +70,6 @@
          </padding>
       </VBox>
    </left>
-   <center>
-      <FlowPane fx:id="flowPane" prefHeight="480.0" prefWidth="549.0" BorderPane.alignment="CENTER" />
-   </center>
    <bottom>
       <HBox prefHeight="34.0" prefWidth="751.0" style="-fx-border-color: silver; -fx-border-width: 2 0 0 0;" BorderPane.alignment="CENTER">
          <children>
@@ -84,4 +81,11 @@
          </children>
       </HBox>
    </bottom>
+   <center>
+      <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <content>
+            <FlowPane fx:id="flowPane" />
+         </content>
+      </ScrollPane>
+   </center>
 </BorderPane>

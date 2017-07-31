@@ -1,6 +1,7 @@
 package com.example.remotecontrolpc;
 
 public class MusicImageAvatar {
+
 	private int icon, duration;
 	private String avatarHeading, avatarSubheading, avatarData, type;
 	

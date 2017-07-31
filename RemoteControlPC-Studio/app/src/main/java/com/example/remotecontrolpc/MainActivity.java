@@ -14,6 +14,7 @@ import com.example.remotecontrolpc.livescreen.LiveScreenFragment;
 import com.example.remotecontrolpc.mediaplayer.MediaPlayerFragment;
 import com.example.remotecontrolpc.poweroff.PowerOffFragment;
 import com.example.remotecontrolpc.presentation.PresentationFragment;
+import com.example.remotecontrolpc.server.Server;
 import com.example.remotecontrolpc.touchpad.TouchpadFragment;
 
 import android.Manifest;
@@ -209,7 +210,6 @@ public class MainActivity extends ActionBarActivity implements
     
 	protected void onDestroy() {
 		super.onDestroy();
-		//Toast.makeText(thisActivity, "Destroyed", Toast.LENGTH_LONG).show();
 		try {
 			if (MainActivity.clientSocket != null) {
 				MainActivity.clientSocket.close();
@@ -223,6 +223,7 @@ public class MainActivity extends ActionBarActivity implements
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+		Server.closeServer();
 	}
 	
 	//this method is called from fragments to send message to server (Desktop)
