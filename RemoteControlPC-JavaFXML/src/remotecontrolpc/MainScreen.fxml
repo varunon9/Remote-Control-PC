@@ -84,7 +84,7 @@
    <center>
       <ScrollPane fitToHeight="true" fitToWidth="true" BorderPane.alignment="CENTER">
          <content>
-            <FlowPane fx:id="flowPane" />
+            <TilePane fx:id="tilePane" prefHeight="200.0" prefWidth="200.0" />
          </content>
       </ScrollPane>
    </center>

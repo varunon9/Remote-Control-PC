@@ -71,8 +71,6 @@ public class Server {
                 switch (message) {
                     case "FILE_DOWNLOAD_LIST_FILES":
                         filePath = (String) objectInputStream.readObject();
-                        if (filePath.equals("/")) {
-                        }
                         new FilesList() {
 
                             @Override
@@ -81,6 +79,10 @@ public class Server {
                                 sendFilesList.sendFilesList(filesInFolder, objectOutputStream);
                             }
                         }.execute(filePath);
+                        break;
+                    case "FILE_DOWNLOAD":
+                        filePath = (String) objectInputStream.readObject();
+                        //todo
                         break;
                     default: ;
                 }

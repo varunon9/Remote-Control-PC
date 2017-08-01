@@ -23,13 +23,16 @@ import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.TilePane;
+import layout.FileOrFolderController;
 
 /**
  *
@@ -46,7 +49,7 @@ public class MainScreenController implements Initializable {
     public static ObjectInputStream objectInputStream = null;
     
     @FXML
-    private FlowPane flowPane;
+    private TilePane tilePane;
     @FXML
     private BorderPane borderPane;
     @FXML
@@ -158,31 +161,71 @@ public class MainScreenController implements Initializable {
         ImageView imageView = new ImageView(image);
         imageView.setPreserveRatio(true);
         Platform.runLater(() -> {
-            imageView.fitWidthProperty().bind(flowPane.widthProperty());
-            imageView.fitHeightProperty().bind(flowPane.heightProperty());
-            flowPane.getChildren().clear();
-            flowPane.getChildren().add(imageView);
+            imageView.fitWidthProperty().bind(tilePane.widthProperty());
+            imageView.fitHeightProperty().bind(tilePane.heightProperty());
+            tilePane.getChildren().clear();
+            tilePane.getChildren().add(imageView);
         });
     }
     
     public void closeImageViewer() {
         Platform.runLater(() -> {
-            flowPane.getChildren().clear();
+            tilePane.getChildren().clear();
         });
     }
     
     public void showFiles(ArrayList<AvatarFile> filesInFolder) {
         Platform.runLater(() -> {
-            flowPane.getChildren().clear();
+            tilePane.getChildren().clear();
             for (AvatarFile file : filesInFolder) {
-                Image image = new Image(
-                        getClass().getResourceAsStream("/resources/folder.png")
+                FXMLLoader fxmlLoader = new FXMLLoader(
+                        getClass().getResource("/layout/FileOrFolder.fxml")
                 );
-                ImageView imageView = new ImageView(image);
-                imageView.setPreserveRatio(true);
-                flowPane.getChildren().add(imageView);
-                //System.out.println(file.getHeading() + ":" + file.getSubheading());
+                Parent root;
+                try {
+                    root = (Parent) fxmlLoader.load();
+                } catch(Exception e) {
+                    e.printStackTrace();
+                    return;
+                }
+                FileOrFolderController fileOrFolderController = 
+                        (FileOrFolderController) fxmlLoader.getController();
+                String fileType = file.getType();
+                Image icon = null;
+                switch(fileType) {
+                    case "folder":
+                        icon = new Image(
+                                getClass().getResourceAsStream("/resources/folder.png")
+                        );
+                        break;
+                    case "file":
+                        icon = new Image(
+                                getClass().getResourceAsStream("/resources/file.png")
+                        );
+                        break;
+                    case "image":
+                        icon = new Image(
+                                getClass().getResourceAsStream("/resources/image.png")
+                        );
+                        break;
+                    case "mp3":
+                        icon = new Image(
+                                getClass().getResourceAsStream("/resources/music.png")
+                        );
+                        break;
+                    case "pdf":
+                        icon = new Image(
+                                getClass().getResourceAsStream("/resources/pdf.png")
+                        );
+                        break;
+                    default: ;
+                }
+                fileOrFolderController.setIcon(icon);
+                fileOrFolderController.setHeading(file.getHeading());
+                fileOrFolderController.setSubHeading(file.getSubheading());
+                tilePane.getChildren().add(root);
             }
         });
     }
+    
 }
