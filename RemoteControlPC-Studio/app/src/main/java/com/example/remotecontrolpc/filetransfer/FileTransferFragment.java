@@ -83,7 +83,6 @@ public class FileTransferFragment extends Fragment implements OnClickListener {
 	
 	@Override
 	public void onClick(View v) {
-		// TODO Auto-generated method stub
 		int id = v.getId();
 		if (id == R.id.backButton) {
 			currentPath = currentDirectory.getParent();

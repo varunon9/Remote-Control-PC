@@ -6,6 +6,7 @@
 package remotecontrolpc;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -32,6 +33,10 @@ public class RemoteControlPC extends Application {
         
         stage.setScene(scene);
         stage.setTitle("RemoteControlPC");
+        stage.setOnCloseRequest(e -> {
+            Platform.exit();
+            System.exit(0);
+        });
         stage.show();
     }
 

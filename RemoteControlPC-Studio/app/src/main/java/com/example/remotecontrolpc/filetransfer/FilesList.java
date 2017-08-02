@@ -25,7 +25,7 @@ public abstract class FilesList extends AsyncTask<String, Void, ArrayList<Avatar
 		File file = new File(path);
 		//file.mkdirs();
 		File[] files = file.listFiles();
-	    if (files.length > 0) {
+	    if (files != null && files.length > 0) {
 	    	for (int i = 0; i < files.length; i++) {
 	        	String avatarHeading = files[i].getName();
 	        	long lastModified = files[i].lastModified();

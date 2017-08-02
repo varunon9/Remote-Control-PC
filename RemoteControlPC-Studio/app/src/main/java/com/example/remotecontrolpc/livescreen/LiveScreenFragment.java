@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.remotecontrolpc.MainActivity;
 import com.example.remotecontrolpc.R;
@@ -108,8 +109,12 @@ public class LiveScreenFragment extends Fragment {
                     Bitmap bitmap = BitmapFactory.decodeFile(path);
                     Matrix matrix = new Matrix();
                     matrix.postRotate(-90);
-                    Bitmap rotated = Bitmap.createBitmap(bitmap ,0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
-                    screenshotImageView.setImageBitmap(rotated);
+                    try {
+                        Bitmap rotated = Bitmap.createBitmap(bitmap ,0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+                        screenshotImageView.setImageBitmap(rotated);
+                    } catch(Exception e) {
+                        Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }.execute();
         }

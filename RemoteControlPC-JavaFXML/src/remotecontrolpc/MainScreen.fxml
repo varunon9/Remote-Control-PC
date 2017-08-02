@@ -13,22 +13,17 @@
    <top>
       <HBox prefHeight="30.0" prefWidth="751.0" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" text="Previous">
+            <Button fx:id="backButton" mnemonicParsing="false" onAction="#previousLocation" text="Back">
                <HBox.margin>
                   <Insets right="5.0" />
                </HBox.margin>
             </Button>
-            <Button mnemonicParsing="false" text="Next">
+            <Button fx:id="rootButton" mnemonicParsing="false" onAction="#fetchRootDirectory" text="Root">
                <HBox.margin>
                   <Insets right="5.0" />
                </HBox.margin>
             </Button>
-            <Button mnemonicParsing="false" text="Root">
-               <HBox.margin>
-                  <Insets right="5.0" />
-               </HBox.margin>
-            </Button>
-            <Label prefHeight="26.0" prefWidth="559.0" style="-fx-border-width: 0 0 0 0; -fx-border-color: silver;" text="/" />
+            <Label fx:id="pathLabel" prefHeight="26.0" prefWidth="559.0" style="-fx-border-width: 0 0 0 0; -fx-border-color: silver;" text="/" />
          </children>
          <padding>
             <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />

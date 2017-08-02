@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package remotecontrolpc;
 
 import file.AvatarFile;
@@ -18,6 +13,7 @@ import java.net.Socket;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.Stack;
 import javafx.application.Platform;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
@@ -47,6 +43,7 @@ public class MainScreenController implements Initializable {
     public static OutputStream outputStream = null;
     public static ObjectOutputStream objectOutputStream = null;
     public static ObjectInputStream objectInputStream = null;
+    private Stack<String> pathStack;
     
     @FXML
     private TilePane tilePane;
@@ -62,6 +59,16 @@ public class MainScreenController implements Initializable {
     private Button resetButton;
     @FXML
     private Label messageLabel;
+    @FXML
+    private Button backButton;
+    @FXML
+    private Button rootButton;
+    @FXML
+    Label pathLabel;
+    
+    public MainScreenController() {
+        pathStack = new Stack<>();
+    }
     
     public MainScreenController getMainScreenController() {
         return MainScreenController.mainScreenController;
@@ -96,6 +103,25 @@ public class MainScreenController implements Initializable {
             e.printStackTrace();
         }
         setConnectionDetails();
+    }
+    
+    @FXML
+    private void fetchRootDirectory() {
+        ClientToAndroid.fetchDirectory("/");
+    }
+    
+    @FXML
+    private void previousLocation() {
+        String currentPath = pathStack.peek();
+        if (currentPath == null || currentPath.equals("/")) {
+            Platform.runLater(() -> {
+                backButton.setDisable(true);
+            });
+            return;
+        }
+        pathStack.pop();
+        currentPath = pathStack.peek();
+        ClientToAndroid.fetchDirectory(currentPath);
     }
     
     @Override
@@ -152,6 +178,14 @@ public class MainScreenController implements Initializable {
     public void showMessage(String message) {
         Platform.runLater(() -> {
             messageLabel.setText(message);
+        });
+    }
+    
+    public void displayPath(String path) {
+        pathStack.push(path);
+        pathLabel.setDisable(false);
+        Platform.runLater(() -> {
+            pathLabel.setText(path);
         });
     }
     
@@ -223,6 +257,8 @@ public class MainScreenController implements Initializable {
                 fileOrFolderController.setIcon(icon);
                 fileOrFolderController.setHeading(file.getHeading());
                 fileOrFolderController.setSubHeading(file.getSubheading());
+                fileOrFolderController.setPath(file.getPath());
+                fileOrFolderController.setFileType(file.getType());
                 tilePane.getChildren().add(root);
             }
         });

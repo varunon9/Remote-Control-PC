@@ -14,9 +14,7 @@ import filesharing.FileAPI;
 import filesharing.ReceiveFile;
 import filesharing.SendFile;
 import filesharing.SendFilesList;
-import java.io.EOFException;
 import java.net.InetAddress;
-import java.net.SocketAddress;
 import javafx.application.Platform;
 import mousekeyboardcontrol.MouseKeyboardControl;
 import poweroff.PowerOff;
@@ -151,7 +149,9 @@ public class Server {
                                 if (filePath.equals("/")) {
                                     filePath = fileAPI.getHomeDirectoryPath();
                                 }
-                                new SendFilesList().sendFilesList(fileAPI, filePath, MainScreenController.objectOutputStream);
+                                new SendFilesList().sendFilesList(
+                                        fileAPI, filePath, MainScreenController.objectOutputStream
+                                );
                                 break;
                             case "FILE_DOWNLOAD_REQUEST":
                                 //filePath is complete path including file name
@@ -160,8 +160,11 @@ public class Server {
                                 break;
                             case "FILE_TRANSFER_REQUEST":
                                 fileName = (String) MainScreenController.objectInputStream.readObject();
+                                long fileSize = (long) MainScreenController.objectInputStream.readObject();
                                 //not in thread, blocking action
-                                new ReceiveFile().receiveFile(fileName);
+                                new ReceiveFile().receiveFile(
+                                        fileName, fileSize, MainScreenController.objectInputStream
+                                );
                                 break;
                             case "SHUTDOWN_PC":
                                 powerOff.shutdown();

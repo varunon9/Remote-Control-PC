@@ -25,7 +25,7 @@ public class ClientToAndroid {
     private static Socket clientSocket;
     private static InputStream inputStream;
     private static OutputStream outputStream;
-    private static ObjectInputStream objectInputStream;
+    public static ObjectInputStream objectInputStream;
     private static ObjectOutputStream objectOutputStream;
     
     public void connect(InetAddress inetAddress, int port) {
@@ -62,11 +62,7 @@ public class ClientToAndroid {
                 objectInputStream = new ObjectInputStream(inputStream);
                 
                 // Request Android to fetch files list for root directory
-                sendMessageToAndroid("FILE_DOWNLOAD_LIST_FILES");
-                sendMessageToAndroid("/");
-                ArrayList<AvatarFile> filesInFolder = 
-                        (ArrayList<AvatarFile>) objectInputStream.readObject();
-                mainScreenController.showFiles(filesInFolder);
+                fetchDirectory("/");
             } catch(Exception e) {
                 e.printStackTrace();
             }
@@ -105,6 +101,22 @@ public class ClientToAndroid {
             } catch(Exception e) {
                 e.printStackTrace();
             }
+        }
+    }
+    
+    public static void fetchDirectory(String path) {
+        try {
+            sendMessageToAndroid("FILE_DOWNLOAD_LIST_FILES");
+            sendMessageToAndroid(path);
+            ArrayList<AvatarFile> filesInFolder
+                    = (ArrayList<AvatarFile>) objectInputStream.readObject();
+            if (filesInFolder == null || filesInFolder.isEmpty()) {
+            } else {
+                mainScreenController.showFiles(filesInFolder);
+                mainScreenController.displayPath(path);
+            }
+        } catch(Exception e) {
+            e.printStackTrace();
         }
     }
 }

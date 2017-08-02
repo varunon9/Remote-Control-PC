@@ -13,6 +13,7 @@ Use your Android phone to control your Laptop.
 7. Control presentation on laptop via phone
 8. Suspend, Restart or Shutdown your laptop using phone
 9. Fetch your laptop screen to Android (only single click supported)
+10. Browse Android files on Desktop (View and Download)
 
 ## How does it work?
 

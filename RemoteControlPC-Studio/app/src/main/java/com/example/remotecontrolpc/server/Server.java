@@ -34,7 +34,7 @@ public class Server {
     private static OutputStream outputStream;
     private static ObjectInputStream objectInputStream;
     private static ObjectOutputStream objectOutputStream;
-    private Activity activity;
+    private static Activity activity;
 
     public Server(Activity activity) {
         this.activity = activity;
@@ -82,7 +82,7 @@ public class Server {
                         break;
                     case "FILE_DOWNLOAD":
                         filePath = (String) objectInputStream.readObject();
-                        //todo
+                        new TransferFileToPC().transferFile(filePath, objectOutputStream);
                         break;
                     default: ;
                 }
@@ -114,6 +114,31 @@ public class Server {
             }
         } catch(Exception e) {
             System.out.println(e);
+        }
+    }
+
+    public static void sendMessageToServer(long message) {
+        if (clientSocket != null) {
+            try {
+                objectOutputStream.writeObject(message);
+                objectOutputStream.flush();
+            } catch (Exception e) {
+                e.printStackTrace();
+                socketException();
+            }
+        }
+    }
+
+    private static void socketException() {
+        Toast.makeText(activity, "Connection Closed", Toast.LENGTH_LONG).show();
+        if (clientSocket != null) {
+            try {
+                clientSocket.close();
+                objectOutputStream.close();
+                clientSocket = null;
+            } catch(Exception e2) {
+                e2.printStackTrace();
+            }
         }
     }
 }
