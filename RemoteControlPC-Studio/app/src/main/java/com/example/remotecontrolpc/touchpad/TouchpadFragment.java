@@ -63,6 +63,7 @@ public class TouchpadFragment extends Fragment {
                                     //send mouse movement to server
                             	    MainActivity.sendMessageToServer(disX);
                             	    MainActivity.sendMessageToServer(disY);
+                                    mouseMoved=true;
                                 }
                             }
                             else {
@@ -71,18 +72,19 @@ public class TouchpadFragment extends Fragment {
                         	    initY = (int) event.getY();
                         	    if(disY != 0) {
                         	    	MainActivity.sendMessageToServer("MOUSE_WHEEL");
-                        	    	MainActivity.sendMessageToServer(disY);;
+                        	    	MainActivity.sendMessageToServer(disY);
+                                    mouseMoved=true;
                         	    }
                             }
-                            mouseMoved=true;
                             break;
+						case MotionEvent.ACTION_CANCEL:
                         case MotionEvent.ACTION_UP:
                             //consider a tap only if user did not move mouse after ACTION_DOWN
                             if(!mouseMoved){
                             	MainActivity.sendMessageToServer("LEFT_CLICK");
                             }
                             break;
-                        case MotionEvent.ACTION_POINTER_DOWN: 
+                        case MotionEvent.ACTION_POINTER_DOWN:
                     	    initY = (int) event.getY();
                     	    mouseMoved = false;
                     	    moultiTouch = true;

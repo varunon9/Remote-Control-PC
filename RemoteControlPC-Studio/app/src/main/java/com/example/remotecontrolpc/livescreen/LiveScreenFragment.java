@@ -22,7 +22,7 @@ import java.util.TimerTask;
 
 public class LiveScreenFragment extends Fragment {
     private static final String ARG_SECTION_NUMBER = "section_number";
-    private int xCord, yCord, disY;
+    private int xCord, yCord, initX, initY;
     boolean mouseMoved = false, moultiTouch = false;
     private ImageView screenshotImageView;
     private Timer timer;
@@ -53,6 +53,8 @@ public class LiveScreenFragment extends Fragment {
                         case MotionEvent.ACTION_DOWN:
                             xCord = screenshotImageViewX - (int) event.getY();
                             yCord = (int) event.getX();
+                            initX = xCord;
+                            initY = yCord;
                             MainActivity.sendMessageToServer("MOUSE_MOVE_LIVE");
                             //send mouse movement to server by adjusting coordinates
                             MainActivity.sendMessageToServer((float) xCord / screenshotImageViewX);
@@ -62,15 +64,19 @@ public class LiveScreenFragment extends Fragment {
                             clickCount++;*/
                             break;
                         case MotionEvent.ACTION_MOVE:
-                            if(moultiTouch == false) {
+                            if (moultiTouch == false) {
                                 xCord = screenshotImageViewX - (int) event.getY();
                                 yCord = (int) event.getX();
-                                MainActivity.sendMessageToServer("MOUSE_MOVE_LIVE");
-                                //send mouse movement to server by adjusting coordinates
-                                MainActivity.sendMessageToServer((float) xCord / screenshotImageViewX);
-                                MainActivity.sendMessageToServer((float) yCord / screenshotImageViewY);
+                                if ((xCord - initX) != 0 && (yCord - initY) != 0) {
+                                    initX = xCord;
+                                    initY = yCord;
+                                    MainActivity.sendMessageToServer("MOUSE_MOVE_LIVE");
+                                    //send mouse movement to server by adjusting coordinates
+                                    MainActivity.sendMessageToServer((float) xCord / screenshotImageViewX);
+                                    MainActivity.sendMessageToServer((float) yCord / screenshotImageViewY);
+                                    mouseMoved=true;
+                                }
                             }
-                            mouseMoved=true;
                             break;
                         case MotionEvent.ACTION_UP:
                             // supporting only single click

@@ -102,6 +102,7 @@ public class MainScreenController implements Initializable {
         } catch(Exception e) {
             e.printStackTrace();
         }
+        ClientToAndroid.closeConnectionToAndroid();
         setConnectionDetails();
     }
     

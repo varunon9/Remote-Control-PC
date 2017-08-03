@@ -26,18 +26,11 @@ public class KeyboardFragment extends Fragment implements OnTouchListener, OnCli
 	private Button nButton, tButton, wButton, rButton, fButton, zButton;
 	private Button cButton, xButton, vButton, aButton, oButton, sButton;
 	private Button ctrlAltTButton, ctrlShiftZButton, altF4Button;
+    private String previousText = "";
 	public View onCreateView (LayoutInflater inflater,
             ViewGroup container, Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.keyboard_fragment, container, false);
 		initialization(rootView);
-		typeHereEditText.setOnKeyListener(new View.OnKeyListener() {
-			
-			@Override
-			public boolean onKey(View v, int keyCode, KeyEvent event) {
-				simulateKeyPress(keyCode);
-				return false;
-			}
-		});
 		return rootView;
 		
 	}
@@ -47,9 +40,7 @@ public class KeyboardFragment extends Fragment implements OnTouchListener, OnCli
 		((MainActivity) activity).onSectionAttached(getArguments().getInt(
 				ARG_SECTION_NUMBER));
 	}
-	private void simulateKeyPress(int keyCode) {
-		//System.out.println(keyCode);
-	}
+
 	private void initialization(View rootView) {
 		typeHereEditText = (EditText) rootView.findViewById(R.id.typeHereEditText);
 		ctrlButton = (Button) rootView.findViewById(R.id.ctrlButton);
@@ -216,30 +207,39 @@ public class KeyboardFragment extends Fragment implements OnTouchListener, OnCli
 	@Override
 	public void beforeTextChanged(CharSequence s, int start, int count,
 			int after) {
-		// TODO Auto-generated method stub
-		
 	}
 	@Override
 	public void onTextChanged(CharSequence s, int start, int before, int count) {
-		//count is 0 when clearText button reset text to "" or backspace is pressed
-		if (count!= 0) {
-			char ch = s.charAt(start);
-			MainActivity.sendMessageToServer("TYPE_CHARACTER");
-			MainActivity.sendMessageToServer(Character.toString(ch));
-			//System.out.println(ch);
-		} else if (before == 1) {
-			//backspace pressed
-			MainActivity.sendMessageToServer("TYPE_CHARACTER");
-			MainActivity.sendMessageToServer(Character.toString('\b'));
-		} else {
-			//clearText button pressed, text is reset to ""
-		}
+        char ch = newCharacter(s, previousText);
+        if (ch == 0) {
+            return;
+        }
+        MainActivity.sendMessageToServer("TYPE_CHARACTER");
+        MainActivity.sendMessageToServer(Character.toString(ch));
+        previousText = s.toString();
 	}
 	@Override
 	public void afterTextChanged(Editable s) {
-		// TODO Auto-generated method stub
-		
 	}
+
+	private char newCharacter(CharSequence currentText, CharSequence previousText) {
+        char ch = 0;
+        int currentTextLength = currentText.length();
+        int previousTextLength = previousText.length();
+        int difference = currentTextLength - previousTextLength;
+        if (currentTextLength > previousTextLength) {
+            if (1 == difference) {
+                ch = currentText.charAt(previousTextLength);
+            }
+        } else if (currentTextLength < previousTextLength) {
+            if (-1 == difference) {
+                ch = '\b';
+            } else {
+                ch = ' ';
+            }
+        }
+        return ch;
+    }
 }
 /**
  * ctrl: 17

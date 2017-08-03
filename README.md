@@ -15,6 +15,12 @@ Use your Android phone to control your Laptop.
 9. Fetch your laptop screen to Android (only single click supported)
 10. Browse Android files on Desktop (View and Download)
 
+### Android app link
+https://github.com/varunon9/Remote-Control-PC/blob/master/RemoteControlPC-Studio/app/build/outputs/apk/app-debug.apk
+
+### Desktop app link
+https://github.com/varunon9/Remote-Control-PC/blob/master/RemoteControlPC-JavaFXML/dist/RemoteControlPC.jar
+
 ## How does it work?
 
 ###### Step 1:
@@ -31,6 +37,7 @@ Enjoy :sparkles: :boom: :wink:
 
 ### Dependencies
 You need Java 8
+
 
 ### How to start desktop app?
 1. Clone this Repository / Download zip 
@@ -80,6 +87,10 @@ Desktop part of this project has been developed in Netbeans(Java-FXML) while tha
 
 #### To see working demo on youtube watch this video:
 * https://youtu.be/WY06MoDLFfc
+
+#### Testing of android app:
+* Android 4.2.2 Samsung(GT-S7582)
+* Android 6.0.1 Redmi 4A
 
 ### Releases:
 1. v1.0, Android app developed in eclipse and Desktop app using Java Swing
