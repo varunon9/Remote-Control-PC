@@ -3,23 +3,22 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 23
     buildToolsVersion '25.0.0'
-
     defaultConfig {
-        applicationId "com.example.remotecontrolpc"
-        minSdkVersion 11
+        applicationId 'me.varunon9.remotecontrolpc'
+        minSdkVersion 17
         targetSdkVersion 23
         multiDexEnabled = true
     }
-
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
-
     configurations {
         all*.exclude group: 'com.android.support', module: 'support-v4'
+    }
+    productFlavors {
     }
 }
 

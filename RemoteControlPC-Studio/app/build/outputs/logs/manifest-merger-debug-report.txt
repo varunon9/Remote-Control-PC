@@ -17,7 +17,6 @@ ADDED from /home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/a
 		ADDED from /home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/src/main/AndroidManifest.xml:2:11-69
 uses-sdk
 ADDED from /home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/src/main/AndroidManifest.xml:7:5-9:41
-MERGED from [com.android.support:multidex:1.0.1] /home/varun/.android/build-cache/660780c622b1201198353b82d98620675014bf6e/output/AndroidManifest.xml:18:5-42
 MERGED from [com.android.support:appcompat-v7:23.4.0] /home/varun/.android/build-cache/64755ab34adc489da76630e7c3aa626d2a74f023/output/AndroidManifest.xml:21:5-23:78
 MERGED from [com.android.support:animated-vector-drawable:23.4.0] /home/varun/.android/build-cache/361246cbbbb984a0924f4ca094c65681a304bafc/output/AndroidManifest.xml:5:5-44
 MERGED from [com.android.support:support-vector-drawable:23.4.0] /home/varun/.android/build-cache/9c3e6563cfce1c407ec4bd65682944e1c63f0ad7/output/AndroidManifest.xml:5:5-43
@@ -56,12 +55,12 @@ MERGED from [com.android.support:support-vector-drawable:23.4.0] /home/varun/.an
 		ADDED from /home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/src/main/AndroidManifest.xml:17:9-45
 	android:theme
 		ADDED from /home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/src/main/AndroidManifest.xml:19:9-40
-activity#com.example.remotecontrolpc.MainActivity
+activity#me.varunon9.remotecontrolpc.MainActivity
 ADDED from /home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/src/main/AndroidManifest.xml:20:9-28:20
 	android:label
 		ADDED from /home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/src/main/AndroidManifest.xml:22:13-45
 	android:name
-		ADDED from /home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/src/main/AndroidManifest.xml:21:13-41
+		ADDED from /home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/src/main/AndroidManifest.xml:21:13-68
 intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
 ADDED from /home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/src/main/AndroidManifest.xml:23:13-27:29
 action#android.intent.action.MAIN
@@ -72,9 +71,9 @@ category#android.intent.category.LAUNCHER
 ADDED from /home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/src/main/AndroidManifest.xml:26:17-77
 	android:name
 		ADDED from /home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/src/main/AndroidManifest.xml:26:27-74
-activity#com.example.remotecontrolpc.MusicControlActivity
+activity#me.varunon9.remotecontrolpc.MusicControlActivity
 ADDED from /home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/src/main/AndroidManifest.xml:29:9-32:20
 	android:label
 		ADDED from /home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/src/main/AndroidManifest.xml:31:13-65
 	android:name
-		ADDED from /home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/src/main/AndroidManifest.xml:30:13-49
+		ADDED from /home/varun/Desktop/Github/Remote-Control-PC/RemoteControlPC-Studio/app/src/main/AndroidManifest.xml:30:13-76
