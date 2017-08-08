@@ -6,6 +6,8 @@ android {
 
     defaultConfig {
         applicationId "com.example.remotecontrolpc"
+        versionCode 2
+        versionName "1.2.0"
         minSdkVersion 11
         targetSdkVersion 23
         multiDexEnabled = true
