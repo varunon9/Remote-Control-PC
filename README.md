@@ -16,7 +16,7 @@ Use your Android phone to control your Laptop.
 10. Browse Android files on Desktop (View and Download)
 
 ### Android app link
-https://github.com/varunon9/Remote-Control-PC/blob/master/RemoteControlPC-Studio/app/build/outputs/apk/app-debug.apk
+[![Android App](./screenshots/google-play.png)](https://play.google.com/store/apps/details?id=me.varunon9.remotecontrolpc)
 
 ### Desktop app link
 https://github.com/varunon9/Remote-Control-PC/blob/master/RemoteControlPC-JavaFXML/dist/RemoteControlPC.jar
