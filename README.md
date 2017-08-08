@@ -86,7 +86,7 @@ Desktop part of this project has been developed in Netbeans(Java-FXML) while tha
     4. Add JAR/Folder -> Select jar from /path/to/repository/RemoteControlPC-Libraries/dist/RemoteControlPC-Libraries.jar
 
 #### To see working demo on youtube watch this video:
-* https://youtu.be/WY06MoDLFfc
+* https://youtu.be/6jIQcAVqD24
 
 #### Testing of android app:
 * Android 4.2.2 Samsung(GT-S7582)
