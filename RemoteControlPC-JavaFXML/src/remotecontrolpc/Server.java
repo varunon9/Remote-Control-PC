@@ -39,7 +39,9 @@ public class Server {
         try {
             MainScreenController.clientSocket = 
                     MainScreenController.serverSocket.accept();
-            resetButton.setDisable(true);
+            Platform.runLater(() -> {
+                resetButton.setDisable(true);
+            });
             InetAddress remoteInetAddress = 
                     MainScreenController.clientSocket.getInetAddress();
             String connectedMessage = "Connected to: " + remoteInetAddress;     

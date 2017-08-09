@@ -19,7 +19,7 @@ Use your Android phone to control your Laptop.
 [![Android App](./screenshots/google-play.png)](https://play.google.com/store/apps/details?id=me.varunon9.remotecontrolpc)
 
 ### Desktop app link
-https://github.com/varunon9/Remote-Control-PC/blob/master/RemoteControlPC-JavaFXML/dist/RemoteControlPC.jar
+https://github.com/varunon9/Remote-Control-PC/blob/master/RemoteControlPC-JavaFXML/store/RemoteControlPC.jar
 
 ## How does it work?
 
