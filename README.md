@@ -94,9 +94,6 @@ Desktop part of this project has been developed in Netbeans(Java-FXML) while tha
 * Android 5, API 22 (Emulator)
 
 ### Releases:
-1. v1.0, Android app developed in eclipse and Desktop app using Java Swing
-    * https://github.com/varunon9/Remote-Control-PC/releases/tag/v1.0
-2. v2.0, Android app from Android Studio and Desktop app using Java Swing: 
-    * https://github.com/varunon9/Remote-Control-PC/releases/tag/v2.0
+* https://github.com/varunon9/Remote-Control-PC/releases
 
 #### For query/issues open Github issue or contact: varunon9@gmail.com
