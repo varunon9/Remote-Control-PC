@@ -1,10 +1,11 @@
 package me.varunon9.remotecontrolpc.livescreen;
 
-import android.app.Activity;
+
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -14,14 +15,17 @@ import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import me.varunon9.remotecontrolpc.MainActivity;
-import me.varunon9.remotecontrolpc.R;
-
 import java.util.Timer;
 import java.util.TimerTask;
 
+import me.varunon9.remotecontrolpc.MainActivity;
+import me.varunon9.remotecontrolpc.R;
+
+/**
+ * A simple {@link Fragment} subclass.
+ */
 public class LiveScreenFragment extends Fragment {
-    private static final String ARG_SECTION_NUMBER = "section_number";
+
     private int xCord, yCord, initX, initY;
     boolean mouseMoved = false, moultiTouch = false;
     private ImageView screenshotImageView;
@@ -29,11 +33,16 @@ public class LiveScreenFragment extends Fragment {
     private int screenshotImageViewX, screenshotImageViewY;
     long currentPressTime, lastPressTime;
 
+    public LiveScreenFragment() {
+        // Required empty public constructor
+    }
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView =  inflater.inflate(R.layout.fragment_live_screen, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_live_screen, container, false);
         screenshotImageView = (ImageView) rootView.findViewById(R.id.screenshotImageView);
         ViewTreeObserver vto = screenshotImageView.getViewTreeObserver();
         vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -99,10 +108,9 @@ public class LiveScreenFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        ((MainActivity) activity).onSectionAttached(getArguments().getInt(
-                ARG_SECTION_NUMBER));
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        getActivity().setTitle(getResources().getString(R.string.live_screen));
     }
 
     private void updateScreenshot() {
@@ -141,4 +149,5 @@ public class LiveScreenFragment extends Fragment {
         timer.cancel();
         timer.purge();
     }
+
 }

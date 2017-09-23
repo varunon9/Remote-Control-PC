@@ -1,15 +1,15 @@
 package me.varunon9.remotecontrolpc.filetransfer;
 
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.os.AsyncTask;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.ObjectOutputStream;
 
 import me.varunon9.remotecontrolpc.CallbackReceiver;
 import me.varunon9.remotecontrolpc.MainActivity;
-
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.os.AsyncTask;
 
 public abstract class TransferFileToServer extends AsyncTask<String, String, Void> implements CallbackReceiver {
 

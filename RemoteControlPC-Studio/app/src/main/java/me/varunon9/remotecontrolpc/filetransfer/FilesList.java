@@ -1,14 +1,15 @@
 package me.varunon9.remotecontrolpc.filetransfer;
 
+import android.os.AsyncTask;
+
 import java.io.File;
 import java.util.ArrayList;
 
+import file.AvatarFile;
 import me.varunon9.remotecontrolpc.CallbackReceiver;
 import me.varunon9.remotecontrolpc.R;
 import me.varunon9.remotecontrolpc.Utility;
 
-import file.AvatarFile;
-import android.os.AsyncTask;
 /*
  * The three types used by an asynchronous task are the following:
  * Params, the type of the parameters sent to the task upon execution.
@@ -30,7 +31,7 @@ public abstract class FilesList extends AsyncTask<String, Void, ArrayList<Avatar
 	        	String avatarHeading = files[i].getName();
 	        	long lastModified = files[i].lastModified();
 	        	String lastModifiedDate = utility.getDate(lastModified, "dd MMM yyyy hh:mm a");
-	        	int icon = R.drawable.folder;
+	        	int icon = R.mipmap.folder;
 	        	String itemsOrSize, filePath, type;
 	        	if (files[i].isDirectory()) {
 	        		type = "folder";
@@ -68,6 +69,7 @@ public abstract class FilesList extends AsyncTask<String, Void, ArrayList<Avatar
 	protected void onPostExecute(ArrayList<AvatarFile> myFiles) {
 		receiveData(myFiles);
 	}
+
 	@Override
 	public abstract void receiveData(Object result);
 

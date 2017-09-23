@@ -1,15 +1,15 @@
 package me.varunon9.remotecontrolpc;
 
-import java.io.FileDescriptor;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-
 import android.content.ContentUris;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.ParcelFileDescriptor;
+
+import java.io.FileDescriptor;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class Utility {
 	public String getDate(String date, String dateFormat) {

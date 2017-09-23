@@ -1,5 +1,11 @@
 package me.varunon9.remotecontrolpc.mediaplayer;
 
+import android.content.ContentResolver;
+import android.content.Context;
+import android.database.Cursor;
+import android.net.Uri;
+import android.os.AsyncTask;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -8,19 +14,13 @@ import me.varunon9.remotecontrolpc.CallbackReceiver;
 import me.varunon9.remotecontrolpc.MusicImageAvatar;
 import me.varunon9.remotecontrolpc.Utility;
 
-import android.content.ContentResolver;
-import android.content.Context;
-import android.database.Cursor;
-import android.net.Uri;
-import android.os.AsyncTask;
-
 public abstract class SongsList extends AsyncTask<Void, Void, ArrayList<MusicImageAvatar>> implements CallbackReceiver {
 	Context context;
 	public SongsList(Context context) {
 		this.context = context;
 	}
 	protected ArrayList<MusicImageAvatar> doInBackground(Void... params) {
-		ArrayList <MusicImageAvatar> songsList = new ArrayList<MusicImageAvatar>();
+		ArrayList<MusicImageAvatar> songsList = new ArrayList<MusicImageAvatar>();
 		ContentResolver musicResolver = context.getContentResolver();
     	Uri musicUri = android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
         Cursor musicCursor = musicResolver.query(musicUri, null, null, null, null);
@@ -42,7 +42,7 @@ public abstract class SongsList extends AsyncTask<Void, Void, ArrayList<MusicIma
     		} while (musicCursor.moveToNext());
     	}
     	Collections.sort(songsList,new Comparator<MusicImageAvatar>() {
-			public int compare(MusicImageAvatar a,MusicImageAvatar b) {
+			public int compare(MusicImageAvatar a, MusicImageAvatar b) {
 				return a.getHeading().compareTo(b.getHeading());
 			}
 		});

@@ -91,6 +91,7 @@ Desktop part of this project has been developed in Netbeans(Java-FXML) while tha
 #### Testing of android app:
 * Android 4.2.2 Samsung(GT-S7582)
 * Android 6.0.1 Redmi 4A
+* Android 5, API 22 (Emulator)
 
 ### Releases:
 1. v1.0, Android app developed in eclipse and Desktop app using Java Swing

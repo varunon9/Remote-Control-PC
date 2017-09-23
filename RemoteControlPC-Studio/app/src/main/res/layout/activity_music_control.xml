@@ -7,37 +7,37 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.remotecontrolpc.me.example.remotecontrolpc.MusicControlActivity" >
+    tools:context="me.varunon9.remotecontrolpc.MusicControlActivity" >
 
-    <LinearLayout 
+    <LinearLayout
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        
+
         <TextView
-	        android:id="@+id/setVolumeTextView"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="Set Volume" />
-        
+            android:id="@+id/setVolumeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Set Volume" />
+
         <SeekBar
-	        android:id="@+id/volumeSeekBar"
-	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content" />
-        
+            android:id="@+id/volumeSeekBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
     </LinearLayout>
-    
-    <LinearLayout 
+
+    <LinearLayout
         android:gravity="center"
         android:layout_marginTop="50dp"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"> 
-        
+        android:layout_height="wrap_content">
+
         <SeekBar
-	        android:id="@+id/musicProgressSeekBar"
-	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content" />
+            android:id="@+id/musicProgressSeekBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
         <Button
             android:layout_marginTop="10dp"
@@ -45,9 +45,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="pauseOrResume"
-            android:background="#4FC3F7"
+            android:background="@color/colorPrimaryLight"
             android:text="Pause" />
-        
+
     </LinearLayout>
 
 </LinearLayout>

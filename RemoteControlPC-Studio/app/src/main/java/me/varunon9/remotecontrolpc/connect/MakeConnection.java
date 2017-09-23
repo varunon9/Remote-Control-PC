@@ -1,5 +1,8 @@
 package me.varunon9.remotecontrolpc.connect;
 
+import android.content.Context;
+import android.os.AsyncTask;
+
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.InetSocketAddress;
@@ -8,9 +11,6 @@ import java.net.SocketAddress;
 
 import me.varunon9.remotecontrolpc.CallbackReceiver;
 import me.varunon9.remotecontrolpc.MainActivity;
-
-import android.content.Context;
-import android.os.AsyncTask;
 
 public abstract class MakeConnection extends AsyncTask<Void, Void, Socket> implements CallbackReceiver {
 

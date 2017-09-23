@@ -7,9 +7,6 @@ package me.varunon9.remotecontrolpc.server;
 import android.app.Activity;
 import android.widget.Toast;
 
-import me.varunon9.remotecontrolpc.filetransfer.FilesList;
-import me.varunon9.remotecontrolpc.filetransfer.SendFilesList;
-
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -19,6 +16,8 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 import file.AvatarFile;
+import me.varunon9.remotecontrolpc.filetransfer.FilesList;
+import me.varunon9.remotecontrolpc.filetransfer.SendFilesList;
 
 /**
  * This class will create a ServerSocket and connect to PC

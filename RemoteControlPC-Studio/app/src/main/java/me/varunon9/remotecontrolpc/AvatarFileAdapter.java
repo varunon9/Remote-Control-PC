@@ -1,8 +1,5 @@
 package me.varunon9.remotecontrolpc;
 
-import java.util.ArrayList;
-
-import file.AvatarFile;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.view.LayoutInflater;
@@ -12,12 +9,16 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
+import file.AvatarFile;
+
 public class AvatarFileAdapter extends ArrayAdapter<AvatarFile> {
 	Context context;
 	int layoutResourceID;
-	ArrayList <AvatarFile> objects;
+	ArrayList<AvatarFile> objects;
 	public AvatarFileAdapter(Context context, int layoutResourceID,
-			ArrayList <AvatarFile> objects) {
+                             ArrayList<AvatarFile> objects) {
 		super(context, layoutResourceID, objects);
 		this.context = context;
 		this.layoutResourceID = layoutResourceID;
@@ -48,16 +49,16 @@ public class AvatarFileAdapter extends ArrayAdapter<AvatarFile> {
 				bitmap = utility.decodeImageFile(item.getPath());
 				holder.icon.setImageBitmap(bitmap);
 			} else {
-				holder.icon.setImageResource(R.drawable.image);
+				holder.icon.setImageResource(R.mipmap.image);
 			}
 		} else if (type.equals("mp3")) {
-			holder.icon.setImageResource(R.drawable.music_png);
+			holder.icon.setImageResource(R.mipmap.music_png);
 		} else if (type.equals("pdf")) {
-			holder.icon.setImageResource(R.drawable.pdf);
+			holder.icon.setImageResource(R.mipmap.pdf);
 		} else if (type.equals("file")) {
-			holder.icon.setImageResource(R.drawable.file);
+			holder.icon.setImageResource(R.mipmap.file);
 		} else if (type.equals("folder")) {
-			holder.icon.setImageResource(R.drawable.folder);
+			holder.icon.setImageResource(R.mipmap.folder);
 		}
 		holder.avatarHeading.setText(item.getHeading());
 		holder.avatarSubheading.setText(item.getSubheading());

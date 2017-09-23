@@ -5,8 +5,8 @@ public class MusicImageAvatar {
 	private int icon, duration;
 	private String avatarHeading, avatarSubheading, avatarData, type;
 	
-	public MusicImageAvatar (int icon, int duration,  String avatarHeading, 
-			String avatarSubheading, String avatarData, String type) {
+	public MusicImageAvatar(int icon, int duration, String avatarHeading,
+                            String avatarSubheading, String avatarData, String type) {
 		this.icon = icon;
 		this.duration = duration;
 		this.avatarHeading = avatarHeading;

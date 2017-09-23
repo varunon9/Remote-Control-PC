@@ -1,14 +1,14 @@
 package me.varunon9.remotecontrolpc.imageviewer;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import me.varunon9.remotecontrolpc.CallbackReceiver;
 import me.varunon9.remotecontrolpc.MusicImageAvatar;
@@ -16,12 +16,12 @@ import me.varunon9.remotecontrolpc.Utility;
 
 public abstract class ImagesList extends AsyncTask<Void, Void, ArrayList<MusicImageAvatar>> implements CallbackReceiver {
 	Context context;
-	public ImagesList (Context context) {
+	public ImagesList(Context context) {
 		this.context = context;
 	}
 	@Override
 	protected ArrayList<MusicImageAvatar> doInBackground(Void... params) {
-		ArrayList <MusicImageAvatar> imagesList = new ArrayList<MusicImageAvatar>();
+		ArrayList<MusicImageAvatar> imagesList = new ArrayList<MusicImageAvatar>();
 		ContentResolver imageResolver = context.getContentResolver();
     	Uri imageUri = android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
         Cursor imageCursor = imageResolver.query(imageUri, null, null, null, null);
@@ -36,14 +36,14 @@ public abstract class ImagesList extends AsyncTask<Void, Void, ArrayList<MusicIm
     			String thisData = imageCursor.getString(dataColumn);
     			String thisDate = imageCursor.getString(dateColumn);
     			int thisSize = imageCursor.getInt(sizeColumn);//in bytes
-    			int icon = me.varunon9.remotecontrolpc.R.drawable.image;
+    			int icon = me.varunon9.remotecontrolpc.R.mipmap.image;
     			String subHeading = utility.getSize(thisSize) + ", " + utility.getDate(thisDate, "dd MMM yyyy hh:mm a");
     			//duration set to 0 because it is for image
     			imagesList.add(new MusicImageAvatar(icon, 0, thisTitle, subHeading, thisData, "image"));
     		} while (imageCursor.moveToNext());
     	}
     	Collections.sort(imagesList, new Comparator<MusicImageAvatar>() {
-			public int compare(MusicImageAvatar a,MusicImageAvatar b) {
+			public int compare(MusicImageAvatar a, MusicImageAvatar b) {
 				return a.getHeading().compareTo(b.getHeading());
 			}
 		});

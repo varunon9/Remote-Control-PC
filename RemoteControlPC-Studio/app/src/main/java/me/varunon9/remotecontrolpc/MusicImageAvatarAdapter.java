@@ -1,7 +1,5 @@
 package me.varunon9.remotecontrolpc;
 
-import java.util.ArrayList;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.view.LayoutInflater;
@@ -11,14 +9,16 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class MusicImageAvatarAdapter extends ArrayAdapter<MusicImageAvatar> {
 	
 	Context context;
 	int layoutResourceID;
-	ArrayList <MusicImageAvatar> objects;
+	ArrayList<MusicImageAvatar> objects;
 	
 	public MusicImageAvatarAdapter(Context context, int layoutResourceID,
-			ArrayList <MusicImageAvatar> objects) {
+                                   ArrayList<MusicImageAvatar> objects) {
 		super(context, layoutResourceID, objects);
 		this.context = context;
 		this.layoutResourceID = layoutResourceID;
@@ -49,7 +49,7 @@ public class MusicImageAvatarAdapter extends ArrayAdapter<MusicImageAvatar> {
 			if (bitmap != null) {
 				holder.icon.setImageBitmap(bitmap);
 			} else {
-				holder.icon.setImageResource(R.drawable.music_png);
+				holder.icon.setImageResource(R.mipmap.music_png);
 			}
 		}
 		holder.avatarHeading.setText(item.getHeading());

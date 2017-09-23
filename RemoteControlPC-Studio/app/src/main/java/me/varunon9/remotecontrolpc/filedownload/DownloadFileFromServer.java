@@ -1,15 +1,15 @@
 package me.varunon9.remotecontrolpc.filedownload;
 
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.os.AsyncTask;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 
 import me.varunon9.remotecontrolpc.FileAPI;
 import me.varunon9.remotecontrolpc.MainActivity;
-
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.os.AsyncTask;
 
 public class DownloadFileFromServer extends AsyncTask<String, String, Void > {
 	

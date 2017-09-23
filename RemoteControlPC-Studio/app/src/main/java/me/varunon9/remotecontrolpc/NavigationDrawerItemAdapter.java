@@ -15,7 +15,7 @@ public class NavigationDrawerItemAdapter extends ArrayAdapter<NavigationDrawerIt
 	int layoutResourceID;
 	NavigationDrawerItem objects[];
 	public NavigationDrawerItemAdapter(Context context, int layoutResourceID,
-			NavigationDrawerItem[] objects) {
+                                       NavigationDrawerItem[] objects) {
 		super(context, layoutResourceID, objects);
 		this.context = context;
 		this.layoutResourceID = layoutResourceID;

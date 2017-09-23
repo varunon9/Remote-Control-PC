@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_connect"
+            android:icon="@drawable/ic_connect"
+            android:title="Connect" />
+        <item
+            android:id="@+id/nav_touchpad"
+            android:icon="@drawable/ic_touchpad"
+            android:title="Touchpad" />
+        <item
+            android:id="@+id/nav_keyboard"
+            android:icon="@drawable/ic_keyboard"
+            android:title="Keyboard" />
+        <item
+            android:id="@+id/nav_file_transfer"
+            android:icon="@drawable/ic_file_transfer"
+            android:title="File Transfer" />
+        <item
+            android:id="@+id/nav_file_download"
+            android:icon="@drawable/ic_file_download"
+            android:title="File Download" />
+        <item
+            android:id="@+id/nav_image_viewer"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Image Viewer" />
+        <item
+            android:id="@+id/nav_media_player"
+            android:icon="@drawable/ic_media_player"
+            android:title="Media Player" />
+        <item
+            android:id="@+id/nav_presentation"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Presentation" />
+        <item
+            android:id="@+id/nav_power_off"
+            android:icon="@drawable/ic_power_off"
+            android:title="Power Off" />
+    </group>
+
+    <!--<item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Share" />
+            <item
+                android:id="@+id/nav_send"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Send" />
+        </menu>
+    </item>-->
+
+</menu>
