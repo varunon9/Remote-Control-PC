@@ -44,7 +44,12 @@ public abstract class TransferFileToServer extends AsyncTask<String, String, Voi
 				}
 				File file = new File(path);
 	            long fileSize = file.length();
-	            MainActivity.sendMessageToServer(fileSize);
+
+                // getting java.io.OptionalDataException
+	            //MainActivity.sendMessageToServer(fileSize);
+                MainActivity.objectOutputStream.writeObject(fileSize);
+                MainActivity.objectOutputStream.flush();
+                
 	            fis = new FileInputStream(file);
 	            byte[] buffer = new byte[4096];
 	            int read = 0;

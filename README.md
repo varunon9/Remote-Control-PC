@@ -92,6 +92,7 @@ Desktop part of this project has been developed in Netbeans(Java-FXML) while tha
 * Android 4.2.2 Samsung(GT-S7582)
 * Android 6.0.1 Redmi 4A
 * Android 5, API 22 (Emulator)
+* Android 7, API 24 (Emulator)
 
 ### Releases:
 * https://github.com/varunon9/Remote-Control-PC/releases

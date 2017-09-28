@@ -215,30 +215,32 @@ public class MainActivity extends AppCompatActivity
     //this method is called from fragments to send message to server (Desktop)
     public static void sendMessageToServer(String message) {
         if (MainActivity.clientSocket != null) {
-            try {
+            new SendMessageToServer().execute(String.valueOf(message), "STRING");
+            /*try {
                 MainActivity.objectOutputStream.writeObject(message);
                 MainActivity.objectOutputStream.flush();
             } catch (Exception e) {
                 e.printStackTrace();
                 socketException();
-            }
+            }*/
         }
     }
 
     public static void sendMessageToServer(int message) {
         if (MainActivity.clientSocket != null) {
-            try {
+            new SendMessageToServer().execute(String.valueOf(message), "INT");
+            /*try {
                 MainActivity.objectOutputStream.writeObject(message);
                 MainActivity.objectOutputStream.flush();
             } catch (Exception e) {
                 e.printStackTrace();
                 socketException();
-            }
+            }*/
         }
     }
 
-    private static void socketException() {
-        Toast.makeText(thisActivity, "Connection Closed", Toast.LENGTH_LONG).show();
+    public static void socketException() {
+        //Toast.makeText(thisActivity, "Connection Closed", Toast.LENGTH_LONG).show();
         if (MainActivity.clientSocket != null) {
             try {
                 MainActivity.clientSocket.close();
@@ -252,25 +254,27 @@ public class MainActivity extends AppCompatActivity
 
     public static void sendMessageToServer(float message) {
         if (MainActivity.clientSocket != null) {
-            try {
+            new SendMessageToServer().execute(String.valueOf(message), "FLOAT");
+            /*try {
                 MainActivity.objectOutputStream.writeObject(message);
                 MainActivity.objectOutputStream.flush();
             } catch (Exception e) {
                 e.printStackTrace();
                 socketException();
-            }
+            }*/
         }
     }
 
     public static void sendMessageToServer(long message) {
         if (MainActivity.clientSocket != null) {
-            try {
+            new SendMessageToServer().execute(String.valueOf(message), "LONG");
+            /*try {
                 MainActivity.objectOutputStream.writeObject(message);
                 MainActivity.objectOutputStream.flush();
             } catch (Exception e) {
                 e.printStackTrace();
                 socketException();
-            }
+            }*/
         }
     }
 
