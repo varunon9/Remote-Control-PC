@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006, 2016, Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2006, 2017, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  */
 
@@ -171,16 +171,16 @@ var dtjava = function() {
         var edge = false;
         var noActiveX = false;
         edge = (navigator.userAgent.match(/Edge/i) != null);
-        
+
         // If IE and Windows 8 or Windows 8.1 then check for Metro mode
         if(ie && navigator.userAgent.match(/Windows NT 6\.[23]/i) != null) {
             try {
                 // try to create a known ActiveX object
                 new ActiveXObject("htmlfile");
             } catch(e) {
-		// ActiveX is disabled or not supported. 
+		// ActiveX is disabled or not supported.
                 noActiveX = true;
-            } 
+            }
         }
 
         if(edge || noActiveX) {
@@ -208,7 +208,7 @@ var dtjava = function() {
         // trim() is not supported by IE10 and before
         if(typeof String.prototype.trim !== 'function') {
            String.prototype.trim = function() {
-               return this.replace(/^\s+|\s+$/g, ''); 
+               return this.replace(/^\s+|\s+$/g, '');
            }
         }
 
@@ -247,7 +247,7 @@ var dtjava = function() {
                 if (m.indexOf("application/x-java-applet;version") != -1 && m.indexOf('=') != -1) {
                     var v = m.substring(m.indexOf('=') + 1);
                     // Use the existing version comparison mechanism to ensure that
-                    // the latest JRE is selected ( "versionA"<="VersionB" equals to 
+                    // the latest JRE is selected ( "versionA"<="VersionB" equals to
                     // versionCheck("versionA+","versionB") returns "true")
                     if(jre == null || versionCheck(jre + "+", v)){
 			jre = v;
@@ -263,7 +263,7 @@ var dtjava = function() {
                 }
             }
         }
-		
+
         return {haveDom:dom, wk:webkit, ie:ie, win:windows,
                 linux:linux, mac:mac, op: opera, chrome:chrome, edge:edge,
                 jre:jre, deploy:deploy, fx:fx, noPluginWebBrowser:noPluginWebBrowser,
@@ -282,7 +282,7 @@ var dtjava = function() {
         divTag.id = "messagebox";
         divTag.setAttribute('style', mbStyle);
         divTag.innerHTML = messageBox;
-        document.body.appendChild(divTag);              
+        document.body.appendChild(divTag);
 
     }
     //partially derived from swfobject.js
@@ -390,7 +390,7 @@ var dtjava = function() {
             installNativePlugin();
         }
     }
-    
+
    function getAbsoluteUrl(jnlp){
         var absoluteUrl;
         if(isAbsoluteUrl(jnlp)) {
@@ -407,7 +407,7 @@ var dtjava = function() {
     function launchWithJnlpProtocol(jnlp) {
         document.location="jnlp:"+ getAbsoluteUrl(jnlp);
     }
-  
+
 
     function isAbsoluteUrl(url){
        var protocols = ["http://", "https://", "file://"];
@@ -2743,7 +2743,7 @@ var dtjava = function() {
             }
         }
         if (notNull(platform.jvmargs)) {
-            sparams["java_arguments"] = platform.jvmargs;
+            sparams["java_arguments"] = listToString(platform.jvmargs);
         }
 
         //prepare parameters first
