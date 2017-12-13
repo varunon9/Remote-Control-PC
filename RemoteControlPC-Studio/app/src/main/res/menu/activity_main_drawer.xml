@@ -38,6 +38,9 @@
             android:id="@+id/nav_power_off"
             android:icon="@drawable/ic_power_off"
             android:title="Power Off" />
+        <item
+            android:id="@+id/nav_red_button"
+            android:title="Red button" />
     </group>
 
     <!--<item android:title="Communicate">
