@@ -7,21 +7,16 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
+
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
-import static android.widget.Toast.makeText;
-import android.widget.TextView;
 
-import me.varunon9.remotecontrolpc.MainActivity;
-import me.varunon9.remotecontrolpc.R;
 
-public class RedButtonFragment extends Fragment {
+
+public class RedButtonFragment extends Fragment implements View.OnClickListener {
     private Button butt;
-
-    public RedButtonFragment(){}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -29,12 +24,7 @@ public class RedButtonFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_red_button, container, false);
         butt = (Button) rootView.findViewById(R.id.redButton);
 
-        butt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                makeText(getActivity(), "NOOOOOOOOOOO", Toast.LENGTH_LONG).show();
-            }
-        });
+        butt.setOnClickListener(this);
 
         return rootView;
     }
@@ -44,4 +34,10 @@ public class RedButtonFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         getActivity().setTitle("DON'T CLICK ON THE RED BUTTON");
     }
+
+    @Override
+    public void onClick(View view) {
+        if(view == butt){
+        Toast.makeText(getContext(),"Boutton cliqué",Toast.LENGTH_SHORT).show();
+    }}
 }
