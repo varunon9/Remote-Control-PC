@@ -8,6 +8,7 @@ public class serveur
 	ServerSocket socketserver;
 	Socket socket;
 	DataOutputStream out;
+	BufferedReader in;
 
 	try {
 	    socketserver = new ServerSocket(3000);
@@ -20,6 +21,11 @@ public class serveur
 	    //byte[4096];
 	    out.writeInt(5);
 	    out.flush();
+
+	    in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+	    
+	    System.out.println(in.readLine());
+	    
 	    socket.close();
 	    socketserver.close();
 

@@ -7,6 +7,7 @@ public class client
     {
 	Socket socket;
 	DataInputStream in;
+	PrintWriter out;
 	
 	try {
 	    socket = new Socket(InetAddress.getLocalHost(), 3000);
@@ -14,8 +15,11 @@ public class client
 	    in = new DataInputStream(socket.getInputStream());
 	    //String msg = in.readLine();
 	    //System.out.println(msg);
-	    System.out.println("J'ai trouvé "+in.readInt());
-	    
+	    System.out.println("J'ai trouvé "+in.readInt()); //Reception
+
+	    out = new PrintWriter(socket.getOutputStream());
+	    out.println("Bien reçu !");
+	    out.flush();
 	    socket.close();
 	}
 	catch (UnknownHostException e) {
