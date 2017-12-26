@@ -17,16 +17,13 @@ public class client
 	    //System.out.println(msg);
 	    System.out.println("J'ai trouvé "+in.readInt()); //Reception
 
+	    Thread.sleep(5000);
 	    out = new PrintWriter(socket.getOutputStream());
 	    out.println("Bien reçu !");
 	    out.flush();
 	    socket.close();
 	}
-	catch (UnknownHostException e) {
-	    System.out.println("Error " + e.getMessage());
-	    e.printStackTrace();
-	}
-	catch (IOException e){
+	catch (Exception e){
 	    System.out.println("Error" + e.getMessage());
 	    e.printStackTrace();
 	}

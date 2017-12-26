@@ -12,11 +12,18 @@ public class serveur2
 
 	try {
 	    socketserver = new ServerSocket(3000);
-	    Thread t = new Thread(new accept(socketserver));
-	    t.start();
+	    while(true){
+		socket = socketserver.accept();
+		System.out.println("Connexion");
+
+		Thread t = new Thread(new ConnexionRunnable(socket));
+		t.start();
+	    }
+	    
+	    
 	    
 	}
-	catch (IOException e) {
+	catch (Exception e) {
 	    System.out.println("Error " + e.getMessage());
 	    e.printStackTrace();
 	}
@@ -26,38 +33,37 @@ public class serveur2
 
 
 
-class accept implements Runnable
+class ConnexionRunnable implements Runnable
 {
-    private ServerSocket serversocket;
     private Socket socket;
-    private int nb_client;
+    
     DataOutputStream out;
     
-    public accept (ServerSocket server) {
-	this.serversocket = server;
-	this.nb_client = 0;
+    public ConnexionRunnable (Socket socket) {
+	this.socket = socket;
+
 
     }
 
     public void run(){
-	
+	BufferedReader in;
 	try {
-	    while(true){
-		socket = serversocket.accept();
-	    System.out.println("Connection !");
-
-	    out = new DataOutputStream(socket.getOutputStream());
+	   
+		out = new DataOutputStream(socket.getOutputStream());
 	    
-	    out.writeInt(++nb_client);
-	    out.flush();
-	    socket.close();
-
+		out.writeInt(5);
+		out.flush();
+		in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+	    
+		System.out.println(in.readLine());
+		socket.close();
+		
 	    }
-	}
+	
 	catch (IOException e) {
 	    System.out.println("Error " + e.getMessage());
 	    e.printStackTrace();
 	}
-
     }
+
 }
