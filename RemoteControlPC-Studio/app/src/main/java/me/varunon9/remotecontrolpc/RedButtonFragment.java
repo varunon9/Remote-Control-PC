@@ -13,6 +13,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.Socket;
 
 
 public class RedButtonFragment extends Fragment implements View.OnClickListener {
@@ -38,6 +41,29 @@ public class RedButtonFragment extends Fragment implements View.OnClickListener 
     @Override
     public void onClick(View view) {
         if(view == butt){
+            final Socket socket;
+
+            try {
+                socket = new Socket("192.168.1.78", 3000);
+                Thread t = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        DataOutputStream dos;
+                        try {
+                            dos = new DataOutputStream(socket.getOutputStream());
+                            dos.writeInt(12);
+                            dos.close();
+                            socket.close();
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+                t.start();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         Toast.makeText(getContext(),"Boutton cliqué",Toast.LENGTH_SHORT).show();
     }}
 }
