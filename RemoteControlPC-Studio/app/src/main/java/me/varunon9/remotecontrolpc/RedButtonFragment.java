@@ -43,17 +43,16 @@ public class RedButtonFragment extends Fragment implements View.OnClickListener 
     @Override
     public void onClick(View view) {
         if(view == butt){
-            Socket sock;
-            Context cont = getContext();
-            //MainActivity.sendMessageToServer("coucou");
-
+            MainActivity.sendMessageToServer("COUCOU");
+/*
             try {
-                sock = new Socket("192.168.43.123", 4000);
-                /*Thread t = new Thread(new Runnable() {
+                Thread t = new Thread(new Runnable() {
                     @Override
                     public void run() {
+                        Socket sock;
                         DataOutputStream dos;
                         try {
+                            sock = new Socket("192.168.43.123", 4000);
                             dos = new DataOutputStream(socket.getOutputStream());
                             dos.writeInt(12);
                             dos.close();
@@ -64,15 +63,13 @@ public class RedButtonFragment extends Fragment implements View.OnClickListener 
                         }
                     }
                 });
-                t.start();*/
-                Connect c = new Connect(sock, cont);
-                c.execute();
+                t.start();
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        //Toast.makeText(getContext(),"Boutton cliqué",Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getContext(),"Boutton cliqué",Toast.LENGTH_SHORT).show();*/
     }}
-
+/*
     static class Connect extends AsyncTask<Void, Void, Void> {
 
         private Socket sock;
@@ -112,5 +109,5 @@ public class RedButtonFragment extends Fragment implements View.OnClickListener 
             t.start();
             return null;
         }
-    }
+    }*/
 }
