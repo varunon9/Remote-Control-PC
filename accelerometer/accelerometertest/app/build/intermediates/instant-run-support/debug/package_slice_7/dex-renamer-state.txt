@@ -1,0 +1,4 @@
+#Sun Jan 07 16:19:23 CET 2018
+base.0=/home/david/Documents/ISIMA/ProjetIsima/PROJET_ZZ1/Remote-Control-PC/accelerometer/accelerometertest/app/build/intermediates/transforms/dexMerger/debug/7
+path.0=classes.dex
+renamed.0=classes.dex
