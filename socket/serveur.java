@@ -13,7 +13,7 @@ public class serveur
 
 	try {
 	    while(true){
-		socketserver = new ServerSocket(3000);
+		socketserver = new ServerSocket(4000);
 		socket = socketserver.accept();
 		System.out.println("Connexion !");
 /*
