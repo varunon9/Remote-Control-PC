@@ -4,12 +4,16 @@ package me.varunon9.remotecontrolpc;
  * Created by david on 13/12/17.
  */
 import android.content.Context;
-import android.os.AsyncTask;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -20,8 +24,10 @@ import java.io.IOException;
 import java.net.Socket;
 
 
-public class RedButtonFragment extends Fragment implements View.OnClickListener {
+public class RedButtonFragment extends Fragment implements SensorEventListener, View.OnHoverListener, View.OnClickListener {
     private Button butt;
+    private SensorManager sensors;
+    private Sensor accelero;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -30,6 +36,10 @@ public class RedButtonFragment extends Fragment implements View.OnClickListener 
         butt = (Button) rootView.findViewById(R.id.redButton);
 
         butt.setOnClickListener(this);
+        butt.setOnHoverListener(this);
+        sensors = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
+        accelero = sensors.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        sensors.registerListener(this, accelero, SensorManager.SENSOR_DELAY_NORMAL);
 
         return rootView;
     }
@@ -37,14 +47,26 @@ public class RedButtonFragment extends Fragment implements View.OnClickListener 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getActivity().setTitle("DON'T CLICK ON THE RED BUTTON");
+        getActivity().setTitle("PRESS THE RED BUTTON");
+    }
+
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {}
+
+    public void onSensorChanged(SensorEvent event){
+        if(butt.isPressed()) {
+            if (Math.abs(event.values[0]) > 0.1 || Math.abs(event.values[1]) > 0.1) {
+                MainActivity.sendMessageToServer("MOUSE_REMOTE");
+                MainActivity.sendMessageToServer(-event.values[0]);
+                MainActivity.sendMessageToServer(-event.values[1]);
+            }
+        }
     }
 
     @Override
     public void onClick(View view) {
         if(view == butt){
-            MainActivity.sendMessageToServer("COUCOU");
-/*
+/*            MainActivity.sendMessageToServer("COUCOU");
+
             try {
                 Thread t = new Thread(new Runnable() {
                     @Override
@@ -67,47 +89,10 @@ public class RedButtonFragment extends Fragment implements View.OnClickListener 
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        //Toast.makeText(getContext(),"Boutton cliqué",Toast.LENGTH_SHORT).show();*/
+        Toast.makeText(getContext(),"Boutton cliqué",Toast.LENGTH_SHORT).show();*/
     }}
-/*
-    static class Connect extends AsyncTask<Void, Void, Void> {
 
-        private Socket sock;
-        private Context cont;
-
-        public Connect(Socket sock, Context cont) {
-            this.sock = sock;
-            this.cont = cont;
-        }
-
-        @Override
-        protected void onPreExecute() {
-            Toast.makeText(cont,"Connection...",Toast.LENGTH_SHORT).show();
-        }
-
-        protected void onPostExecute(Void... result) {
-            Toast.makeText(cont,"Connection finished!",Toast.LENGTH_SHORT).show();
-        }
-
-        @Override
-        protected Void doInBackground(Void... arg0) {
-            Thread t = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    DataOutputStream dos;
-                    try {
-                        dos = new DataOutputStream(sock.getOutputStream());
-                        dos.writeInt(12);
-                        dos.close();
-                        sock.close();
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
-            t.start();
-            return null;
-        }
-    }*/
+    public boolean onHover(View view, MotionEvent m){
+        return true;
+    }
 }
