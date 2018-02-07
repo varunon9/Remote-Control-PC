@@ -75,10 +75,11 @@ public class Server {
                     if (message != null) {
                         switch (message) {
 			case "MOUSE_REMOTE":
+			    Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();
 			    float accX = (float) MainScreenController.objectInputStream.readObject();
 			    float accY = (float) MainScreenController.objectInputStream.readObject();
 			    Point pt = MouseInfo.getPointerInfo().getLocation();
-			    mouseControl.mouseMove((int)(pt.x + accX*5), (int)(pt.y + accY * 5));
+			    mouseControl.mouseMove((int)(pt.x + accX*screensize.width / 100), (int)(pt.y + accY * 2 * screensize.height/100));
 			    break;
                             case "LEFT_CLICK":
                                 mouseControl.leftClick();
@@ -95,6 +96,7 @@ public class Server {
                                 mouseControl.mouseWheel(scrollAmount);
                                 break;
                             case "MOUSE_MOVE":
+				
                                 int x = (int) MainScreenController.objectInputStream.readObject();
                                 int y = (int) MainScreenController.objectInputStream.readObject();
                                 Point point = MouseInfo.getPointerInfo().getLocation();
