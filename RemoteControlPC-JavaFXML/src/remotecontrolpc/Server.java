@@ -74,6 +74,12 @@ public class Server {
                     int keyCode;
                     if (message != null) {
                         switch (message) {
+			case "MOUSE_REMOTE":
+			    float accX = (float) MainScreenController.objectInputStream.readObject();
+			    float accY = (float) MainScreenController.objectInputStream.readObject();
+			    Point pt = MouseInfo.getPointerInfo().getLocation();
+			    mouseControl.mouseMove((int)(pt.x + accX*5), (int)(pt.y + accY * 5));
+			    break;
                             case "LEFT_CLICK":
                                 mouseControl.leftClick();
                                 break;
