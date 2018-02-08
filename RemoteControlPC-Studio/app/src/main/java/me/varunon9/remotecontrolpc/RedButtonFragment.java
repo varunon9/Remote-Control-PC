@@ -28,15 +28,23 @@ public class RedButtonFragment extends Fragment implements SensorEventListener, 
     private Button butt;
     private SensorManager sensors;
     private Sensor accelero;
+    private Button leftclick;
+    private Button rightclick;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
         View rootView = inflater.inflate(R.layout.fragment_red_button, container, false);
         butt = (Button) rootView.findViewById(R.id.redButton);
+        leftclick = (Button) rootView.findViewById(R.id.left_click);
+        rightclick = (Button) rootView.findViewById(R.id.right_click);
 
-        butt.setOnClickListener(this);
+       // butt.setOnClickListener(this);
         butt.setOnHoverListener(this);
+        leftclick.setOnClickListener(this);
+        rightclick.setOnClickListener(this);
+
+
         sensors = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
         accelero = sensors.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         sensors.registerListener(this, accelero, SensorManager.SENSOR_DELAY_NORMAL);
@@ -54,43 +62,21 @@ public class RedButtonFragment extends Fragment implements SensorEventListener, 
 
     public void onSensorChanged(SensorEvent event){
         if(butt.isPressed()) {
-            if (Math.abs(event.values[0]) > 0.1 || Math.abs(event.values[1]) > 0.1) {
+            //if (Math.abs(event.values[0]) > 0.1 || Math.abs(event.values[1]) > 0.1) {
                 MainActivity.sendMessageToServer("MOUSE_REMOTE");
                 MainActivity.sendMessageToServer(-event.values[0]);
                 MainActivity.sendMessageToServer(-event.values[1]);
-            }
+            //}
         }
     }
 
     @Override
-    public void onClick(View view) {
-        if(view == butt){
-/*            MainActivity.sendMessageToServer("COUCOU");
-
-            try {
-                Thread t = new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Socket sock;
-                        DataOutputStream dos;
-                        try {
-                            sock = new Socket("192.168.43.123", 4000);
-                            dos = new DataOutputStream(socket.getOutputStream());
-                            dos.writeInt(12);
-                            dos.close();
-                            socket.close();
-
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                });
-                t.start();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        Toast.makeText(getContext(),"Boutton cliqué",Toast.LENGTH_SHORT).show();*/
-    }}
+  public void onClick(View view) {
+     if((Button) view == leftclick)
+         MainActivity.sendMessageToServer("LEFT_CLICK");
+     else
+         MainActivity.sendMessageToServer("RIGHT_CLICK");
+    }
 
     public boolean onHover(View view, MotionEvent m){
         return true;
