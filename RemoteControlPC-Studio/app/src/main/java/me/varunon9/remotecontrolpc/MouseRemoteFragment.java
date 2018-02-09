@@ -17,14 +17,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
-
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.net.Socket;
 
 
-public class RedButtonFragment extends Fragment implements SensorEventListener, View.OnHoverListener, View.OnClickListener {
+public class MouseRemoteFragment extends Fragment implements SensorEventListener, View.OnHoverListener, View.OnClickListener {
     private Button butt;
     private SensorManager sensors;
     private Sensor accelero;
@@ -34,8 +29,8 @@ public class RedButtonFragment extends Fragment implements SensorEventListener, 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
-        View rootView = inflater.inflate(R.layout.fragment_red_button, container, false);
-        butt = (Button) rootView.findViewById(R.id.redButton);
+        View rootView = inflater.inflate(R.layout.fragment_mouseremote, container, false);
+        butt = (Button) rootView.findViewById(R.id.mouseremotebutton);
         leftclick = (Button) rootView.findViewById(R.id.left_click);
         rightclick = (Button) rootView.findViewById(R.id.right_click);
 

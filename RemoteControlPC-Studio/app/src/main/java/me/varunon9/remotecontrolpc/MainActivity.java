@@ -186,8 +186,8 @@ public class MainActivity extends AppCompatActivity
             fragment = new HelpFragment();
         } else if (id == R.id.action_live_screen) {
             fragment = new LiveScreenFragment();
-        } else if (id == R.id.nav_red_button) {
-            fragment = new RedButtonFragment();
+        } else if (id == R.id.nav_mouseremote) {
+            fragment = new MouseRemoteFragment();
         }
         if (fragment != null) {
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();

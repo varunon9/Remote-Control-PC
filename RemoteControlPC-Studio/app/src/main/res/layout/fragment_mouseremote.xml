@@ -5,7 +5,7 @@
     >
 
     <Button
-        android:id="@+id/redButton"
+        android:id="@+id/mouseremotebutton"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:layout_width="186dp"

@@ -39,8 +39,8 @@
             android:icon="@drawable/ic_power_off"
             android:title="Power Off" />
         <item
-            android:id="@+id/nav_red_button"
-            android:title="Red button" />
+            android:id="@+id/nav_mouseremote"
+            android:title="Mouse Remote" />
     </group>
 
     <!--<item android:title="Communicate">
