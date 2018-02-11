@@ -20,29 +20,30 @@ import android.widget.Button;
 
 
 public class MouseRemoteFragment extends Fragment implements SensorEventListener, View.OnHoverListener, View.OnClickListener {
-    private Button butt;
-    private SensorManager sensors;
-    private Sensor accelero;
-    private Button leftclick;
-    private Button rightclick;
+    private Button mButton;
+    private SensorManager mSensors;
+    private Sensor mAccelero;
+    private Button mLeftClick;
+    private Button mRightClick;
+    private boolean mResetAccelero = false;
+    float mDefaultValues[] = {0, 0};
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
         View rootView = inflater.inflate(R.layout.fragment_mouseremote, container, false);
-        butt = (Button) rootView.findViewById(R.id.mouseremotebutton);
-        leftclick = (Button) rootView.findViewById(R.id.left_click);
-        rightclick = (Button) rootView.findViewById(R.id.right_click);
+        mButton = (Button) rootView.findViewById(R.id.mouseremotebutton);
+        mLeftClick = (Button) rootView.findViewById(R.id.left_click);
+        mRightClick = (Button) rootView.findViewById(R.id.right_click);
 
-       // butt.setOnClickListener(this);
-        butt.setOnHoverListener(this);
-        leftclick.setOnClickListener(this);
-        rightclick.setOnClickListener(this);
+        mButton.setOnHoverListener(this);
+        mLeftClick.setOnClickListener(this);
+        mRightClick.setOnClickListener(this);
 
 
-        sensors = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
-        accelero = sensors.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        sensors.registerListener(this, accelero, SensorManager.SENSOR_DELAY_NORMAL);
+        mSensors = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
+        mAccelero = mSensors.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        mSensors.registerListener(this, mAccelero, SensorManager.SENSOR_DELAY_NORMAL);
 
         return rootView;
     }
@@ -50,24 +51,33 @@ public class MouseRemoteFragment extends Fragment implements SensorEventListener
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getActivity().setTitle("PRESS THE RED BUTTON");
+        getActivity().setTitle(R.string.mouse_remote);
     }
 
     public void onAccuracyChanged(Sensor sensor, int accuracy) {}
 
     public void onSensorChanged(SensorEvent event){
-        if(butt.isPressed()) {
-            //if (Math.abs(event.values[0]) > 0.1 || Math.abs(event.values[1]) > 0.1) {
+        if(mButton.isPressed()) {
+            if (mResetAccelero) {
+                mDefaultValues[0] = event.values[0];
+                mDefaultValues[1] = event.values[1];
+                mResetAccelero = false;
+            }
+            if (Math.abs(event.values[0]-mDefaultValues[0]) > 1 || Math.abs(event.values[1]-mDefaultValues[1]) > 1) {
                 MainActivity.sendMessageToServer("MOUSE_REMOTE");
-                MainActivity.sendMessageToServer(-event.values[0]);
-                MainActivity.sendMessageToServer(-event.values[1]);
-            //}
+                MainActivity.sendMessageToServer(-event.values[0]+mDefaultValues[0]);
+                MainActivity.sendMessageToServer(-event.values[1]+mDefaultValues[1]);
+            }
+
+        }
+        else {
+            mResetAccelero = true;
         }
     }
 
     @Override
   public void onClick(View view) {
-     if((Button) view == leftclick)
+     if((Button) view == mLeftClick)
          MainActivity.sendMessageToServer("LEFT_CLICK");
      else
          MainActivity.sendMessageToServer("RIGHT_CLICK");
