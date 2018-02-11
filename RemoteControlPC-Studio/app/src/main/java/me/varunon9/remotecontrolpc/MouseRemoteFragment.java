@@ -3,7 +3,9 @@ package me.varunon9.remotecontrolpc;
 /**
  * Created by david on 13/12/17.
  */
+import android.app.Activity;
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -11,12 +13,16 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.view.Display;
 import android.view.LayoutInflater;
 
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
+
+import static android.content.Context.WINDOW_SERVICE;
 
 
 public class MouseRemoteFragment extends Fragment implements SensorEventListener, View.OnHoverListener, View.OnClickListener {
@@ -45,6 +51,9 @@ public class MouseRemoteFragment extends Fragment implements SensorEventListener
         mAccelero = mSensors.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         mSensors.registerListener(this, mAccelero, SensorManager.SENSOR_DELAY_NORMAL);
 
+        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
+
+
         return rootView;
     }
 
@@ -63,11 +72,11 @@ public class MouseRemoteFragment extends Fragment implements SensorEventListener
                 mDefaultValues[1] = event.values[1];
                 mResetAccelero = false;
             }
-            if (Math.abs(event.values[0]-mDefaultValues[0]) > 1 || Math.abs(event.values[1]-mDefaultValues[1]) > 1) {
-                MainActivity.sendMessageToServer("MOUSE_REMOTE");
-                MainActivity.sendMessageToServer(-event.values[0]+mDefaultValues[0]);
-                MainActivity.sendMessageToServer(-event.values[1]+mDefaultValues[1]);
-            }
+
+            MainActivity.sendMessageToServer("MOUSE_REMOTE");
+            MainActivity.sendMessageToServer(-event.values[0]+mDefaultValues[0]);
+            MainActivity.sendMessageToServer(-event.values[1]+mDefaultValues[1]);
+
 
         }
         else {
