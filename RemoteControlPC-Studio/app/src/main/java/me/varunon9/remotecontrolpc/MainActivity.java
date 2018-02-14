@@ -42,6 +42,8 @@ import me.varunon9.remotecontrolpc.touchpad.TouchpadFragment;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    final static String vol = "VOLUME";
+
     public static Socket clientSocket = null;
     public static ObjectInputStream objectInputStream = null;
     public static ObjectOutputStream objectOutputStream = null;
@@ -188,6 +190,8 @@ public class MainActivity extends AppCompatActivity
             fragment = new LiveScreenFragment();
         } else if (id == R.id.nav_mouseremote) {
             fragment = new MouseRemoteFragment();
+        } else if (id == R.id.nav_volume) {
+            fragment = new VolumeFragment();
         }
         if (fragment != null) {
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
