@@ -26,10 +26,10 @@ import music.MusicPlayer;
  */
 
 public class Server {
-    
+
     private Label messageLabel;
-    
-    public void connect(Button resetButton, Label connectionStatusLabel, 
+
+    public void connect(Button resetButton, Label connectionStatusLabel,
             Label messageLabel, int port) {
         this.messageLabel = messageLabel;
         MouseKeyboardControl mouseControl = new MouseKeyboardControl();
@@ -37,28 +37,28 @@ public class Server {
         int screenWidth = (int) screenSize.getWidth();
         int screenHeight = (int) screenSize.getHeight();
         try {
-            MainScreenController.clientSocket = 
+            MainScreenController.clientSocket =
                     MainScreenController.serverSocket.accept();
             Platform.runLater(() -> {
                 resetButton.setDisable(true);
             });
-            InetAddress remoteInetAddress = 
+            InetAddress remoteInetAddress =
                     MainScreenController.clientSocket.getInetAddress();
-            String connectedMessage = "Connected to: " + remoteInetAddress;     
+            String connectedMessage = "Connected to: " + remoteInetAddress;
             Platform.runLater(() -> {
                 connectionStatusLabel.setText(connectedMessage);
             });
             showMessage(connectedMessage);
-            
+
             // connecting another socket to app (Peer to Peer)
             new ClientToAndroid().connect(remoteInetAddress, port);
-            MainScreenController.inputStream = 
+            MainScreenController.inputStream =
                     MainScreenController.clientSocket.getInputStream();
-            MainScreenController.outputStream = 
+            MainScreenController.outputStream =
                     MainScreenController.clientSocket.getOutputStream();
-            MainScreenController.objectOutputStream = 
+            MainScreenController.objectOutputStream =
                     new ObjectOutputStream(MainScreenController.outputStream);
-            MainScreenController.objectInputStream = 
+            MainScreenController.objectInputStream =
                     new ObjectInputStream(MainScreenController.inputStream);
             FileAPI fileAPI = new FileAPI();
             String message, filePath, fileName;
@@ -69,11 +69,18 @@ public class Server {
             ImageViewer imageViewer = new ImageViewer();
             while (true) {
                 try {
-                    message = 
+                    message =
                             (String) MainScreenController.objectInputStream.readObject();
                     int keyCode;
                     if (message != null) {
                         switch (message) {
+			case "MOUSE_REMOTE":
+			    Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();
+			    float accX = (float) MainScreenController.objectInputStream.readObject();
+			    float accY = (float) MainScreenController.objectInputStream.readObject();
+			    Point pt = MouseInfo.getPointerInfo().getLocation();
+			    mouseControl.mouseMove((int)(pt.x + accX*screensize.width / 100), (int)(pt.y + accY * 2 * screensize.height/100));
+			    break;
                             case "LEFT_CLICK":
                                 mouseControl.leftClick();
                                 break;
@@ -84,21 +91,22 @@ public class Server {
                                 mouseControl.doubleClick();
                                 break;
                             case "MOUSE_WHEEL":
-                                int scrollAmount = 
+                                int scrollAmount =
                                         (int) MainScreenController.objectInputStream.readObject();
                                 mouseControl.mouseWheel(scrollAmount);
                                 break;
                             case "MOUSE_MOVE":
+				
                                 int x = (int) MainScreenController.objectInputStream.readObject();
                                 int y = (int) MainScreenController.objectInputStream.readObject();
-                                Point point = MouseInfo.getPointerInfo().getLocation(); 
+                                Point point = MouseInfo.getPointerInfo().getLocation();
                                 // Get current mouse position
                                 float nowx = point.x;
                                 float nowy = point.y;
                                 mouseControl.mouseMove((int) (nowx + x), (int) (nowy + y));
                                 break;
                             case "MOUSE_MOVE_LIVE":
-                                // need to adjust coordinates 
+                                // need to adjust coordinates
                                 float xCord = (float) MainScreenController.objectInputStream.readObject();
                                 float yCord = (float) MainScreenController.objectInputStream.readObject();
                                 xCord = xCord * screenWidth;
@@ -122,12 +130,12 @@ public class Server {
                             case "ALT_F4":
                                 mouseControl.altF4();
                                 break;
-                            case "TYPE_CHARACTER": 
+                            case "TYPE_CHARACTER":
                                 //handle StringIndexOutOfBoundsException here when pressing soft enter key
                                 char ch = ((String) MainScreenController.objectInputStream.readObject()).charAt(0);
                                 mouseControl.typeCharacter(ch);
                                 break;
-                            case "TYPE_KEY": 
+                            case "TYPE_KEY":
                                 keyCode = (int) MainScreenController.objectInputStream.readObject();
                                 mouseControl.typeCharacter(keyCode);
                                 break;
@@ -210,7 +218,7 @@ public class Server {
                                 filePath = new FileAPI().getHomeDirectoryPath();
                                 filePath = filePath + "/RemoteControlPC/" + fileName;
                                 imageViewer.showImage(fileName, filePath);
-                                break; 
+                                break;
                             case "CLOSE_IMAGE_VIEWER":
                                 imageViewer.closeImageViewer();
                                 break;
@@ -218,6 +226,10 @@ public class Server {
                                 new Screenshot().sendScreenshot(
                                         MainScreenController.objectOutputStream
                                 );
+                                break;
+                            case "COUCOU":
+                                showMessage("Bien reçu bien reçu !");
+                                System.out.println("coucou");
                                 break;
                         }
                     } else {
@@ -243,8 +255,8 @@ public class Server {
         } catch(Exception e) {
             e.printStackTrace();
         }
-    } 
-    
+    }
+
     private void connectionClosed() {
         try {
             MainScreenController.objectInputStream.close();
@@ -253,12 +265,12 @@ public class Server {
             MainScreenController.inputStream.close();
             MainScreenController.outputStream.close();
             MainScreenController.objectOutputStream.close();
-        } 
+        }
         catch(Exception e) {
             e.printStackTrace();
         }
     }
-    
+
     private void showMessage(String message) {
         Platform.runLater(() -> {
             messageLabel.setText(message);
