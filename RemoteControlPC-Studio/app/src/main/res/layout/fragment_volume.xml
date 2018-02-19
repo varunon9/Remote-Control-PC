@@ -5,30 +5,46 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
+    <View
         android:id="@+id/SoundButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true" />
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:layout_centerInParent="true"
+        android:background="@color/colorPrimary" />
+
+    <View
+        android:id="@+id/volume_view_top_limit"
+        android:layout_width="300dp"
+        android:layout_height="1dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:background="#FFFF0000" />
 
     <TextView
         android:id="@+id/MaxSound"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_alignBottom="@+id/volume_view_top_limit"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        android:text="100 --------------------- 100"
+        android:text="100"
         android:textSize="20sp" />
+
+    <View
+        android:id="@+id/volume_view_bottom_limit"
+        android:layout_width="300dp"
+        android:layout_height="1dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="50dp"
+        android:background="#FFFF0000" />
 
     <TextView
         android:id="@+id/MinSound"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_alignTop="@+id/volume_view_bottom_limit"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="50dp"
-        android:text="0 --------------------- 0"
+        android:text="0"
         android:textSize="20sp" />
 
 </RelativeLayout>

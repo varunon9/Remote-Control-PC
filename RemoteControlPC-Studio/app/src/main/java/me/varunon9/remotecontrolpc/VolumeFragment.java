@@ -7,8 +7,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
+import android.view.ViewTreeObserver;
 
 import static android.view.MotionEvent.ACTION_DOWN;
 import static android.view.MotionEvent.ACTION_MOVE;
@@ -19,9 +18,9 @@ import static android.view.MotionEvent.ACTION_MOVE;
 
 public class VolumeFragment extends Fragment implements View.OnTouchListener {
 
-    private Button mVolumeButton;
-    private TextView mMax;
-    private TextView mMin;
+    private View mVolumeButton;
+    private View mViewTopLimit;
+    private View mViewBottomLimit;
     private float maxY = 0.0f;
     private float minY = 0.0f;
     private float dy = 0.0f;
@@ -29,11 +28,17 @@ public class VolumeFragment extends Fragment implements View.OnTouchListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_volume, container, false);
-        mVolumeButton = (Button) rootView.findViewById(R.id.SoundButton);
+        mVolumeButton = rootView.findViewById(R.id.SoundButton);
         mVolumeButton.setOnTouchListener(this);
-        mMax = (TextView) rootView.findViewById(R.id.MaxSound);
-        mMin = (TextView) rootView.findViewById(R.id.MinSound);
-
+        mViewTopLimit= rootView.findViewById(R.id.volume_view_top_limit);
+        mViewBottomLimit = rootView.findViewById(R.id.volume_view_bottom_limit);
+        rootView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                maxY = mViewTopLimit.getY();
+                minY = mViewBottomLimit.getY() - mVolumeButton.getHeight();
+            }
+        });
         return rootView;
     }
 
@@ -50,8 +55,6 @@ public class VolumeFragment extends Fragment implements View.OnTouchListener {
             switch (event.getActionMasked()) {
                 case ACTION_DOWN:
                     dy = view.getY() - y;
-                    maxY = mMax.getY();
-                    minY = mMin.getY();
                 case ACTION_MOVE:
                     y += dy;
                     if (y > maxY && y < minY) {
