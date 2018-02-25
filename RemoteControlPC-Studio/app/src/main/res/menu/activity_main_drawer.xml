@@ -40,10 +40,13 @@
             android:title="Power Off" />
         <item
             android:id="@+id/nav_mouseremote"
-            android:title="Mouse Remote" />
+            android:title="@string/mouse_remote" />
         <item
             android:id="@+id/nav_volume"
-            android:title="Volume" />
+            android:title="@string/volume" />
+        <item
+            android:id="@+id/nav_brightness"
+            android:title="@string/brightness" />
     </group>
 
     <!--<item android:title="Communicate">

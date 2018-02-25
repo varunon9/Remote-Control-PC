@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     final static String vol = "VOLUME";
+    final static String bri = "BRIGHTNESS";
 
     public static Socket clientSocket = null;
     public static ObjectInputStream objectInputStream = null;
@@ -192,6 +193,8 @@ public class MainActivity extends AppCompatActivity
             fragment = new MouseRemoteFragment();
         } else if (id == R.id.nav_volume) {
             fragment = new VolumeFragment();
+        } else if (id == R.id.nav_brightness) {
+            fragment = new BrightnessFragment();
         }
         if (fragment != null) {
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
