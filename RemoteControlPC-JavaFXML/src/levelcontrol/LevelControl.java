@@ -33,7 +33,7 @@ public class LevelControl
 	    }
 	    else {
 		if(check(level, "Windows")) {
-		    Runtime.getRuntime().exec("nircmd.exe setbrightness "+(level/100));
+		    Runtime.getRuntime().exec("nircmd.exe setbrightness "+level);
 		}
 	    }
 		
