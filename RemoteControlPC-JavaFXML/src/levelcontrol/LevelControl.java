@@ -8,32 +8,40 @@ public class LevelControl
     private boolean check(float level, String os) {
 	return level >=0 && level <= 100 && System.getProperty("os.name").contains(os);
     }
+
+    private void errorOutput(Process err) {
+	
+	try {
+	    err.getOutputStream().close();
+
+	    String line;
+
+	    BufferedReader stderr = new BufferedReader(new InputStreamReader(err.getErrorStream()));
+
+	    line = stderr.readLine();
+
+	    if(line != null) {
+		do {
+		    System.err.println(line);
+		}while((line = stderr.readLine()) != null);
+	    }
+
+	    stderr.close();
+	} catch (Exception e) {
+	    e.printStackTrace();
+	}
+	
+    }
     
     public void setBrightness(float level) {
 	
 	try {
 	    if(check(level, "Linux")) {
-		Process err = Runtime.getRuntime().exec("echo " + (level*5000/100) + " | tee /sys/class/backlight/intel_backlight/brightness");
-
-		err.getOutputStream().close();
-
-		String line;
-
-		BufferedReader stderr = new BufferedReader(new InputStreamReader(err.getErrorStream()));
-
-		line = stderr.readLine();
-
-		if(line != null) {
-		    do {
-			System.err.println(line);
-		    }while((line = stderr.readLine()) != null);
-		}
-
-		stderr.close();
+		errorOutput(Runtime.getRuntime().exec("./brightness.sh "+level));
 	    }
 	    else {
 		if(check(level, "Windows")) {
-		    Runtime.getRuntime().exec("nircmd.exe setbrightness "+level);
+		    errorOutput(Runtime.getRuntime().exec("nircmd.exe setbrightness "+level));
 		}
 	    }
 		
@@ -52,11 +60,11 @@ public class LevelControl
 	
 	try {
 	    if(check(level, "Linux")) {
-		Runtime.getRuntime().exec("amixer sset 'Master' "+level+"%");
+		errorOutput(Runtime.getRuntime().exec("amixer sset 'Master' "+level+"%"));
 	    }
 	    else {
 		if(check(level, "Windows"))
-		    Runtime.getRuntime().exec("nircmd.exe setsysvolume "+(level*32768/100));
+		    errorOutput(Runtime.getRuntime().exec("nircmd.exe setsysvolume "+(level*32768/100)));
 	    }			
 		
 	}
