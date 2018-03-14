@@ -22,6 +22,7 @@
     <string name="title_activity_music_control">MusicControl</string>
     <string name="mouse_remote">Mouse Remote</string>
     <string name="volume">Volume</string>
+    <string name="shortcut">Shortcut</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

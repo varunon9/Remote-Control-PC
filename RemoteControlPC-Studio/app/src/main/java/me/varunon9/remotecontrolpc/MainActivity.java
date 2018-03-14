@@ -192,6 +192,8 @@ public class MainActivity extends AppCompatActivity
             fragment = new MouseRemoteFragment();
         } else if (id == R.id.nav_volume) {
             fragment = new VolumeFragment();
+        } else if (id == R.id.nav_shortcut) {
+            fragment = new ShortcutFragment();
         }
         if (fragment != null) {
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
