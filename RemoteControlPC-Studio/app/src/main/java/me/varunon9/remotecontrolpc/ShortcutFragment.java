@@ -12,9 +12,13 @@ import android.widget.ImageButton;
  * Created by alex on 12/03/18.
  */
 
-public class ShortcutFragment extends Fragment {
+public class ShortcutFragment extends Fragment implements View.OnClickListener{
 
     private ImageButton mbuttonFirefox;
+    private ImageButton mbuttonGimp;
+    private ImageButton mbuttonTerminal;
+    private ImageButton mbuttonChromium;
+    private ImageButton mbuttonStudio;
     private final String command = "LAUNCH";
 
     @Override
@@ -24,14 +28,16 @@ public class ShortcutFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_shortcut, container, false);
         mbuttonFirefox = (ImageButton) rootView.findViewById(R.id.button_firefox);
+        mbuttonGimp = (ImageButton) rootView.findViewById(R.id.button_gimp);
+        mbuttonTerminal = (ImageButton) rootView.findViewById(R.id.button_terminal);
+        mbuttonChromium = (ImageButton) rootView.findViewById(R.id.button_chromium);
+        mbuttonStudio = (ImageButton) rootView.findViewById(R.id.button_studio);
 
-        mbuttonFirefox.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MainActivity.sendMessageToServer(command);
-                MainActivity.sendMessageToServer("firefox");
-            }
-        });
+        mbuttonFirefox.setOnClickListener(this);
+        mbuttonGimp.setOnClickListener(this);
+        mbuttonTerminal.setOnClickListener(this);
+        mbuttonChromium.setOnClickListener(this);
+        mbuttonStudio.setOnClickListener(this);
 
         return rootView;
 
@@ -43,6 +49,30 @@ public class ShortcutFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         getActivity().setTitle(R.string.shortcut);
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v == mbuttonFirefox) {
+            MainActivity.sendMessageToServer(command);
+            MainActivity.sendMessageToServer("firefox");
+        }
+        else if (v == mbuttonGimp) {
+            MainActivity.sendMessageToServer(command);
+            MainActivity.sendMessageToServer("gimp");
+        }
+        else if (v == mbuttonTerminal) {
+            MainActivity.sendMessageToServer(command);
+            MainActivity.sendMessageToServer("terminal");
+        }
+        else if (v == mbuttonChromium) {
+            MainActivity.sendMessageToServer(command);
+            MainActivity.sendMessageToServer("chromium");
+        }
+        else if (v == mbuttonStudio) {
+            MainActivity.sendMessageToServer(command);
+            MainActivity.sendMessageToServer("studio");
+        }
     }
 
 }

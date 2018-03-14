@@ -17,5 +17,33 @@
             android:scaleType="centerCrop"
             app:srcCompat="@mipmap/firefox" />
 
+        <ImageButton
+            android:id="@+id/button_gimp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:scaleType="centerCrop"
+            app:srcCompat="@mipmap/gimp" />
+
+        <ImageButton
+            android:id="@+id/button_terminal"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:scaleType="centerCrop"
+            app:srcCompat="@mipmap/terminal"/>
+
+        <ImageButton
+            android:id="@+id/button_chromium"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:scaleType="centerCrop"
+            app:srcCompat="@mipmap/chromium"/>
+
+        <ImageButton
+            android:id="@+id/button_studio"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:scaleType="centerCrop"
+            app:srcCompat="@mipmap/studio"/>
+
     </LinearLayout>
 </HorizontalScrollView>
