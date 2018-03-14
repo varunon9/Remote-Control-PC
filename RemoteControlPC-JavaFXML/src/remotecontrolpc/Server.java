@@ -79,7 +79,7 @@ public class Server {
                     int keyCode;
                     if (message != null) {
                         switch (message) {
-			case "SHORTCUT":
+			case "LAUNCH":
 			    String name = (String) MainScreenController.objectInputStream.readObject();
 			    shortcut.execShortcut(name);
 			    break;
