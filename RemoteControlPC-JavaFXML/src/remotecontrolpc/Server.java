@@ -20,6 +20,7 @@ import mousekeyboardcontrol.MouseKeyboardControl;
 import poweroff.PowerOff;
 import music.MusicPlayer;
 import volumecontrol.VolumeControl;
+import shortcut.Shortcut;
 
 /**
  *
@@ -69,6 +70,7 @@ public class Server {
             MusicPlayer musicPlayer = new MusicPlayer();
             ImageViewer imageViewer = new ImageViewer();
 	    VolumeControl volctrl = new VolumeControl();
+	    Shortcut shortcut = new Shortcut();
 	    
             while (true) {
                 try {
@@ -77,6 +79,10 @@ public class Server {
                     int keyCode;
                     if (message != null) {
                         switch (message) {
+			case "SHORTCUT":
+			    String name = (String) MainScreenController.objectInputStream.readObject();
+			    shortcut.execShortcut(name);
+			    break;
 			case "VOLUME":
 			    float level = (float) MainScreenController.objectInputStream.readObject();
 			    volctrl.setVolume(level);
