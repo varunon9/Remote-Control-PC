@@ -63,7 +63,7 @@ public class ShortcutFragment extends Fragment implements View.OnClickListener{
         }
         else if (v == mbuttonTerminal) {
             MainActivity.sendMessageToServer(command);
-            MainActivity.sendMessageToServer("terminal");
+            MainActivity.sendMessageToServer("gnome-terminal");
         }
         else if (v == mbuttonChromium) {
             MainActivity.sendMessageToServer(command);
