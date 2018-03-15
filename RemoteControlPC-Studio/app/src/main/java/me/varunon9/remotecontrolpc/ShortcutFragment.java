@@ -1,25 +1,25 @@
 package me.varunon9.remotecontrolpc;
 
+import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
+import android.widget.Button;
+
+import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Created by alex on 12/03/18.
  */
 
-public class ShortcutFragment extends Fragment implements View.OnClickListener{
+public class ShortcutFragment extends Fragment {
 
-    private ImageButton mbuttonFirefox;
-    private ImageButton mbuttonGimp;
-    private ImageButton mbuttonTerminal;
-    private ImageButton mbuttonChromium;
-    private ImageButton mbuttonStudio;
-    private final String command = "LAUNCH";
+    protected final static String command = "LAUNCH";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -27,17 +27,9 @@ public class ShortcutFragment extends Fragment implements View.OnClickListener{
         super.onCreateView(inflater, container, savedInstanceState);
 
         View rootView = inflater.inflate(R.layout.fragment_shortcut, container, false);
-        mbuttonFirefox = (ImageButton) rootView.findViewById(R.id.button_firefox);
-        mbuttonGimp = (ImageButton) rootView.findViewById(R.id.button_gimp);
-        mbuttonTerminal = (ImageButton) rootView.findViewById(R.id.button_terminal);
-        mbuttonChromium = (ImageButton) rootView.findViewById(R.id.button_chromium);
-        mbuttonStudio = (ImageButton) rootView.findViewById(R.id.button_studio);
 
-        mbuttonFirefox.setOnClickListener(this);
-        mbuttonGimp.setOnClickListener(this);
-        mbuttonTerminal.setOnClickListener(this);
-        mbuttonChromium.setOnClickListener(this);
-        mbuttonStudio.setOnClickListener(this);
+        ShortcutTask shortcut = new ShortcutTask(rootView);
+        shortcut.execute();
 
         return rootView;
 
@@ -51,28 +43,61 @@ public class ShortcutFragment extends Fragment implements View.OnClickListener{
 
     }
 
-    @Override
-    public void onClick(View v) {
-        if (v == mbuttonFirefox) {
-            MainActivity.sendMessageToServer(command);
-            MainActivity.sendMessageToServer("firefox");
+    private static class ShortcutTask extends AsyncTask<Void, Void, ArrayList<String>> {
+
+        private Context context;
+        private ViewGroup rootView;
+
+        public ShortcutTask(View v) {
+            rootView = (ViewGroup) v;
+            context = v.getContext();
         }
-        else if (v == mbuttonGimp) {
-            MainActivity.sendMessageToServer(command);
-            MainActivity.sendMessageToServer("gimp");
+
+        @Override
+        protected ArrayList<String> doInBackground(Void... arg0) {
+            String str = new String();
+            MainActivity.sendMessageToServer("SHORTCUT");
+            while (str == null) {
+                try {
+                    str = (String) MainActivity.objectInputStream.readObject();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            ArrayList<String> shct = new ArrayList<String>();
+            int next = str.indexOf("\n");
+            int iMax = str.length() - 1;
+
+            while (next != iMax) {
+                shct.add(str.substring(0, next-1));
+                str = str.substring(next+1);
+                iMax -= next+1;
+                next = str.indexOf("\n");
+            }
+
+            return shct;
         }
-        else if (v == mbuttonTerminal) {
-            MainActivity.sendMessageToServer(command);
-            MainActivity.sendMessageToServer("gnome-terminal");
+
+        @Override
+        protected void onPostExecute(ArrayList<String> shct) {
+            Iterator i = shct.iterator();
+
+            while (i.hasNext()) {
+                final String s = (String) i.next();
+                Button b = new Button(context);
+                b.setText(s);
+                b.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        MainActivity.sendMessageToServer(command);
+                        MainActivity.sendMessageToServer(s);
+                    }
+                });
+                rootView.addView(b);
+            }
         }
-        else if (v == mbuttonChromium) {
-            MainActivity.sendMessageToServer(command);
-            MainActivity.sendMessageToServer("chromium");
-        }
-        else if (v == mbuttonStudio) {
-            MainActivity.sendMessageToServer(command);
-            MainActivity.sendMessageToServer("studio");
-        }
+
     }
 
 }
