@@ -15,6 +15,8 @@ import filesharing.ReceiveFile;
 import filesharing.SendFile;
 import filesharing.SendFilesList;
 import java.net.InetAddress;
+import java.util.ArrayList;
+
 import javafx.application.Platform;
 import mousekeyboardcontrol.MouseKeyboardControl;
 import poweroff.PowerOff;
@@ -79,21 +81,24 @@ public class Server {
                     int keyCode;
                     if (message != null) {
                         switch (message) {
-			case "LAUNCH":
-			    String name = (String) MainScreenController.objectInputStream.readObject();
-			    shortcut.execShortcut(name);
-			    break;
-			case "VOLUME":
-			    float level = (float) MainScreenController.objectInputStream.readObject();
-			    volctrl.setVolume(level);
-			    break;
-			case "MOUSE_REMOTE":
-			    Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();
-			    float accX = (float) MainScreenController.objectInputStream.readObject();
-			    float accY = (float) MainScreenController.objectInputStream.readObject();
-			    Point pt = MouseInfo.getPointerInfo().getLocation();
-			    mouseControl.mouseMove((int)(pt.x + accX*screensize.width / 100), (int)(pt.y + accY * 2 * screensize.height/100));
-			    break;
+                            case "SHORTCUT":
+                                ClientToAndroid.sendMessageToAndroid(shortcut.search());
+                                break;
+                            case "LAUNCH":
+                                String name = (String) MainScreenController.objectInputStream.readObject();
+                                shortcut.execShortcut(name);
+                                break;
+                            case "VOLUME":
+                                float level = (float) MainScreenController.objectInputStream.readObject();
+                                volctrl.setVolume(level);
+                                break;
+                            case "MOUSE_REMOTE":
+                                Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();
+                                float accX = (float) MainScreenController.objectInputStream.readObject();
+                                float accY = (float) MainScreenController.objectInputStream.readObject();
+                                Point pt = MouseInfo.getPointerInfo().getLocation();
+                                mouseControl.mouseMove((int)(pt.x + accX*screensize.width / 100), (int)(pt.y + accY * 2 * screensize.height/100));
+                                break;
                             case "LEFT_CLICK":
                                 mouseControl.leftClick();
                                 break;
