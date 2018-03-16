@@ -32,6 +32,7 @@ import me.varunon9.remotecontrolpc.filetransfer.FileTransferFragment;
 import me.varunon9.remotecontrolpc.help.HelpFragment;
 import me.varunon9.remotecontrolpc.imageviewer.ImageViewerFragment;
 import me.varunon9.remotecontrolpc.keyboard.KeyboardFragment;
+import me.varunon9.remotecontrolpc.levelcontrol.LevelControl;
 import me.varunon9.remotecontrolpc.livescreen.LiveScreenFragment;
 import me.varunon9.remotecontrolpc.mediaplayer.MediaPlayerFragment;
 import me.varunon9.remotecontrolpc.poweroff.PowerOffFragment;
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     final static String vol = "VOLUME";
+    final static String bri = "BRIGHTNESS";
 
     public static Socket clientSocket = null;
     public static ObjectInputStream objectInputStream = null;
@@ -191,7 +193,9 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_mouseremote) {
             fragment = new MouseRemoteFragment();
         } else if (id == R.id.nav_volume) {
-            fragment = new VolumeFragment();
+            fragment = LevelControl.newInstance(R.string.volume, this.vol);
+        } else if (id == R.id.nav_brightness) {
+            fragment = LevelControl.newInstance(R.string.brightness, this.bri);
         }
         if (fragment != null) {
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();

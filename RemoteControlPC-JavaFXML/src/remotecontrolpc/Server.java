@@ -19,7 +19,7 @@ import javafx.application.Platform;
 import mousekeyboardcontrol.MouseKeyboardControl;
 import poweroff.PowerOff;
 import music.MusicPlayer;
-import volumecontrol.VolumeControl;
+import levelcontrol.LevelControl;
 
 /**
  *
@@ -68,7 +68,7 @@ public class Server {
             PowerOff  powerOff = new PowerOff();
             MusicPlayer musicPlayer = new MusicPlayer();
             ImageViewer imageViewer = new ImageViewer();
-	    VolumeControl volctrl = new VolumeControl();
+	    LevelControl lvlctrl = new LevelControl();
 	    
             while (true) {
                 try {
@@ -77,9 +77,13 @@ public class Server {
                     int keyCode;
                     if (message != null) {
                         switch (message) {
+			case "BRIGHTNESS":
+			    float bright = (float) MainScreenController.objectInputStream.readObject();
+			    lvlctrl.setBrightness(bright);
+			    break;
 			case "VOLUME":
 			    float level = (float) MainScreenController.objectInputStream.readObject();
-			    volctrl.setVolume(level);
+			    lvlctrl.setVolume(level);
 			    break;
 			case "MOUSE_REMOTE":
 			    Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();
