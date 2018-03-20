@@ -82,10 +82,14 @@ public class Server {
                     if (message != null) {
                         switch (message) {
                             case "SHORTCUT":
-                                ClientToAndroid.sendMessageToAndroid(shortcut.search());
+                                System.out.println("Coucou");
+                                MainScreenController.objectOutputStream.writeObject(shortcut.search());
+                                //MainScreenController.objectOutputStream.writeObject("Un ");
+                                MainScreenController.objectOutputStream.flush();
                                 break;
                             case "LAUNCH":
                                 String name = (String) MainScreenController.objectInputStream.readObject();
+
                                 shortcut.execShortcut(name);
                                 break;
                             case "VOLUME":

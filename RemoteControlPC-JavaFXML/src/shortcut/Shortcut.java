@@ -3,8 +3,7 @@ package shortcut;
 
 import java.io.DataInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
+
 
 public class Shortcut {
 	public final static String[] software = {"studio", "skype", "discord", "chromium", "firefox", "gnome-terminal", "gimp", "emacs"
@@ -13,8 +12,8 @@ public class Shortcut {
 	public Shortcut() {}
 
 	public String search() {
-		String ret = "";
 
+		StringBuilder stringBuilder = new StringBuilder();
 		try {
 			for (int i = 0; i < software.length; i++){
 				Process p = Runtime.getRuntime().exec("which "+software[i]);
@@ -22,20 +21,22 @@ public class Shortcut {
 				String cmd = stdin.readLine();
 				System.out.println(cmd);
 
-				if(cmd != null && !cmd.equals(""))
-					ret += software[i]+"\n";
+				if(cmd != null && !cmd.equals("")) {
+					stringBuilder.append(software[i]).append("\n");
+				}
+
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
-		return ret;
+		return stringBuilder.toString();
 	}
 
 	public void execShortcut(String name) {
 		if (System.getProperty("os.name").equals("Linux")) {
 			try {
-				Runtime.getRuntime().exec(name+"&");
+				Runtime.getRuntime().exec(name);
 			} catch (Exception e) {
 				System.out.println("Error " + e.getMessage());
 				e.printStackTrace();
