@@ -29,6 +29,7 @@ public class ShortcutFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_shortcut, container, false);
 
         ShortcutTask shortcut = new ShortcutTask(rootView);
+        MainActivity.sendMessageToServer("SHORTCUT");
         shortcut.execute();
 
         return rootView;
@@ -46,37 +47,33 @@ public class ShortcutFragment extends Fragment {
     private static class ShortcutTask extends AsyncTask<Void, Void, ArrayList<String>> {
 
         private Context context;
-        private ViewGroup rootView;
+        private ViewGroup groupView;
 
         public ShortcutTask(View v) {
-            rootView = (ViewGroup) v;
+            groupView = (ViewGroup) v.findViewById(R.id.containerView);
             context = v.getContext();
         }
 
         @Override
         protected ArrayList<String> doInBackground(Void... arg0) {
-            String str = new String();
-            MainActivity.sendMessageToServer("SHORTCUT");
-            while (str == null) {
-                try {
-                    str = (String) MainActivity.objectInputStream.readObject();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+            String str = null;
+            try {
+                str = (String) MainActivity.objectInputStream.readObject();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
+            System.out.println(str);
 
-            ArrayList<String> shct = new ArrayList<String>();
+            ArrayList<String> shortcuts = new ArrayList<String>();
             int next = str.indexOf("\n");
-            int iMax = str.length() - 1;
 
-            while (next != iMax) {
-                shct.add(str.substring(0, next-1));
+            while (next != -1) {
+                shortcuts.add(str.substring(0, next));
                 str = str.substring(next+1);
-                iMax -= next+1;
                 next = str.indexOf("\n");
             }
 
-            return shct;
+            return shortcuts;
         }
 
         @Override
@@ -94,7 +91,7 @@ public class ShortcutFragment extends Fragment {
                         MainActivity.sendMessageToServer(s);
                     }
                 });
-                rootView.addView(b);
+                groupView.addView(b);
             }
         }
 
