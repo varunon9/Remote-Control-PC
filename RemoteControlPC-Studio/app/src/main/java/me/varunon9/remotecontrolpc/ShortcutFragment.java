@@ -8,10 +8,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.BaseAdapter;
+import android.widget.GridView;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  * Created by alex on 12/03/18.
@@ -28,7 +30,9 @@ public class ShortcutFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_shortcut, container, false);
 
-        ShortcutTask shortcut = new ShortcutTask(rootView);
+        GridView gridView = (GridView) rootView.findViewById(R.id.containerView);
+
+        ShortcutTask shortcut = new ShortcutTask(gridView);
         MainActivity.sendMessageToServer("SHORTCUT");
         shortcut.execute();
 
@@ -44,14 +48,14 @@ public class ShortcutFragment extends Fragment {
 
     }
 
-    private static class ShortcutTask extends AsyncTask<Void, Void, ArrayList<String>> {
+    private class ShortcutTask extends AsyncTask<Void, Void, ArrayList<String>> {
 
-        private Context context;
-        private ViewGroup groupView;
+        private final Context mContext;
+        private GridView gridView;
 
-        public ShortcutTask(View v) {
-            groupView = (ViewGroup) v.findViewById(R.id.containerView);
-            context = v.getContext();
+        public ShortcutTask(GridView gridView) {
+            mContext = getContext();
+            this.gridView = gridView;
         }
 
         @Override
@@ -62,7 +66,6 @@ public class ShortcutFragment extends Fragment {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            System.out.println(str);
 
             ArrayList<String> shortcuts = new ArrayList<String>();
             int next = str.indexOf("\n");
@@ -77,22 +80,64 @@ public class ShortcutFragment extends Fragment {
         }
 
         @Override
-        protected void onPostExecute(ArrayList<String> shct) {
-            Iterator i = shct.iterator();
+        protected void onPostExecute(ArrayList<String> shortcuts) {
 
-            while (i.hasNext()) {
-                final String s = (String) i.next();
-                Button b = new Button(context);
-                b.setText(s);
-                b.setOnClickListener(new View.OnClickListener() {
+            gridView.setAdapter(new ShortcutAdapter(mContext, shortcuts));
+        }
+
+        private class ShortcutAdapter extends BaseAdapter {
+
+            private final Context mContext;
+            private final ArrayList<String> shortcuts;
+
+            public ShortcutAdapter(Context context, ArrayList<String> shortcuts) {
+                mContext = context;
+                this.shortcuts = shortcuts;
+            }
+
+            @Override
+            public int getCount() {
+                return shortcuts.size();
+            }
+
+            @Override
+            public long getItemId(int position) {
+                return 0;
+            }
+
+            @Override
+            public Object getItem(int position) {
+                return shortcuts.get(position);
+            }
+
+            @Override
+            public View getView(final int position, View convertView, ViewGroup parent) {
+                ImageButton imageButton;
+                if (convertView == null) {
+                    imageButton = new ImageButton(mContext);
+                    imageButton.setLayoutParams(new GridView.LayoutParams(200, 200));
+                    imageButton.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                }
+                else {
+                    imageButton = (ImageButton) convertView;
+                }
+
+                if (getItem(position).equals("gnome-terminal")) {
+                    imageButton.setImageResource(R.mipmap.terminal);
+                }
+                else {
+                    imageButton.setImageResource(getResources().getIdentifier((String) getItem(position), "mipmap", getActivity().getPackageName()));
+                }
+                imageButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         MainActivity.sendMessageToServer(command);
-                        MainActivity.sendMessageToServer(s);
+                        MainActivity.sendMessageToServer((String) getItem(position));
                     }
                 });
-                groupView.addView(b);
+                return imageButton;
             }
+
         }
 
     }
