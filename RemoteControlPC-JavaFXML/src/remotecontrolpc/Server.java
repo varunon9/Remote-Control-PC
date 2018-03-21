@@ -82,9 +82,7 @@ public class Server {
                     if (message != null) {
                         switch (message) {
                             case "SHORTCUT":
-                                System.out.println("Coucou");
                                 MainScreenController.objectOutputStream.writeObject(shortcut.search());
-                                //MainScreenController.objectOutputStream.writeObject("Un ");
                                 MainScreenController.objectOutputStream.flush();
                                 break;
                             case "LAUNCH":
@@ -248,10 +246,6 @@ public class Server {
                                 new Screenshot().sendScreenshot(
                                         MainScreenController.objectOutputStream
                                 );
-                                break;
-                            case "COUCOU":
-                                showMessage("Bien reçu bien reçu !");
-                                System.out.println("coucou");
                                 break;
                         }
                     } else {
