@@ -46,6 +46,7 @@
             android:title="Volume" />
         <item
             android:id="@+id/nav_shortcut"
+            android:icon="@drawable/ic_shortcut"
             android:title="Shortcut" />
     </group>
 

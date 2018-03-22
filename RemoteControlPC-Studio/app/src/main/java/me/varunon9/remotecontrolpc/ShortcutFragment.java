@@ -68,12 +68,15 @@ public class ShortcutFragment extends Fragment {
             }
 
             ArrayList<String> shortcuts = new ArrayList<String>();
-            int next = str.indexOf("\n");
 
-            while (next != -1) {
-                shortcuts.add(str.substring(0, next));
-                str = str.substring(next+1);
-                next = str.indexOf("\n");
+            if (str != null) {
+                int next = str.indexOf("\n");
+
+                while (next != -1) {
+                    shortcuts.add(str.substring(0, next));
+                    str = str.substring(next + 1);
+                    next = str.indexOf("\n");
+                }
             }
 
             return shortcuts;
