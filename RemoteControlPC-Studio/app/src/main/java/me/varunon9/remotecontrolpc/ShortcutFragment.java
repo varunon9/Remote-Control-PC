@@ -6,14 +6,20 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
+
+import static android.graphics.Color.DKGRAY;
+import static android.graphics.Color.LTGRAY;
+import static android.graphics.Color.TRANSPARENT;
 
 /**
  * Created by alex on 12/03/18.
@@ -115,30 +121,34 @@ public class ShortcutFragment extends Fragment {
 
             @Override
             public View getView(final int position, View convertView, ViewGroup parent) {
-                ImageButton imageButton;
+                final String item = (String) getItem(position);
+
                 if (convertView == null) {
-                    imageButton = new ImageButton(mContext);
-                    imageButton.setLayoutParams(new GridView.LayoutParams(200, 200));
-                    imageButton.setScaleType(ImageView.ScaleType.CENTER_CROP);
-                }
-                else {
-                    imageButton = (ImageButton) convertView;
+                    final LayoutInflater inflater = LayoutInflater.from(mContext);
+                    convertView = inflater.inflate(R.layout.shortcut_content, null);
                 }
 
-                if (getItem(position).equals("gnome-terminal")) {
-                    imageButton.setImageResource(R.mipmap.terminal);
+                final ImageView icon = (ImageView) convertView.findViewById(R.id.shortcut_image);
+                final TextView name = (TextView) convertView.findViewById(R.id.shortcut_name);
+
+                if (item.equals("gnome-terminal")) {
+                    icon.setImageResource(R.mipmap.terminal);
                 }
                 else {
-                    imageButton.setImageResource(getResources().getIdentifier((String) getItem(position), "mipmap", getActivity().getPackageName()));
+                    icon.setImageResource(getResources().getIdentifier(item, "mipmap", getActivity().getPackageName()));
                 }
-                imageButton.setOnClickListener(new View.OnClickListener() {
+
+                name.setText(item);
+
+                convertView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         MainActivity.sendMessageToServer(command);
-                        MainActivity.sendMessageToServer((String) getItem(position));
+                        MainActivity.sendMessageToServer(item);
                     }
                 });
-                return imageButton;
+
+                return convertView;
             }
 
         }
