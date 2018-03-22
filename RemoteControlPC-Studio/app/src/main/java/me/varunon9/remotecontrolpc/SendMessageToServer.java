@@ -17,7 +17,7 @@ public class SendMessageToServer extends AsyncTask<String, Void, Void> {
         int intMessage;
         float floatMessage;
         long longMessage;
-        System.out.println(message + ", " + code);
+        //System.out.println(message + ", " + code);
         if (code.equals("STRING")) {
             try {
                 MainActivity.objectOutputStream.writeObject(message);

@@ -32,7 +32,7 @@ public class MouseRemoteFragment extends Fragment implements SensorEventListener
     private Button mLeftClick;
     private Button mRightClick;
     private boolean mResetAccelero = false;
-    float mDefaultValues[] = {0, 0};
+    float mDefaultValues[] = {0, 0}, mCurrentValues[] = {0,0};
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -54,6 +54,9 @@ public class MouseRemoteFragment extends Fragment implements SensorEventListener
         getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
 
 
+        SendDataThread t = new SendDataThread();
+        t.start();
+
         return rootView;
     }
 
@@ -71,16 +74,51 @@ public class MouseRemoteFragment extends Fragment implements SensorEventListener
                 mDefaultValues[0] = event.values[0];
                 mDefaultValues[1] = event.values[1];
                 mResetAccelero = false;
+
+
             }
 
-            MainActivity.sendMessageToServer("MOUSE_REMOTE");
-            MainActivity.sendMessageToServer(-event.values[0]+mDefaultValues[0]);
-            MainActivity.sendMessageToServer(-event.values[1]+mDefaultValues[1]);
-
-
+            mCurrentValues[0] = -event.values[0]+mDefaultValues[0];
+            mCurrentValues[1] = -event.values[1]+mDefaultValues[1];
         }
         else {
             mResetAccelero = true;
+        }
+    }
+
+    private class SendDataThread extends Thread {
+        private float normalize(float x) {
+            float ret = 0.0f;
+
+            if(Math.abs(x) < 2.f) {
+                ret = 2.f;
+            }
+            else if(Math.abs(x) >=  2.f && Math.abs(x) < 6.f) {
+                ret = 4.f;
+            }
+            else if(Math.abs(x) >=  6.f && Math.abs(x) < 11.f) {
+                ret = 6.f;
+            }
+
+            return ret*(x/Math.abs(x));
+        }
+
+        public void run() {
+            long tps, ticks;
+
+            while(true) {
+
+                if(mButton.isPressed()) {
+                    MainActivity.sendMessageToServer("MOUSE_REMOTE");
+                    MainActivity.sendMessageToServer(mCurrentValues[0]);
+                    MainActivity.sendMessageToServer(mCurrentValues[1]);
+                    try {
+                        Thread.sleep(60);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
         }
     }
 
@@ -93,6 +131,9 @@ public class MouseRemoteFragment extends Fragment implements SensorEventListener
     }
 
     public boolean onHover(View view, MotionEvent m){
+        /*MainActivity.sendMessageToServer("MOUSE_REMOTE");
+        MainActivity.sendMessageToServer(mCurrentValues[0]);
+        MainActivity.sendMessageToServer(mCurrentValues[1]);*/
         return true;
     }
 }
