@@ -15,11 +15,14 @@ import filesharing.ReceiveFile;
 import filesharing.SendFile;
 import filesharing.SendFilesList;
 import java.net.InetAddress;
+import java.util.ArrayList;
+
 import javafx.application.Platform;
 import mousekeyboardcontrol.MouseKeyboardControl;
 import poweroff.PowerOff;
 import music.MusicPlayer;
 import levelcontrol.LevelControl;
+import shortcut.Shortcut;
 
 /**
  *
@@ -69,6 +72,7 @@ public class Server {
             MusicPlayer musicPlayer = new MusicPlayer();
             ImageViewer imageViewer = new ImageViewer();
 	    LevelControl lvlctrl = new LevelControl();
+	    Shortcut shortcut = new Shortcut();
 	    
             while (true) {
                 try {
@@ -85,6 +89,14 @@ public class Server {
 			    float level = (float) MainScreenController.objectInputStream.readObject();
 			    lvlctrl.setVolume(level);
 			    break;
+                            case "SHORTCUT":
+                                MainScreenController.objectOutputStream.writeObject(shortcut.search());
+                                MainScreenController.objectOutputStream.flush();
+                                break;
+                            case "LAUNCH":
+                                String name = (String) MainScreenController.objectInputStream.readObject();
+                                shortcut.execShortcut(name);
+                                break;
 			case "MOUSE_REMOTE":
 			    Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();
 			    float accX = (float) MainScreenController.objectInputStream.readObject();
@@ -237,10 +249,6 @@ public class Server {
                                 new Screenshot().sendScreenshot(
                                         MainScreenController.objectOutputStream
                                 );
-                                break;
-                            case "COUCOU":
-                                showMessage("Bien reçu bien reçu !");
-                                System.out.println("coucou");
                                 break;
                         }
                     } else {

@@ -50,6 +50,10 @@
             android:id="@+id/nav_brightness"
             android:icon="@drawable/ic_brightness"
             android:title="@string/brightness" />
+        <item
+            android:id="@+id/nav_shortcut"
+            android:icon="@drawable/ic_shortcut"
+            android:title="Shortcut" />
     </group>
 
     <!--<item android:title="Communicate">

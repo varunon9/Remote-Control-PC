@@ -196,6 +196,8 @@ public class MainActivity extends AppCompatActivity
             fragment = LevelControl.newInstance(R.string.volume, this.vol);
         } else if (id == R.id.nav_brightness) {
             fragment = LevelControl.newInstance(R.string.brightness, this.bri);
+        } else if (id == R.id.nav_shortcut) {
+            fragment = new ShortcutFragment();
         }
         if (fragment != null) {
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();

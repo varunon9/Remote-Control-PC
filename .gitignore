@@ -2,6 +2,8 @@
 /RemoteControlPC-Desktop/build/
 /RemoteControlPC-Studio/app/build/
 /RemoteControlPC-JavaFXML/build/
+RemoteControlPC-JavaFXML/src/out/
+RemoteControlPC-JavaFXML/dist/javadoc/
 
 *~
 
@@ -19,3 +21,5 @@ RemoteControlPC-JavaFXML/compil\.sh
 RemoteControlPC-JavaFXML/run\.sh
 
 RemoteControlPC-Studio/.idea/*
+
+*.html
