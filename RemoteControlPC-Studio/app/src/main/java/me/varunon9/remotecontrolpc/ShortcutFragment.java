@@ -1,6 +1,7 @@
 package me.varunon9.remotecontrolpc;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -131,12 +132,14 @@ public class ShortcutFragment extends Fragment {
                 final ImageView icon = (ImageView) convertView.findViewById(R.id.shortcut_image);
                 final TextView name = (TextView) convertView.findViewById(R.id.shortcut_name);
 
-                if (item.equals("gnome-terminal")) {
-                    icon.setImageResource(R.mipmap.terminal);
+                int res = getResources().getIdentifier(item.replace("-", "_"), "mipmap", getActivity().getPackageName());
+                if (res != 0) {
+                    icon.setImageResource(res);
                 }
                 else {
-                    icon.setImageResource(getResources().getIdentifier(item, "mipmap", getActivity().getPackageName()));
+                    icon.setImageResource(R.mipmap.unknown);
                 }
+
 
                 name.setText(item);
 
