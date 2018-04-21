@@ -18,6 +18,8 @@ import java.net.InetAddress;
 import java.util.ArrayList;
 
 import javafx.application.Platform;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import mousekeyboardcontrol.MouseKeyboardControl;
 import poweroff.PowerOff;
 import music.MusicPlayer;
@@ -221,6 +223,7 @@ public class Server {
                                 } catch(Exception e) {
                                     showMessage("Unsupported Media: " + fileName);
                                 }
+
                                 break;
                             case "SLIDE_MUSIC":
                                 slideDuration = (int) MainScreenController.objectInputStream.readObject();

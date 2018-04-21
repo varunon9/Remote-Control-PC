@@ -1,5 +1,6 @@
 package me.varunon9.remotecontrolpc;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Bundle;
@@ -9,6 +10,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
+
+import me.varunon9.remotecontrolpc.filetransfer.TransferFileToServer;
 
 import static android.view.MotionEvent.ACTION_BUTTON_PRESS;
 import static android.view.MotionEvent.ACTION_BUTTON_RELEASE;
@@ -31,7 +35,7 @@ public class MicrophoneFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_microphone, container, false);
 
-        mFileName = getActivity().getExternalCacheDir().getAbsolutePath() + "/audiorecordtest.3gp";
+        mFileName = getActivity().getExternalCacheDir().getAbsolutePath() + "/audiorecordtest";
 
         mRecordButton = (Button) rootView.findViewById(R.id.button_record);
         mPlayButton = (Button) rootView.findViewById(R.id.button_play);
@@ -60,15 +64,19 @@ public class MicrophoneFragment extends Fragment {
                     mPlayer.release();
                 } else {
                     mPlayer = new MediaPlayer();
-                    System.out.println(mFileName);
+                    /*System.out.println(mFileName);*/
 
                     try {
                         mPlayer.setDataSource(mFileName);
                         mPlayer.prepare();
-                        mPlayer.start();
+                        //mPlayer.start();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+
+                    int duration = mPlayer.getDuration();
+                    duration /= 1000; //in seconds
+                    transferFile("audiorecordtest", mFileName, duration);
                 }
                 mIsPlaying = !mIsPlaying;
             }
@@ -80,9 +88,9 @@ public class MicrophoneFragment extends Fragment {
     private void startRecording() {
         mRecorder = new MediaRecorder();
         mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-        mRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+        mRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
         mRecorder.setOutputFile(mFileName);
-        mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+        mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
 
         try {
             mRecorder.prepare();
@@ -98,6 +106,31 @@ public class MicrophoneFragment extends Fragment {
         mRecorder.release();
     }
 
+    private void transferFile(final String name, String path, final int duration) {
+        if (MainActivity.clientSocket != null) {
+            MainActivity.sendMessageToServer("FILE_TRANSFER_REQUEST");
+            MainActivity.sendMessageToServer(name);
+            Toast.makeText(getActivity(), "Wait for music controls", Toast.LENGTH_LONG).show();
+            new TransferFileToServer(getActivity()){
+
+                @Override
+                public void receiveData(Object result) {
+                    Intent intent = new Intent(getActivity(), MusicControlActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("MUSIC_FILE_NAME", name);
+                    bundle.putInt("MUSIC_DURATION", duration);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+
+                }
+
+            }.execute(new String[]{name, path});
+        } else {
+            Toast.makeText(getActivity(), "Not Connected", Toast.LENGTH_LONG).show();
+        }
+    }
+
+
     @Override
     public void onStop() {
         super.onStop();
@@ -109,6 +142,11 @@ public class MicrophoneFragment extends Fragment {
             mPlayer.release();
             mPlayer = null;
         }
+    }
+
+    public void onDestroy() {
+        super.onDestroy();
+        MainActivity.sendMessageToServer("STOP_MUSIC");
     }
 
 }
