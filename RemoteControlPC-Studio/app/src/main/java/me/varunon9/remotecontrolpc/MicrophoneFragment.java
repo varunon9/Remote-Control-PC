@@ -14,8 +14,6 @@ import android.widget.Toast;
 
 import me.varunon9.remotecontrolpc.filetransfer.TransferFileToServer;
 
-import static android.view.MotionEvent.ACTION_BUTTON_PRESS;
-import static android.view.MotionEvent.ACTION_BUTTON_RELEASE;
 import static android.view.MotionEvent.ACTION_DOWN;
 import static android.view.MotionEvent.ACTION_UP;
 
@@ -64,12 +62,10 @@ public class MicrophoneFragment extends Fragment {
                     mPlayer.release();
                 } else {
                     mPlayer = new MediaPlayer();
-                    /*System.out.println(mFileName);*/
 
                     try {
                         mPlayer.setDataSource(mFileName);
                         mPlayer.prepare();
-                        //mPlayer.start();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
