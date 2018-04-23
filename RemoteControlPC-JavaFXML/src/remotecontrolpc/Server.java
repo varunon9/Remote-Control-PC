@@ -89,14 +89,14 @@ public class Server {
 			    float level = (float) MainScreenController.objectInputStream.readObject();
 			    lvlctrl.setVolume(level);
 			    break;
-                            case "SHORTCUT":
-                                MainScreenController.objectOutputStream.writeObject(shortcut.search());
-                                MainScreenController.objectOutputStream.flush();
-                                break;
-                            case "LAUNCH":
-                                String name = (String) MainScreenController.objectInputStream.readObject();
-                                shortcut.execShortcut(name);
-                                break;
+            case "SHORTCUT":
+                MainScreenController.objectOutputStream.writeObject(shortcut.search());
+                MainScreenController.objectOutputStream.flush();
+                break;
+            case "LAUNCH":
+                String name = (String) MainScreenController.objectInputStream.readObject();
+                shortcut.execShortcut(name);
+                break;
 			case "MOUSE_REMOTE":
 			    Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();
 			    float accX = (float) MainScreenController.objectInputStream.readObject();
