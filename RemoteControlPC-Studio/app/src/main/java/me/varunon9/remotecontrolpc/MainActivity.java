@@ -318,6 +318,9 @@ public class MainActivity extends AppCompatActivity
                 }
                 return;
             }
+            default:
+                MicrophoneFragment.permissionToRecordAccepted = (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED);
+                return;
         }
     }
 }

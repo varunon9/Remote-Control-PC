@@ -1,6 +1,7 @@
 package me.varunon9.remotecontrolpc;
 
-import android.content.Intent;
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Bundle;
@@ -23,8 +24,13 @@ public class MicrophoneFragment extends Fragment {
     private Button mPlayButton;
 
     private static String mFileName;
+
     private MediaRecorder mRecorder;
     private MediaPlayer mPlayer;
+
+    public static boolean permissionToRecordAccepted = false;
+    private static final int REQUEST_RECORD_AUDIO_PERMISSION = 200;
+    private String[] permissions = {Manifest.permission.RECORD_AUDIO};
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -35,34 +41,41 @@ public class MicrophoneFragment extends Fragment {
 
         mFileName = getActivity().getExternalCacheDir().getAbsolutePath() + "/audiorecordtest";
 
+        if (getActivity().checkSelfPermission(Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(permissions, REQUEST_RECORD_AUDIO_PERMISSION);
+        } else {
+            permissionToRecordAccepted = true;
+        }
+
         mRecordButton = (Button) rootView.findViewById(R.id.button_record);
         mPlayButton = (Button) rootView.findViewById(R.id.button_play);
 
         mRecordButton.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
-                switch (motionEvent.getActionMasked()) {
-                    case ACTION_DOWN:
-                        startRecording();
-                        return true;
-                    case ACTION_UP:
-                        stopRecording();
-                        return false;
-                    default:
-                        return false;
+                if (permissionToRecordAccepted) {
+                    switch (motionEvent.getActionMasked()) {
+                        case ACTION_DOWN:
+                            startRecording();
+                            return true;
+                        case ACTION_UP:
+                            stopRecording();
+                            return false;
+                        default:
+                            return false;
+                    }
+                } else {
+                    Toast.makeText(getActivity(), "Permission not accepted", Toast.LENGTH_LONG).show();
+                    return false;
                 }
             }
         });
 
         mPlayButton.setOnClickListener(new View.OnClickListener() {
-            boolean mIsPlaying = false;
             @Override
             public void onClick(View view) {
-                if (mIsPlaying) {
-                    mPlayer.release();
-                } else {
+                if (permissionToRecordAccepted) {
                     mPlayer = new MediaPlayer();
-
                     try {
                         mPlayer.setDataSource(mFileName);
                         mPlayer.prepare();
@@ -71,10 +84,12 @@ public class MicrophoneFragment extends Fragment {
                     }
 
                     int duration = mPlayer.getDuration();
+                    mPlayer.release();
                     duration /= 1000; //in seconds
                     transferFile("audiorecordtest", mFileName, duration);
+                } else {
+                    Toast.makeText(getActivity(), "Permission not accepted", Toast.LENGTH_LONG).show();
                 }
-                mIsPlaying = !mIsPlaying;
             }
         });
 
@@ -111,13 +126,10 @@ public class MicrophoneFragment extends Fragment {
 
                 @Override
                 public void receiveData(Object result) {
-                    Intent intent = new Intent(getActivity(), MusicControlActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putString("MUSIC_FILE_NAME", name);
-                    bundle.putInt("MUSIC_DURATION", duration);
-                    intent.putExtras(bundle);
-                    startActivity(intent);
-
+                    if (MainActivity.clientSocket != null) {
+                        MainActivity.sendMessageToServer("PLAY_MUSIC");
+                        MainActivity.sendMessageToServer(name);
+                    }
                 }
 
             }.execute(new String[]{name, path});
