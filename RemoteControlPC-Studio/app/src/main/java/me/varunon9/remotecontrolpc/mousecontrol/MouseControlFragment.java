@@ -1,9 +1,9 @@
-package me.varunon9.remotecontrolpc;
+package me.varunon9.remotecontrolpc.mousecontrol;
 
 /**
  * Created by david on 13/12/17.
  */
-import android.app.Activity;
+
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.hardware.Sensor;
@@ -13,19 +13,17 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.view.Display;
 import android.view.LayoutInflater;
 
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.Button;
 
-import static android.content.Context.WINDOW_SERVICE;
+import me.varunon9.remotecontrolpc.MainActivity;
+import me.varunon9.remotecontrolpc.R;
 
 
-public class MouseRemoteFragment extends Fragment implements SensorEventListener, View.OnHoverListener, View.OnClickListener {
+public class MouseControlFragment extends Fragment implements SensorEventListener, View.OnClickListener {
     private Button mButton;
     private SensorManager mSensors;
     private Sensor mAccelero;
@@ -37,12 +35,11 @@ public class MouseRemoteFragment extends Fragment implements SensorEventListener
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
-        View rootView = inflater.inflate(R.layout.fragment_mouseremote, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_mousecontrol, container, false);
         mButton = (Button) rootView.findViewById(R.id.mouseremotebutton);
         mLeftClick = (Button) rootView.findViewById(R.id.left_click);
         mRightClick = (Button) rootView.findViewById(R.id.right_click);
 
-        mButton.setOnHoverListener(this);
         mLeftClick.setOnClickListener(this);
         mRightClick.setOnClickListener(this);
 
@@ -63,7 +60,7 @@ public class MouseRemoteFragment extends Fragment implements SensorEventListener
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getActivity().setTitle(R.string.mouse_remote);
+        getActivity().setTitle(R.string.mouse_control);
     }
 
     public void onAccuracyChanged(Sensor sensor, int accuracy) {}
@@ -124,16 +121,9 @@ public class MouseRemoteFragment extends Fragment implements SensorEventListener
 
     @Override
   public void onClick(View view) {
-     if((Button) view == mLeftClick)
+     if(view == mLeftClick)
          MainActivity.sendMessageToServer("LEFT_CLICK");
      else
          MainActivity.sendMessageToServer("RIGHT_CLICK");
-    }
-
-    public boolean onHover(View view, MotionEvent m){
-        /*MainActivity.sendMessageToServer("MOUSE_REMOTE");
-        MainActivity.sendMessageToServer(mCurrentValues[0]);
-        MainActivity.sendMessageToServer(mCurrentValues[1]);*/
-        return true;
     }
 }

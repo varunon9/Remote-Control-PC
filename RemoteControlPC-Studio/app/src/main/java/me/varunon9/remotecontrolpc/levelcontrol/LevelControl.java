@@ -1,5 +1,6 @@
 package me.varunon9.remotecontrolpc.levelcontrol;
 
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
@@ -13,8 +14,10 @@ import android.view.ViewTreeObserver;
 import me.varunon9.remotecontrolpc.MainActivity;
 import me.varunon9.remotecontrolpc.R;
 
+import static android.view.MotionEvent.ACTION_CANCEL;
 import static android.view.MotionEvent.ACTION_DOWN;
 import static android.view.MotionEvent.ACTION_MOVE;
+import static android.view.MotionEvent.ACTION_UP;
 
 /**
  * Created by alex on 27/02/18.
@@ -72,6 +75,7 @@ public class LevelControl extends Fragment implements View.OnTouchListener {
             float bias = event.getRawY();
             switch (event.getActionMasked()) {
                 case ACTION_DOWN:
+                    changeControllerColor();
                     dy = view.getY() - bias;
                     break;
                 case ACTION_MOVE:
@@ -86,11 +90,27 @@ public class LevelControl extends Fragment implements View.OnTouchListener {
                     MainActivity.sendMessageToServer(args.getString("command"));
                     MainActivity.sendMessageToServer(100.0f - bias * 100.0f);
                     break;
+                case ACTION_UP:
+                    changeControllerColor();
+                    break;
+                case ACTION_CANCEL:
+                    changeControllerColor();
                 default:
                     break;
             }
         }
         return true;
+    }
+
+    private void changeControllerColor() {
+        int colorPrimary = getResources().getColor(R.color.colorPrimary);
+        int colorPrimaryDark = getResources().getColor(R.color.colorPrimaryDark);
+
+        if (((ColorDrawable) mViewController.getBackground()).getColor() == colorPrimary) {
+            mViewController.setBackgroundColor(colorPrimaryDark);
+        } else {
+            mViewController.setBackgroundColor(colorPrimary);
+        }
     }
 
 }

@@ -7,11 +7,8 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatDelegate;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -35,9 +32,11 @@ import me.varunon9.remotecontrolpc.keyboard.KeyboardFragment;
 import me.varunon9.remotecontrolpc.levelcontrol.LevelControl;
 import me.varunon9.remotecontrolpc.livescreen.LiveScreenFragment;
 import me.varunon9.remotecontrolpc.mediaplayer.MediaPlayerFragment;
+import me.varunon9.remotecontrolpc.mousecontrol.MouseControlFragment;
 import me.varunon9.remotecontrolpc.poweroff.PowerOffFragment;
 import me.varunon9.remotecontrolpc.presentation.PresentationFragment;
 import me.varunon9.remotecontrolpc.server.Server;
+import me.varunon9.remotecontrolpc.shortcut.ShortcutFragment;
 import me.varunon9.remotecontrolpc.touchpad.TouchpadFragment;
 
 public class MainActivity extends AppCompatActivity
@@ -190,8 +189,8 @@ public class MainActivity extends AppCompatActivity
             fragment = new HelpFragment();
         } else if (id == R.id.action_live_screen) {
             fragment = new LiveScreenFragment();
-        } else if (id == R.id.nav_mouseremote) {
-            fragment = new MouseRemoteFragment();
+        } else if (id == R.id.nav_mousecontrol) {
+            fragment = new MouseControlFragment();
         } else if (id == R.id.nav_volume) {
             fragment = LevelControl.newInstance(R.string.volume, this.vol);
         } else if (id == R.id.nav_brightness) {

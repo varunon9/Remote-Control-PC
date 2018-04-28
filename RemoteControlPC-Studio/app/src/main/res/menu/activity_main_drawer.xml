@@ -39,9 +39,9 @@
             android:icon="@drawable/ic_power_off"
             android:title="Power Off" />
         <item
-            android:id="@+id/nav_mouseremote"
+            android:id="@+id/nav_mousecontrol"
             android:icon="@drawable/ic_mouse_remote"
-            android:title="@string/mouse_remote" />
+            android:title="@string/mouse_control" />
         <item
             android:id="@+id/nav_volume"
             android:icon="@drawable/ic_volume"
@@ -53,7 +53,7 @@
         <item
             android:id="@+id/nav_shortcut"
             android:icon="@drawable/ic_shortcut"
-            android:title="Shortcut" />
+            android:title="@string/shortcut" />
     </group>
 
     <!--<item android:title="Communicate">

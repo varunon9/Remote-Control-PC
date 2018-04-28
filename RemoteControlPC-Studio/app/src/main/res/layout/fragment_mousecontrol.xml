@@ -12,7 +12,7 @@
         android:layout_width="186dp"
         android:layout_height="98dp"
         android:layout_margin="10dp"
-        android:background="#4466AA"
+        android:background="@color/colorPrimary"
         android:text="Press"
         android:textColor="#FFFFFF"
         />

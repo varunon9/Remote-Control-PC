@@ -1,4 +1,4 @@
-package me.varunon9.remotecontrolpc;
+package me.varunon9.remotecontrolpc.shortcut;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -17,6 +17,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
+import me.varunon9.remotecontrolpc.MainActivity;
+import me.varunon9.remotecontrolpc.R;
 
 import static android.graphics.Color.DKGRAY;
 import static android.graphics.Color.LTGRAY;
