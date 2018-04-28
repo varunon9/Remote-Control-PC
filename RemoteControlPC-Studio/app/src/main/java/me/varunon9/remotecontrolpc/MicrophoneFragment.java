@@ -138,6 +138,13 @@ public class MicrophoneFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_RECORD_AUDIO_PERMISSION:
+                permissionToRecordAccepted = (grantResults[0] == PackageManager.PERMISSION_GRANTED);
+        }
+    }
 
     @Override
     public void onStop() {
