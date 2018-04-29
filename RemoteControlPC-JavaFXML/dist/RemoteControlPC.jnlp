@@ -8,11 +8,15 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+<<<<<<< Updated upstream
 <<<<<<< HEAD
     <jar href="RemoteControlPC.jar" size="77218" download="eager" />
 =======
     <jar href="RemoteControlPC.jar" size="172958" download="eager" />
 >>>>>>> shortcut
+=======
+    <jar href="RemoteControlPC.jar" size="77555" download="eager" />
+>>>>>>> Stashed changes
     <jar href="lib/RemoteControlPC-Libraries.jar" size="1658" download="eager" />
   </resources>
   <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="RemoteControlPC" >

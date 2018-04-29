@@ -81,6 +81,11 @@ public class Server {
                     int keyCode;
                     if (message != null) {
                         switch (message) {
+			case "VOLUME_GET":
+			    ClientToAndroid.sendMessageToAndroid(lvlctrl.getVolume()+"");
+			    System.out.println(lvlctrl.getVolume()+"");
+
+			    break;
 			case "BRIGHTNESS":
 			    float bright = (float) MainScreenController.objectInputStream.readObject();
 			    lvlctrl.setBrightness(bright);

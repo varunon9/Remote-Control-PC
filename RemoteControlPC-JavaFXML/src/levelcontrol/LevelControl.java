@@ -2,6 +2,9 @@ package levelcontrol;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
+import java.io.File;
 
 public class LevelControl
 {
@@ -73,4 +76,30 @@ public class LevelControl
 	    e.printStackTrace();
 	}
     }
+
+    public float getVolume() {
+	// amixer get 'Master' | grep '^\s*Front Left' | sed -r 's/^[^[]*\[([0-9]+)%.*/\1/'
+
+	float volume = 0;
+
+	try {
+	    if(System.getProperty("os.name").equals("Linux"))
+		{
+		    errorOutput(Runtime.getRuntime().exec("./volume.sh"));
+		    DataInputStream file = new DataInputStream(new FileInputStream(new File("volume")));
+		    volume = file.readFloat();
+
+		    file.close();		    
+		}
+	}
+	catch (Exception e) {
+	    System.out.println("Error " + e.getMessage());
+	    e.printStackTrace();
+	}
+
+	return volume;
+
+    }
+
+    
 }

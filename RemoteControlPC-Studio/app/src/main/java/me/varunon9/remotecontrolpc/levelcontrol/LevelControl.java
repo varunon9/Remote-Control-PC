@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 
+import java.io.IOException;
+
 import me.varunon9.remotecontrolpc.MainActivity;
 import me.varunon9.remotecontrolpc.R;
 
@@ -32,6 +34,7 @@ public class LevelControl extends Fragment implements View.OnTouchListener {
     private float maxY = 0.0f;
     private float minY = 0.0f;
     private float dy = 0.0f;
+    private float volume = 50.0f;
 
 
     public static LevelControl newInstance(int title, String command) {
@@ -60,7 +63,25 @@ public class LevelControl extends Fragment implements View.OnTouchListener {
             }
         });
         args = getArguments();
+        GetDataThread t = new GetDataThread();
+        t.start();
+
         return rootView;
+    }
+
+
+    private class GetDataThread extends Thread {
+        public void run(){
+            while(true) {
+                MainActivity.sendMessageToServer("VOLUME_GET");
+                try {
+                    volume = MainActivity.objectInputStream.readFloat();
+                    System.out.println(volume);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     @Override
@@ -88,7 +109,8 @@ public class LevelControl extends Fragment implements View.OnTouchListener {
                     params.verticalBias = bias;
                     view.setLayoutParams(params);
                     MainActivity.sendMessageToServer(args.getString("command"));
-                    MainActivity.sendMessageToServer(100.0f - bias * 100.0f);
+                    volume = 100.0f - bias * 100.0f;
+                    MainActivity.sendMessageToServer(volume);
                     break;
                 case ACTION_UP:
                     changeControllerColor();
