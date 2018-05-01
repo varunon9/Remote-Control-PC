@@ -83,28 +83,6 @@ public class MicrophoneFragment extends Fragment {
             }
         });
 
-        mPlayButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (permissionToRecordAccepted) {
-                    mPlayer = new MediaPlayer();
-                    try {
-                        mPlayer.setDataSource(mFileName);
-                        mPlayer.prepare();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                    int duration = mPlayer.getDuration();
-                    mPlayer.release();
-                    duration /= 1000; //in seconds
-                    transferFile("audiorecordtest", mFileName, duration);
-                } else {
-                    Toast.makeText(getActivity(), "Permission not accepted", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
-
         return rootView;
     }
 
@@ -112,33 +90,37 @@ public class MicrophoneFragment extends Fragment {
 
         @Override
         public void run() {
-
+            int length = AudioRecord.getMinBufferSize(44100, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT);
             Socket socket = MainActivity.clientSocket;
-            BufferedOutputStream bos = null;
-            byte[] stopBuf = new byte[AudioRecord.getMinBufferSize(44100, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT)];
-            for (int i = 0; i < AudioRecord.getMinBufferSize(44100, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT); ++i) {
+            BufferedOutputStream bos;
+            byte[] stopBuf = new byte[length];
+            for (int i = 0; i < length; ++i) {
                 stopBuf[i] = 127;
             }
 
             MainActivity.sendMessageToServer("MICROPHONE");
+            MainActivity.sendMessageToServer(length);
+
             try {
+
                 bos = new BufferedOutputStream(socket.getOutputStream());
-                byte[] buf = new byte[AudioRecord.getMinBufferSize(44100, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT)];
+                byte[] buf = new byte[length];
                 while (mIsRecording) {
-                    mAudio.read(buf, 0, AudioRecord.getMinBufferSize(44100, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT));
+                    mAudio.read(buf, 0, length);
                     bos.write(buf);
                 }
                 bos.write(stopBuf);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            finally {
+            /*finally {
                 try {
-                    bos.close();
+                    if(bos != null)
+                        bos.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-            }
+            }*/
         }
     }
 
@@ -150,48 +132,14 @@ public class MicrophoneFragment extends Fragment {
         Thread audioSendThread = new Thread(new AudioSendThread());
         audioSendThread.start();
 
-        /*mRecorder = new MediaRecorder();
-        mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-        mRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
-        mRecorder.setOutputFile(mFileName);
-        mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
-
-        try {
-            mRecorder.prepare();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        mRecorder.start();*/
     }
 
     private void stopRecording() {
-        /*mRecorder.stop();
-        mRecorder.release();*/
         mAudio.stop();
         mIsRecording = false;
     }
 
-    private void transferFile(final String name, String path, final int duration) {
-        if (MainActivity.clientSocket != null) {
-            MainActivity.sendMessageToServer("FILE_TRANSFER_REQUEST");
-            MainActivity.sendMessageToServer(name);
-            Toast.makeText(getActivity(), "Wait for music controls", Toast.LENGTH_LONG).show();
-            new TransferFileToServer(getActivity()){
 
-                @Override
-                public void receiveData(Object result) {
-                    if (MainActivity.clientSocket != null) {
-                        MainActivity.sendMessageToServer("PLAY_MUSIC");
-                        MainActivity.sendMessageToServer(name);
-                    }
-                }
-
-            }.execute(new String[]{name, path});
-        } else {
-            Toast.makeText(getActivity(), "Not Connected", Toast.LENGTH_LONG).show();
-        }
-    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {

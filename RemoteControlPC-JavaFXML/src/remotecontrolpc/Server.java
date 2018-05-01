@@ -103,28 +103,29 @@ public class Server {
                                 shortcut.execShortcut(name);
                                 break;
                             case "MICROPHONE":
+                                int length = (int) MainScreenController.objectInputStream.readObject();
                                 boolean isRecording = true;
                                 BufferedInputStream bis = null;
                                 AudioFormat audioFormat = new AudioFormat(44100f, 16, 1, true, false);
                                 try {
                                     bis = new BufferedInputStream(MainScreenController.clientSocket.getInputStream());
-                                    byte[] buf = new byte[3584];
+                                    byte[] buf = new byte[length];
 
                                     while (isRecording) {
                                         int i = 0;
                                         bis.read(buf);
-                                        while (i < 3584 && buf[i] == 127) {
+                                        while (i < length && buf[i] == 127) {
                                             ++i;
                                         }
-                                        if (i == 3584) {
+                                        if (i == length) {
                                             isRecording = false;
                                         } else {
                                             new Thread(() -> {
                                                 try {
                                                     SourceDataLine sourceDataLine = (SourceDataLine) AudioSystem.getLine(new DataLine.Info(SourceDataLine.class, audioFormat));
-                                                    sourceDataLine.open(audioFormat, 3584);
+                                                    sourceDataLine.open(audioFormat, length);
                                                     sourceDataLine.start();
-                                                    sourceDataLine.write(buf, 0, 3584);
+                                                    sourceDataLine.write(buf, 0, length);
                                                     sourceDataLine.drain();
                                                     sourceDataLine.close();
                                                 } catch (Exception e) {

@@ -104,7 +104,6 @@ public class MouseRemoteFragment extends Fragment implements SensorEventListener
         }
 
         public void run() {
-            long tps, ticks;
 
             while(true) {
 
