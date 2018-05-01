@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.Toolkit;
+import java.io.BufferedInputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import javafx.scene.control.Button;
@@ -25,6 +26,8 @@ import poweroff.PowerOff;
 import music.MusicPlayer;
 import levelcontrol.LevelControl;
 import shortcut.Shortcut;
+
+import javax.sound.sampled.*;
 
 /**
  *
@@ -83,14 +86,14 @@ public class Server {
                     int keyCode;
                     if (message != null) {
                         switch (message) {
-			case "BRIGHTNESS":
-			    float bright = (float) MainScreenController.objectInputStream.readObject();
-			    lvlctrl.setBrightness(bright);
-			    break;
-			case "VOLUME":
-			    float level = (float) MainScreenController.objectInputStream.readObject();
-			    lvlctrl.setVolume(level);
-			    break;
+                            case "BRIGHTNESS":
+                                float bright = (float) MainScreenController.objectInputStream.readObject();
+                                lvlctrl.setBrightness(bright);
+                                break;
+                            case "VOLUME":
+                                float level = (float) MainScreenController.objectInputStream.readObject();
+                                lvlctrl.setVolume(level);
+                                break;
                             case "SHORTCUT":
                                 MainScreenController.objectOutputStream.writeObject(shortcut.search());
                                 MainScreenController.objectOutputStream.flush();
@@ -99,13 +102,55 @@ public class Server {
                                 String name = (String) MainScreenController.objectInputStream.readObject();
                                 shortcut.execShortcut(name);
                                 break;
-			case "MOUSE_REMOTE":
-			    Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();
-			    float accX = (float) MainScreenController.objectInputStream.readObject();
-			    float accY = (float) MainScreenController.objectInputStream.readObject();
-			    Point pt = MouseInfo.getPointerInfo().getLocation();
-			    mouseControl.mouseMove((int)(pt.x + accX*screensize.width / 100), (int)(pt.y + accY * 2 * screensize.height/100));
-			    break;
+                            case "MICROPHONE":
+                                boolean isRecording = true;
+                                BufferedInputStream bis = null;
+                                AudioFormat audioFormat = new AudioFormat(44100f, 16, 1, true, false);
+                                try {
+                                    bis = new BufferedInputStream(MainScreenController.clientSocket.getInputStream());
+                                    byte[] buf = new byte[3584];
+
+                                    while (isRecording) {
+                                        int i = 0;
+                                        bis.read(buf);
+                                        while (i < 3584 && buf[i] == 127) {
+                                            ++i;
+                                        }
+                                        if (i == 3584) {
+                                            isRecording = false;
+                                        } else {
+                                            new Thread(() -> {
+                                                try {
+                                                    SourceDataLine sourceDataLine = (SourceDataLine) AudioSystem.getLine(new DataLine.Info(SourceDataLine.class, audioFormat));
+                                                    sourceDataLine.open(audioFormat, 3584);
+                                                    sourceDataLine.start();
+                                                    sourceDataLine.write(buf, 0, 3584);
+                                                    sourceDataLine.drain();
+                                                    sourceDataLine.close();
+                                                } catch (Exception e) {
+                                                    e.printStackTrace();
+                                                }
+                                            }).start();
+                                        }
+                                    }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                                finally {
+                                    try {
+                                        bis.close();
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                                break;
+                            case "MOUSE_REMOTE":
+                                Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();
+                                float accX = (float) MainScreenController.objectInputStream.readObject();
+                                float accY = (float) MainScreenController.objectInputStream.readObject();
+                                Point pt = MouseInfo.getPointerInfo().getLocation();
+                                mouseControl.mouseMove((int)(pt.x + accX*screensize.width / 100), (int)(pt.y + accY * 2 * screensize.height/100));
+                                break;
                             case "LEFT_CLICK":
                                 mouseControl.leftClick();
                                 break;

@@ -2,6 +2,8 @@ package me.varunon9.remotecontrolpc;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.media.AudioFormat;
+import android.media.AudioRecord;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Bundle;
@@ -13,8 +15,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.io.BufferedOutputStream;
+import java.io.IOException;
+import java.net.Socket;
+
 import me.varunon9.remotecontrolpc.filetransfer.TransferFileToServer;
 
+import static android.view.MotionEvent.ACTION_CANCEL;
 import static android.view.MotionEvent.ACTION_DOWN;
 import static android.view.MotionEvent.ACTION_UP;
 
@@ -24,8 +31,10 @@ public class MicrophoneFragment extends Fragment {
     private Button mPlayButton;
 
     private static String mFileName;
+    private boolean mIsRecording = false;
 
     private MediaRecorder mRecorder;
+    private AudioRecord mAudio;
     private MediaPlayer mPlayer;
 
     public static boolean permissionToRecordAccepted = false;
@@ -59,6 +68,9 @@ public class MicrophoneFragment extends Fragment {
                             startRecording();
                             return true;
                         case ACTION_UP:
+                            stopRecording();
+                            return false;
+                        case ACTION_CANCEL:
                             stopRecording();
                             return false;
                         default:
@@ -96,8 +108,49 @@ public class MicrophoneFragment extends Fragment {
         return rootView;
     }
 
+    private class AudioSendThread implements Runnable {
+
+        @Override
+        public void run() {
+
+            Socket socket = MainActivity.clientSocket;
+            BufferedOutputStream bos = null;
+            byte[] stopBuf = new byte[AudioRecord.getMinBufferSize(44100, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT)];
+            for (int i = 0; i < AudioRecord.getMinBufferSize(44100, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT); ++i) {
+                stopBuf[i] = 127;
+            }
+
+            MainActivity.sendMessageToServer("MICROPHONE");
+            try {
+                bos = new BufferedOutputStream(socket.getOutputStream());
+                byte[] buf = new byte[AudioRecord.getMinBufferSize(44100, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT)];
+                while (mIsRecording) {
+                    mAudio.read(buf, 0, AudioRecord.getMinBufferSize(44100, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT));
+                    bos.write(buf);
+                }
+                bos.write(stopBuf);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            finally {
+                try {
+                    bos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
     private void startRecording() {
-        mRecorder = new MediaRecorder();
+        mAudio = new AudioRecord(MediaRecorder.AudioSource.MIC, 44100, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT, AudioRecord.getMinBufferSize(44100, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT));
+        mAudio.startRecording();
+        mIsRecording = true;
+
+        Thread audioSendThread = new Thread(new AudioSendThread());
+        audioSendThread.start();
+
+        /*mRecorder = new MediaRecorder();
         mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
         mRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
         mRecorder.setOutputFile(mFileName);
@@ -109,12 +162,14 @@ public class MicrophoneFragment extends Fragment {
             e.printStackTrace();
         }
 
-        mRecorder.start();
+        mRecorder.start();*/
     }
 
     private void stopRecording() {
-        mRecorder.stop();
-        mRecorder.release();
+        /*mRecorder.stop();
+        mRecorder.release();*/
+        mAudio.stop();
+        mIsRecording = false;
     }
 
     private void transferFile(final String name, String path, final int duration) {
