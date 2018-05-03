@@ -4,9 +4,9 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
-import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -16,10 +16,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import java.io.BufferedOutputStream;
-import java.io.IOException;
 import java.net.Socket;
-
-import me.varunon9.remotecontrolpc.filetransfer.TransferFileToServer;
 
 import static android.view.MotionEvent.ACTION_CANCEL;
 import static android.view.MotionEvent.ACTION_DOWN;
@@ -28,14 +25,10 @@ import static android.view.MotionEvent.ACTION_UP;
 public class MicrophoneFragment extends Fragment {
 
     private Button mRecordButton;
-    private Button mPlayButton;
 
-    private static String mFileName;
     private boolean mIsRecording = false;
 
-    private MediaRecorder mRecorder;
     private AudioRecord mAudio;
-    private MediaPlayer mPlayer;
 
     public static boolean permissionToRecordAccepted = false;
     private static final int REQUEST_RECORD_AUDIO_PERMISSION = 200;
@@ -48,8 +41,6 @@ public class MicrophoneFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_microphone, container, false);
 
-        mFileName = getActivity().getExternalCacheDir().getAbsolutePath() + "/audiorecordtest";
-
         if (getActivity().checkSelfPermission(Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(permissions, REQUEST_RECORD_AUDIO_PERMISSION);
         } else {
@@ -57,7 +48,6 @@ public class MicrophoneFragment extends Fragment {
         }
 
         mRecordButton = (Button) rootView.findViewById(R.id.button_record);
-        mPlayButton = (Button) rootView.findViewById(R.id.button_play);
 
         mRecordButton.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -84,6 +74,14 @@ public class MicrophoneFragment extends Fragment {
         });
 
         return rootView;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+
+        super.onViewCreated(view, savedInstanceState);
+        getActivity().setTitle(R.string.microphone);
+
     }
 
     private class AudioSendThread implements Runnable {
@@ -113,14 +111,6 @@ public class MicrophoneFragment extends Fragment {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            /*finally {
-                try {
-                    if(bos != null)
-                        bos.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }*/
         }
     }
 
@@ -131,15 +121,14 @@ public class MicrophoneFragment extends Fragment {
 
         Thread audioSendThread = new Thread(new AudioSendThread());
         audioSendThread.start();
-
     }
 
     private void stopRecording() {
         mAudio.stop();
+        mAudio.release();
+        mAudio = null;
         mIsRecording = false;
     }
-
-
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
@@ -152,19 +141,9 @@ public class MicrophoneFragment extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
-        if (mRecorder != null) {
-            mRecorder.release();
-            mRecorder = null;
-        }
-        if (mPlayer != null) {
-            mPlayer.release();
-            mPlayer = null;
+        if (mAudio != null) {
+            mAudio.release();
+            mAudio = null;
         }
     }
-
-    public void onDestroy() {
-        super.onDestroy();
-        MainActivity.sendMessageToServer("STOP_MUSIC");
-    }
-
 }
