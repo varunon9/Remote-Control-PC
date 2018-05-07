@@ -67,7 +67,7 @@ public class MicrophoneFragment extends Fragment {
                             return false;
                     }
                 } else {
-                    Toast.makeText(getActivity(), "Permission not accepted", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "Permission not accepted", Toast.LENGTH_SHORT).show();
                     return false;
                 }
             }
@@ -88,36 +88,51 @@ public class MicrophoneFragment extends Fragment {
 
         @Override
         public void run() {
-            int length = AudioRecord.getMinBufferSize(44100, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT);
-            Socket socket = MainActivity.clientSocket;
-            BufferedOutputStream bos;
-            byte[] stopBuf = new byte[length];
-            for (int i = 0; i < length; ++i) {
-                stopBuf[i] = 127;
-            }
+            Socket audioSocket = null;
+            BufferedOutputStream bos = null;
+            int bufferSize = 4096;
 
             MainActivity.sendMessageToServer("MICROPHONE");
-            MainActivity.sendMessageToServer(length);
+            MainActivity.sendMessageToServer(bufferSize);
 
             try {
+                audioSocket = new Socket(MainActivity.clientSocket.getInetAddress(), MainActivity.clientSocket.getPort() + 1);
+                bos = new BufferedOutputStream(audioSocket.getOutputStream());
+                byte[] buf = new byte[bufferSize];
 
-                bos = new BufferedOutputStream(socket.getOutputStream());
-                byte[] buf = new byte[length];
-                while (mIsRecording) {
-                    mAudio.read(buf, 0, length);
+                while (mAudio.read(buf, 0, bufferSize, AudioRecord.READ_BLOCKING) > 0) {
                     bos.write(buf);
+                    bos.flush();
                 }
-                bos.write(stopBuf);
+
             } catch (Exception e) {
                 e.printStackTrace();
+            }
+
+            finally {
+                try {
+
+                    if (mAudio != null) {
+                        mAudio.release();
+                        mAudio = null;
+                    }
+                    if (bos != null) {
+                        bos.close();
+                    }
+                    if (audioSocket != null) {
+                        audioSocket.close();
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
 
     private void startRecording() {
-        mAudio = new AudioRecord(MediaRecorder.AudioSource.MIC, 44100, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT, AudioRecord.getMinBufferSize(44100, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT));
+        mAudio = new AudioRecord(MediaRecorder.AudioSource.MIC, 44100, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT, 1048576);
         mAudio.startRecording();
-        mIsRecording = true;
 
         Thread audioSendThread = new Thread(new AudioSendThread());
         audioSendThread.start();
@@ -125,9 +140,6 @@ public class MicrophoneFragment extends Fragment {
 
     private void stopRecording() {
         mAudio.stop();
-        mAudio.release();
-        mAudio = null;
-        mIsRecording = false;
     }
 
     @Override

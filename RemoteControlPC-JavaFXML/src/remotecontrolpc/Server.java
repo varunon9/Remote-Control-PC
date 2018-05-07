@@ -6,7 +6,6 @@ import java.awt.Dimension;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.Toolkit;
-import java.io.BufferedInputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import javafx.scene.control.Button;
@@ -16,18 +15,14 @@ import filesharing.ReceiveFile;
 import filesharing.SendFile;
 import filesharing.SendFilesList;
 import java.net.InetAddress;
-import java.util.ArrayList;
 
 import javafx.application.Platform;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
+import microphone.Microphone;
 import mousekeyboardcontrol.MouseKeyboardControl;
 import poweroff.PowerOff;
 import music.MusicPlayer;
 import levelcontrol.LevelControl;
 import shortcut.Shortcut;
-
-import javax.sound.sampled.*;
 
 /**
  *
@@ -81,8 +76,7 @@ public class Server {
 	    
             while (true) {
                 try {
-                    message =
-                            (String) MainScreenController.objectInputStream.readObject();
+                    message = (String) MainScreenController.objectInputStream.readObject();
                     int keyCode;
                     if (message != null) {
                         switch (message) {
@@ -103,47 +97,9 @@ public class Server {
                                 shortcut.execShortcut(name);
                                 break;
                             case "MICROPHONE":
-                                int length = (int) MainScreenController.objectInputStream.readObject();
-                                boolean isRecording = true;
-                                BufferedInputStream bis = null;
-                                AudioFormat audioFormat = new AudioFormat(44100f, 16, 1, true, false);
-                                try {
-                                    bis = new BufferedInputStream(MainScreenController.clientSocket.getInputStream());
-                                    byte[] buf = new byte[length];
-
-                                    while (isRecording) {
-                                        int i = 0;
-                                        bis.read(buf);
-                                        while (i < length && buf[i] == 127) {
-                                            ++i;
-                                        }
-                                        if (i == length) {
-                                            isRecording = false;
-                                        } else {
-                                            new Thread(() -> {
-                                                try {
-                                                    SourceDataLine sourceDataLine = (SourceDataLine) AudioSystem.getLine(new DataLine.Info(SourceDataLine.class, audioFormat));
-                                                    sourceDataLine.open(audioFormat, length);
-                                                    sourceDataLine.start();
-                                                    sourceDataLine.write(buf, 0, length);
-                                                    sourceDataLine.drain();
-                                                    sourceDataLine.close();
-                                                } catch (Exception e) {
-                                                    e.printStackTrace();
-                                                }
-                                            }).start();
-                                        }
-                                    }
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
-                                finally {
-                                    try {
-                                        bis.close();
-                                    } catch (Exception e) {
-                                        e.printStackTrace();
-                                    }
-                                }
+                                int bufferSize = (int) MainScreenController.objectInputStream.readObject();
+                                Microphone microphone = new Microphone(bufferSize);
+                                microphone.run();
                                 break;
                             case "MOUSE_REMOTE":
                                 Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();
