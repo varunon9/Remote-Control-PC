@@ -15,9 +15,9 @@ import filesharing.ReceiveFile;
 import filesharing.SendFile;
 import filesharing.SendFilesList;
 import java.net.InetAddress;
-import java.util.ArrayList;
 
 import javafx.application.Platform;
+import microphone.Microphone;
 import mousekeyboardcontrol.MouseKeyboardControl;
 import poweroff.PowerOff;
 import music.MusicPlayer;
@@ -76,38 +76,41 @@ public class Server {
 	    
             while (true) {
                 try {
-                    message =
-                            (String) MainScreenController.objectInputStream.readObject();
+                    message = (String) MainScreenController.objectInputStream.readObject();
                     int keyCode;
                     if (message != null) {
                         switch (message) {
+                            case "BRIGHTNESS":
+                                float bright = (float) MainScreenController.objectInputStream.readObject();
+                                lvlctrl.setBrightness(bright);
+                                break;
+                            case "VOLUME":
+                                float level = (float) MainScreenController.objectInputStream.readObject();
+                                lvlctrl.setVolume(level);
+                                break;
+                            case "SHORTCUT":
+                                MainScreenController.objectOutputStream.writeObject(shortcut.search());
+                                MainScreenController.objectOutputStream.flush();
+                                break;
+                            case "LAUNCH":
+                                String name = (String) MainScreenController.objectInputStream.readObject();
+                                shortcut.execShortcut(name);
+                                break;
+                            case "MICROPHONE":
+                                int bufferSize = (int) MainScreenController.objectInputStream.readObject();
+                                Microphone microphone = new Microphone(bufferSize);
+                                microphone.run();
+                                break;
+                            case "MOUSE_REMOTE":
+                                Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();
+                                float accX = (float) MainScreenController.objectInputStream.readObject();
+                                float accY = (float) MainScreenController.objectInputStream.readObject();
+                                Point pt = MouseInfo.getPointerInfo().getLocation();
+                                mouseControl.mouseMove((int)(pt.x + accX*screensize.width / 100), (int)(pt.y + accY * 2 * screensize.height/100));
+                                break;
 			case "VOLUME_GET":
 			    ClientToAndroid.sendMessageToAndroid(lvlctrl.getVolume()+"");
 			    System.out.println(lvlctrl.getVolume()+"");
-
-			    break;
-			case "BRIGHTNESS":
-			    float bright = (float) MainScreenController.objectInputStream.readObject();
-			    lvlctrl.setBrightness(bright);
-			    break;
-			case "VOLUME":
-			    float level = (float) MainScreenController.objectInputStream.readObject();
-			    lvlctrl.setVolume(level);
-			    break;
-            case "SHORTCUT":
-                MainScreenController.objectOutputStream.writeObject(shortcut.search());
-                MainScreenController.objectOutputStream.flush();
-                break;
-            case "LAUNCH":
-                String name = (String) MainScreenController.objectInputStream.readObject();
-                shortcut.execShortcut(name);
-                break;
-			case "MOUSE_REMOTE":
-			    Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();
-			    float accX = (float) MainScreenController.objectInputStream.readObject();
-			    float accY = (float) MainScreenController.objectInputStream.readObject();
-			    Point pt = MouseInfo.getPointerInfo().getLocation();
-			    mouseControl.mouseMove((int)(pt.x + accX*screensize.width / 100), (int)(pt.y + accY * 2 * screensize.height/100));
 			    break;
                             case "LEFT_CLICK":
                                 mouseControl.leftClick();
@@ -226,6 +229,7 @@ public class Server {
                                 } catch(Exception e) {
                                     showMessage("Unsupported Media: " + fileName);
                                 }
+
                                 break;
                             case "SLIDE_MUSIC":
                                 slideDuration = (int) MainScreenController.objectInputStream.readObject();

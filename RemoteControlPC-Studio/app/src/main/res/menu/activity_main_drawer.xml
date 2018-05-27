@@ -54,6 +54,10 @@
             android:id="@+id/nav_shortcut"
             android:icon="@drawable/ic_shortcut"
             android:title="@string/shortcut" />
+        <item
+            android:id="@+id/nav_microphone"
+            android:icon="@drawable/ic_microphone"
+            android:title="@string/microphone"/>
     </group>
 
     <!--<item android:title="Communicate">
