@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox fx:id="vBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#showDetails" prefHeight="80.0" prefWidth="84.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="layout.FileOrFolderController">
+   <children>
+      <ImageView id="iconImageView" fx:id="iconImageView" fitHeight="41.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+         <image>
+            <Image url="@../resources/folder.png" />
+         </image></ImageView>
+      <Label fx:id="headingLabel" alignment="CENTER" prefHeight="36.0" prefWidth="84.0" text="folder" wrapText="true" />
+   </children>
+</VBox>

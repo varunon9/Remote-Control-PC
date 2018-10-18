@@ -38,6 +38,26 @@
             android:id="@+id/nav_power_off"
             android:icon="@drawable/ic_power_off"
             android:title="Power Off" />
+        <item
+            android:id="@+id/nav_mousecontrol"
+            android:icon="@drawable/ic_mouse_remote"
+            android:title="@string/mouse_control" />
+        <item
+            android:id="@+id/nav_volume"
+            android:icon="@drawable/ic_volume"
+            android:title="@string/volume" />
+        <item
+            android:id="@+id/nav_brightness"
+            android:icon="@drawable/ic_brightness"
+            android:title="@string/brightness" />
+        <item
+            android:id="@+id/nav_shortcut"
+            android:icon="@drawable/ic_shortcut"
+            android:title="@string/shortcut" />
+        <item
+            android:id="@+id/nav_microphone"
+            android:icon="@drawable/ic_microphone"
+            android:title="@string/microphone"/>
     </group>
 
     <!--<item android:title="Communicate">

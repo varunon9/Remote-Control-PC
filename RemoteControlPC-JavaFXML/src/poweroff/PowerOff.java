@@ -21,9 +21,15 @@ public class PowerOff {
     
     public void shutdown() {     
         try {
-            if ("Windows 8.1".equals(os) || "Windows 8.0".equals(os)) {
+            System.out.println(os);
+            if (os.contains("Windows")) {
                 runtime.exec("shutdown -s");
-            } else {
+            }
+            else if("Linux".equals(os))
+                    {
+                            runtime.exec("sudo shutdown -h now");
+                    }
+            else {
                 System.out.println("Unsupported operating system");
             }
         } catch(Exception e) {
@@ -35,9 +41,12 @@ public class PowerOff {
     
     public void restart() {     
         try {
-            if ("Windows 8.1".equals(os) || "Windows 8.0".equals(os)) {
+            if (os.contains("Windows")) {
                 runtime.exec("shutdown -r");
-            } else {
+            }
+	    else if ("Linux".equals(os)) {
+		runtime.exec("sudo shutdown -r now");
+	    }else {
                 System.out.println("Unsupported operating system");
             }
         } catch(Exception e) {
@@ -49,7 +58,7 @@ public class PowerOff {
     
     public void suspend() {     
         try {
-            if ("Windows 8.1".equals(os) || "Windows 8.0".equals(os)) {
+            if (os.contains("Windows")) {
                 runtime.exec("Rundll32.exe powrprof.dll,SetSuspendState Sleep");
             } else {
                 System.out.println("Unsupported operating system");
@@ -64,7 +73,7 @@ public class PowerOff {
         try {
             if ("Linux".equals(os) || "Mac OS X".equals(os)) {
                 new MouseKeyboardControl().ctrlAltL();
-            } else if ("Windows 8.1".equals(os) || "Windows 8.0".equals(os)) {
+            } else if (os.contains("Windows")) {
                 runtime.exec("Rundll32.exe user32.dll,LockWorkStation");
             } else {
                 System.out.println("Unsupported operating system");

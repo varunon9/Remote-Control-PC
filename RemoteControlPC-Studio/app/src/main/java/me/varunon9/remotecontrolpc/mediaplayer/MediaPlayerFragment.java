@@ -60,6 +60,7 @@ public class MediaPlayerFragment extends Fragment {
                 String path = song.getData();
                 int duration = song.getDuration();
                 duration /= 1000; //in seconds
+                System.out.println(fileName + " " + path);
                 transferFile(fileName, path, duration);
             }
 
